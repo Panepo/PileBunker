@@ -1,86 +1,21 @@
 import * as types from '../constants/ConstActionTypes'
 
-export function pageChange(modelId) {
+export function typeChange(modelId) {
 	return {
-		type: types.PAGE_CHANGE,
+		type: types.TYPE_CHANGE,
 		modelId
 	}
 }
 
-export function modelOpen(modelId) {
+export function plainChange() {
 	return {
-		type: types.MODEL_OPEN,
-		modelId
+		type: types.PLAIN_CHANGE
 	}
 }
 
-export function modelClose(modelId) {
+export function maxChange(modelId) {
 	return {
-		type: types.MODEL_CLOSE,
-		modelId
-	}
-}
-
-export function aircraftChange(modelId) {
-	return {
-		type: types.AIRCRAFT_CHANGE,
-		modelId
-	}
-}
-
-export function aircraftTypeChange(modelId) {
-	return {
-		type: types.AIRCRAFT_TYPE_CHANGE,
-		modelId
-	}
-}
-
-export function aircraftSkillChange(modelId) {
-	return {
-		type: types.AIRCRAFT_SKILL_CHANGE,
-		modelId
-	}
-}
-
-export function aircraftFactoryChange(modelId) {
-	return {
-		type: types.AIRCRAFT_FACTORY_CHANGE,
-		modelId
-	}
-}
-
-export function carrierSelect(modelId) {
-	return {
-		type: types.CARRIER_SELECT,
-		modelId
-	}
-}
-
-export function carrierSlotSelect(modelId) {
-	return {
-		type: types.CARRIER_SLOT_SELECT,
-		modelId
-	}
-}
-
-export function carrierDisplay(modelId) {
-	return {
-		type: types.CARRIER_DISPLAY,
-		modelId
-	}
-}
-
-export function statusInitial( airControl, airDamage ) {
-	return {
-		type: types.STATUS_INITIAL,
-		airControl,
-		airDamage
-	}
-}
-
-export function statusChange(modelId) {
-	return {
-		type: types.STATUS_CHANGE,
+		type: types.MAX_CHANGE,
 		modelId
 	}
 }

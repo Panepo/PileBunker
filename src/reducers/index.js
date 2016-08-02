@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-//import { default as reducerPage } from './reducerPage'
-//import { default as reducerGroup } from './reducerGroup'
-//import { default as reducerStatus } from './reducerStatus'
+import { default as reducerCalc } from './reducerCalc'
 
 export default combineReducers({
-	
+	reducerCalc
 })

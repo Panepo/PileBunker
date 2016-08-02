@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { pageChange } from '../actions'
+import { typeChange, plainChange, maxChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import TextInput from '../components/TextInput'
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
@@ -8,7 +9,7 @@ import '../../css/Content.css'
 
 class Content extends Component {
 	render() {
-		const {  } = this.props
+		const { type, typeChange, plain, plainChange, max, maxChange } = this.props
 		
 		var typeTemp
 		var typeOut = []
@@ -16,9 +17,9 @@ class Content extends Component {
 			typeTemp = (
 				<ToggleButton
 					key={"inputType" + i.toString()}
-					display={1}
+					display={type}
 					title={listType[i]}
-					onClickFunc={pageChange}
+					onClickFunc={(modelId) => typeChange(modelId)}
 					modelId={listTypeS[i]}
 					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
 					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
@@ -33,9 +34,9 @@ class Content extends Component {
 			butTemp = (
 				<ToggleButton
 					key={"inputBut" + i.toString()}
-					display={1}
+					display={max}
 					title={listBut[i]}
-					onClickFunc={pageChange}
+					onClickFunc={(modelId) => maxChange(modelId)}
 					modelId={listButS[i]}
 					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
 					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
@@ -59,23 +60,23 @@ class Content extends Component {
 								classes={"text-input"}
 								title={"城娘攻擊力"}
 								modelId={"atk"}
-								inputFunc={pageChange}
+								inputFunc={(modelId) => typeChange(modelId)}
 								defaultValue={200}
 								/>
 							<TextInput 
 								classes={"text-input"}
 								title={"兜防禦力"}
 								modelId={"def"}
-								inputFunc={pageChange}
+								inputFunc={(modelId) => typeChange(modelId)}
 								defaultValue={100}
 								/>
 						</div>
 						<div>
 							<ToggleButton
 								key={"inputType" + i.toString()}
-								display={1}
+								display={plain}
 								title={"地形適性"}
-								onClickFunc={pageChange}
+								onClickFunc={(modelId) => plainChange(modelId)}
 								modelId={"plain"}
 								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
 								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
@@ -90,16 +91,28 @@ class Content extends Component {
 }
 
 Content.propTypes = {
-	
+	type: PropTypes.string.isRequired,
+	plain: PropTypes.string.isRequired,
+	max: PropTypes.string.isRequired,
 }
 
 const mapStateToProps = (state) => {
 	return {
-		
+		type: state.reducerCalc.type,
+		plain: state.reducerCalc.plain,
+		max: state.reducerCalc.max,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		typeChange: bindActionCreators(typeChange, dispatch),
+		plainChange: bindActionCreators(plainChange, dispatch),
+		maxChange: bindActionCreators(maxChange, dispatch),
 	}
 }
 
 export default connect(
 	mapStateToProps,
-	{ pageChange }
+	mapDispatchToProps
 )(Content)
