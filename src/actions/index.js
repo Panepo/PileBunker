@@ -19,3 +19,11 @@ export function maxChange(modelId) {
 		modelId
 	}
 }
+
+export function inputChange(modelId, modelValue) {
+	return {
+		type: types.INPUT_CHANGE,
+		modelId,
+		modelValue
+	}
+}

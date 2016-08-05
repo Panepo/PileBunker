@@ -1,7 +1,8 @@
 import {
 	TYPE_CHANGE,
 	PLAIN_CHANGE,
-	MAX_CHANGE
+	MAX_CHANGE,
+	INPUT_CHANGE,
 } from '../constants/ConstActionTypes'
 
 
@@ -9,6 +10,12 @@ const initialState = {
 	type: 'sword',
 	plain: 'plain',
 	max: "max0",
+	atk: 200,
+	def: 100,
+	atkSkill: 0,
+	defSkill: 0,
+	aspdSkill: 0,
+	aspdSpell: 0,
 }
 
 export default function reducerCalc(state = initialState, action) {
@@ -31,6 +38,35 @@ export default function reducerCalc(state = initialState, action) {
 			return Object.assign({}, state, {
 				max: action.modelId
 			})
+		case INPUT_CHANGE:
+			switch(action.modelId) {
+				case "atk":
+					return Object.assign({}, state, {
+						atk: action.modelValue
+					})
+				case "def":
+					return Object.assign({}, state, {
+						def: action.modelValue
+					})
+				case "atkSkill":
+					return Object.assign({}, state, {
+						atkSkill: action.modelValue
+					})
+				case "defSkill":
+					return Object.assign({}, state, {
+						defSkill: action.modelValue
+					})
+				case "aspdSkill":
+					return Object.assign({}, state, {
+						aspdSkill: action.modelValue
+					})
+				case "aspdSpell":
+					return Object.assign({}, state, {
+						aspdSpell: action.modelValue
+					})
+			}
+			
+			
 		default:
 			return state
 	}

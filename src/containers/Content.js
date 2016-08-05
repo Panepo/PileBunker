@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { typeChange, plainChange, maxChange } from '../actions'
+import { typeChange, plainChange, maxChange, inputChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
-import TextInput from '../components/TextInput'
+import InputBoxValue from '../components/InputBoxValue'
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
 	render() {
 		const { type, typeChange, plain, plainChange, max, maxChange } = this.props
+		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange } = this.props
 		
 		var typeTemp
 		var typeOut = []
@@ -21,8 +22,8 @@ class Content extends Component {
 					title={listType[i]}
 					onClickFunc={(modelId) => typeChange(modelId)}
 					modelId={listTypeS[i]}
-					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+					Cactive={"type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
+					Cinactive={"type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
 					/>
 			)
 			typeOut.push(typeTemp)
@@ -51,37 +52,72 @@ class Content extends Component {
 					<div className="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 						<h4>城プロRE 武器傷害機算機 パイルバンカー</h4>
-						<h5>數值設定</h5>
+						<h5>設定</h5>
 						<div>
+							武器種：
 							{typeOut}
 						</div>
 						<div>
-							<TextInput 
-								classes={"text-input"}
-								title={"城娘攻擊力"}
-								modelId={"atk"}
-								inputFunc={(modelId) => typeChange(modelId)}
-								defaultValue={200}
-								/>
-							<TextInput 
-								classes={"text-input"}
-								title={"兜防禦力"}
-								modelId={"def"}
-								inputFunc={(modelId) => typeChange(modelId)}
-								defaultValue={100}
-								/>
-						</div>
-						<div>
+							地形適性：
 							<ToggleButton
 								key={"inputType" + i.toString()}
 								display={plain}
-								title={"地形適性"}
+								title={"地形適性あり"}
 								onClickFunc={(modelId) => plainChange(modelId)}
 								modelId={"plain"}
 								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
 								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
 								/>
+						</div>
+						<div>
+							巨大化：
 							{butOut}
+						</div>
+						<div>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"城娘攻擊力"}
+								modelId={"atk"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={atk}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"兜防禦力"}
+								modelId={"def"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={def}
+								/>
+						</div>
+						<div>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能攻擊力增加"}
+								modelId={"atkSkill"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={atkSkill}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能兜防禦力減少"}
+								modelId={"defSkill"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={defSkill}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能攻擊速度增加"}
+								modelId={"aspdSkill"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={aspdSkill}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"策略攻擊速度增加"}
+								modelId={"aspdSpell"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={aspdSpell}
+								/>
 						</div>
 					</div>
 				</div>
@@ -94,6 +130,12 @@ Content.propTypes = {
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
 	max: PropTypes.string.isRequired,
+	atk: PropTypes.number.isRequired,
+	def: PropTypes.number.isRequired,
+	atkSkill: PropTypes.number.isRequired,
+	defSkill: PropTypes.number.isRequired,
+	aspdSkill: PropTypes.number.isRequired,
+	aspdSpell: PropTypes.number.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -101,6 +143,12 @@ const mapStateToProps = (state) => {
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
 		max: state.reducerCalc.max,
+		atk: state.reducerCalc.atk,
+		def: state.reducerCalc.def,
+		atkSkill: state.reducerCalc.atkSkill,
+		defSkill: state.reducerCalc.defSkill,
+		aspdSkill: state.reducerCalc.aspdSkill,
+		aspdSpell: state.reducerCalc.aspdSpell,
 	}
 }
 
@@ -109,6 +157,7 @@ const mapDispatchToProps = (dispatch) => {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		plainChange: bindActionCreators(plainChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
+		inputChange: bindActionCreators(inputChange, dispatch),
 	}
 }
 
