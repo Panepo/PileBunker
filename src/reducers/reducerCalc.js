@@ -16,6 +16,8 @@ const initialState = {
 	defSkill: 0,
 	aspdSkill: 0,
 	aspdSpell: 0,
+	atkSkillInt: 0,
+	defSkillInt: 0,
 }
 
 export default function reducerCalc(state = initialState, action) {
@@ -52,9 +54,17 @@ export default function reducerCalc(state = initialState, action) {
 					return Object.assign({}, state, {
 						atkSkill: action.modelValue
 					})
+				case "atkSkillInt":
+					return Object.assign({}, state, {
+						atkSkillInt: action.modelValue
+					})
 				case "defSkill":
 					return Object.assign({}, state, {
 						defSkill: action.modelValue
+					})
+				case "defSkillInt":
+					return Object.assign({}, state, {
+						defSkillInt: action.modelValue
 					})
 				case "aspdSkill":
 					return Object.assign({}, state, {

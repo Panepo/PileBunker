@@ -10,7 +10,7 @@ import '../../css/Content.css'
 class Content extends Component {
 	render() {
 		const { type, typeChange, plain, plainChange, max, maxChange } = this.props
-		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange } = this.props
+		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		
 		var typeTemp
 		var typeOut = []
@@ -88,22 +88,6 @@ class Content extends Component {
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
 								defaultValue={def}
 								/>
-						</div>
-						<div>
-							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能攻擊力增加"}
-								modelId={"atkSkill"}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atkSkill}
-								/>
-							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能兜防禦力減少"}
-								modelId={"defSkill"}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={defSkill}
-								/>
 							<InputBoxValue 
 								classes={"text-input"}
 								title={"技能攻擊速度增加"}
@@ -117,6 +101,36 @@ class Content extends Component {
 								modelId={"aspdSpell"}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
 								defaultValue={aspdSpell}
+								/>
+						</div>
+						<div>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能攻擊力增加(%)"}
+								modelId={"atkSkill"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={atkSkill}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能攻擊力增加"}
+								modelId={"atkSkillInt"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={atkSkillInt}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能兜防禦力減少(%)"}
+								modelId={"defSkill"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={defSkill}
+								/>
+							<InputBoxValue 
+								classes={"text-input"}
+								title={"技能兜防禦力減少"}
+								modelId={"defSkillInt"}
+								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
+								defaultValue={defSkillInt}
 								/>
 						</div>
 					</div>
@@ -134,6 +148,8 @@ Content.propTypes = {
 	def: PropTypes.number.isRequired,
 	atkSkill: PropTypes.number.isRequired,
 	defSkill: PropTypes.number.isRequired,
+	atkSkillInt: PropTypes.number.isRequired,
+	defSkillInt: PropTypes.number.isRequired,
 	aspdSkill: PropTypes.number.isRequired,
 	aspdSpell: PropTypes.number.isRequired,
 }
@@ -147,6 +163,8 @@ const mapStateToProps = (state) => {
 		def: state.reducerCalc.def,
 		atkSkill: state.reducerCalc.atkSkill,
 		defSkill: state.reducerCalc.defSkill,
+		atkSkillInt: state.reducerCalc.atkSkillInt,
+		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,
 		aspdSpell: state.reducerCalc.aspdSpell,
 	}
