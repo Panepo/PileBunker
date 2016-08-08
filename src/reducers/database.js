@@ -1,15 +1,15 @@
 import lokijs from 'lokijs'
-import aircraftData from '../../raw/aircrafts.json'
-import carrierData from '../../raw/carriers.json'
+import weaponData from '../../raw/weapons.json'
+import typeData from '../../raw/weaponTypes.json'
 
 var db = new lokijs('db')
-export var dbAircraft = db.addCollection("dbAircraft")
-export var dbCarrier = db.addCollection("dbCarrier")
+export var dbWeapon = db.addCollection("dbWeapon")
+export var dbType = db.addCollection("dbType")
 
-for (var i=0; i<aircraftData.length; i++) {
-	dbAircraft.insert(aircraftData[i])
+for (var i=0; i<weaponData.length; i++) {
+	dbWeapon.insert(weaponData[i])
 }
 
-for (var i=0; i<carrierData.length; i++) {
-	dbCarrier.insert(carrierData[i])
+for (var i=0; i<typeData.length; i++) {
+	dbType.insert(typeData[i])
 }
