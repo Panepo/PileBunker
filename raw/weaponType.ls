@@ -1,0 +1,17 @@
+#slotType = [name frame1 frame2]
+weaponType = [
+["sword",			19, 30]
+["lance",			23, 30]
+["hammer",		32, 30]
+["bow",				19, 18]
+["xbow",			24, 30]
+["xbow2",			42, 30]
+["xbow3",			57, 30]
+["arqu",			37, 30]
+["arqu2",			82, 30]
+["arqu3",		 102, 30]
+["cannon",		42, 60]
+["spell",			42, 30]
+["dance",			62, 60]
+]
+module.exports = weaponType
