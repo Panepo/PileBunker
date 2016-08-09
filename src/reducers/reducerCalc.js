@@ -3,12 +3,15 @@ import {
 	PLAIN_CHANGE,
 	MAX_CHANGE,
 	INPUT_CHANGE,
+	FLY_CHANGE,
 } from '../constants/ConstActionTypes'
 
+import { dbWeapon, dbType } from './database'
 
 const initialState = {
 	type: 'sword',
 	plain: 'plain',
+	fly: '',
 	max: "max0",
 	atk: 200,
 	def: 100,
@@ -34,6 +37,16 @@ export default function reducerCalc(state = initialState, action) {
 			} else {
 				return Object.assign({}, state, {
 					plain: 'plain'
+				})
+			}
+		case FLY_CHANGE:
+			if (state.fly === 'fly') {
+				return Object.assign({}, state, {
+					fly: ''
+				})
+			} else {
+				return Object.assign({}, state, {
+					fly: 'fly'
 				})
 			}
 		case MAX_CHANGE:

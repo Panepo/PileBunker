@@ -13,6 +13,12 @@ export function plainChange() {
 	}
 }
 
+export function flyChange() {
+	return {
+		type: types.FLY_CHANGE
+	}
+}
+
 export function maxChange(modelId) {
 	return {
 		type: types.MAX_CHANGE,

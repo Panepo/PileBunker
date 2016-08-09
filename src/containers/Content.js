@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { typeChange, plainChange, maxChange, inputChange } from '../actions'
+import { typeChange, plainChange, maxChange, inputChange, flyChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
+import SelectableTable from '../components/SelectableTable'
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
 	render() {
-		const { type, typeChange, plain, plainChange, max, maxChange } = this.props
+		const { type, typeChange, plain, plainChange, max, maxChange, fly, flyChange } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		
 		var typeTemp
@@ -60,11 +61,21 @@ class Content extends Component {
 						<div>
 							地形適性：
 							<ToggleButton
-								key={"inputType" + i.toString()}
+								key={"inputType plain"}
 								display={plain}
 								title={"地形適性あり"}
 								onClickFunc={(modelId) => plainChange(modelId)}
 								modelId={"plain"}
+								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
+								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+								/>
+							飛行兜：
+							<ToggleButton
+								key={"inputType fly"}
+								display={fly}
+								title={"飛行兜あり"}
+								onClickFunc={(modelId) => flyChange(modelId)}
+								modelId={"fly"}
 								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
 								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
 								/>
@@ -143,6 +154,7 @@ class Content extends Component {
 Content.propTypes = {
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
+	fly: PropTypes.string.isRequired,
 	max: PropTypes.string.isRequired,
 	atk: PropTypes.number.isRequired,
 	def: PropTypes.number.isRequired,
@@ -158,6 +170,7 @@ const mapStateToProps = (state) => {
 	return {
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
+		fly: state.reducerCalc.fly,
 		max: state.reducerCalc.max,
 		atk: state.reducerCalc.atk,
 		def: state.reducerCalc.def,
@@ -174,6 +187,7 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		plainChange: bindActionCreators(plainChange, dispatch),
+		flyChange: bindActionCreators(flyChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
 	}
