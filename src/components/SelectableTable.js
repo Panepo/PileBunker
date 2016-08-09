@@ -52,7 +52,7 @@ export default class SelectableTable extends Component {
 				if ( j === 0 ) {
 					tdTemp = (
 						<label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor={tableId + " td" + i.toString() + j.toString()}>
-							<input type="checkbox" id={tableId + " td" + i.toString() + j.toString()} className="mdl-checkbox__input" onChange: {this.handleChange.bind(this)} />
+							<input type="checkbox" id={tableId + " td" + i.toString() + j.toString()} className="mdl-checkbox__input" onChange={this.handleChange.bind(this)} />
 						</label>
 					)
 				} else {
