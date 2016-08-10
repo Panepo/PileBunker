@@ -164,6 +164,7 @@ Content.propTypes = {
 	defSkillInt: PropTypes.number.isRequired,
 	aspdSkill: PropTypes.number.isRequired,
 	aspdSpell: PropTypes.number.isRequired,
+	output: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -180,6 +181,7 @@ const mapStateToProps = (state) => {
 		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,
 		aspdSpell: state.reducerCalc.aspdSpell,
+		output: state.reducerCalc.output,
 	}
 }
 

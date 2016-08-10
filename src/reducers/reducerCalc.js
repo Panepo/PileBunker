@@ -24,70 +24,113 @@ const initialState = {
 	defSkillInt: 0,
 	output: [],
 }
+var calcTemp = {}
 
 export default function reducerCalc(state = initialState, action) {
 	switch (action.type) {
 		case TYPE_CHANGE:
+			calcTemp = state
+			calcTemp.type = action.modelId
 			return Object.assign({}, state, {
-				type: action.modelId
+				type: action.modelId,
+				output: calcOutput(calcTemp)
 			})
 		case PLAIN_CHANGE:
 			if (state.plain === 'plain') {
+				calcTemp = state
+				calcTemp.plain = ''
 				return Object.assign({}, state, {
-					plain: ''
+					plain: '',
+					output: calcOutput(calcTemp)
 				})
 			} else {
+				calcTemp = state
+				calcTemp.plain = 'plain'
 				return Object.assign({}, state, {
-					plain: 'plain'
+					plain: 'plain',
+					output: calcOutput(calcTemp)
 				})
 			}
 		case FLY_CHANGE:
 			if (state.fly === 'fly') {
+				calcTemp = state
+				calcTemp.fly = ''
 				return Object.assign({}, state, {
-					fly: ''
+					fly: '',
+					output: calcOutput(calcTemp)
 				})
 			} else {
+				calcTemp = state
+				calcTemp.fly = 'fly'
 				return Object.assign({}, state, {
-					fly: 'fly'
+					fly: 'fly',
+					output: calcOutput(calcTemp)
 				})
 			}
 		case MAX_CHANGE:
+			calcTemp = state
+			calcTemp.max = action.modelId
 			return Object.assign({}, state, {
-				max: action.modelId
+				max: action.modelId,
+				output: calcOutput(calcTemp)
 			})
 		case INPUT_CHANGE:
 			switch(action.modelId) {
 				case "atk":
+					calcTemp = state
+					calcTemp.atk = action.modelValue
 					return Object.assign({}, state, {
-						atk: action.modelValue
+						atk: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "def":
+					calcTemp = state
+					calcTemp.def = action.modelValue
 					return Object.assign({}, state, {
-						def: action.modelValue
+						def: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "atkSkill":
+					calcTemp = state
+					calcTemp.atkSkill = action.modelValue
 					return Object.assign({}, state, {
-						atkSkill: action.modelValue
+						atkSkill: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "atkSkillInt":
+					calcTemp = state
+					calcTemp.atkSkillInt = action.modelValue
 					return Object.assign({}, state, {
-						atkSkillInt: action.modelValue
+						atkSkillInt: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "defSkill":
+					calcTemp = state
+					calcTemp.defSkill = action.modelValue
 					return Object.assign({}, state, {
-						defSkill: action.modelValue
+						defSkill: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "defSkillInt":
+					calcTemp = state
+					calcTemp.defSkillInt = action.modelValue
 					return Object.assign({}, state, {
-						defSkillInt: action.modelValue
+						defSkillInt: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "aspdSkill":
+					calcTemp = state
+					calcTemp.aspdSkill = action.modelValue
 					return Object.assign({}, state, {
-						aspdSkill: action.modelValue
+						aspdSkill: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 				case "aspdSpell":
+					calcTemp = state
+					calcTemp.aspdSpell = action.modelValue
 					return Object.assign({}, state, {
-						aspdSpell: action.modelValue
+						aspdSpell: action.modelValue,
+						output: calcOutput(calcTemp)
 					})
 			}
 		default:
@@ -138,10 +181,10 @@ function calcOutput(input){
 	for (var i=0; i<weaponSelected.length; i++){
 		totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 		totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-		weaponSelected[i].damage = totalAtk - totalDef
-		weaponSelected[i].frame1 = typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100)
-		weaponSelected[i].frame2 = typeSelected.frame2 * (1 - input.aspdSpell/100)
-		weaponSelected[i].dps = weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 )
+		weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+		weaponSelected[i].frame1 = Math.floor( (typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))*100 )/100
+		weaponSelected[i].frame2 = Math.floor( (typeSelected.frame2 * (1 - input.aspdSpell/100))*100 )/100
+		weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 	}
 	dbWeapon.update(weaponSelected)
 	
@@ -153,17 +196,17 @@ function calcOutput(input){
 		case 'bow':
 		case 'spell':
 			output = dbWeapon.chain().find({ 'type': input.type }).data()
-		
+			break
 		case 'xbow':
 			weaponSelected = dbWeapon.chain().find({ 'type': 'xbow2' }).data()
 			typeSelected = dbType.findOne({'name':'xbow2' })
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				weaponSelected[i].damage = totalAtk - totalDef
-				weaponSelected[i].frame1 = typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100)
-				weaponSelected[i].frame2 = typeSelected.frame2 * (1 - input.aspdSpell/100)
-				weaponSelected[i].dps = weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 )
+				weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+				weaponSelected[i].frame1 = Math.floor( (typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))*100 )/100
+				weaponSelected[i].frame2 = Math.floor( (typeSelected.frame2 * (1 - input.aspdSpell/100))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			
@@ -172,13 +215,13 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				weaponSelected[i].damage = totalAtk - totalDef
-				weaponSelected[i].frame1 = typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100)
-				weaponSelected[i].frame2 = typeSelected.frame2 * (1 - input.aspdSpell/100)
-				weaponSelected[i].dps = weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 )
+				weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+				weaponSelected[i].frame1 = Math.floor( (typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))*100 )/100
+				weaponSelected[i].frame2 = Math.floor( (typeSelected.frame2 * (1 - input.aspdSpell/100))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
-			output = dbWeapon.chain().find({ 'type': 'xbow' }).find({ 'type': 'xbow2' }).find({ 'type': 'xbow3' }).data()
+			output = dbWeapon.chain().find({'$or': [{ 'type': 'xbow' },{ 'type': 'xbow2' },{ 'type': 'xbow3' }]}).data()
 			break
 		case 'arqu':
 			weaponSelected = dbWeapon.chain().find({ 'type': 'arqu2' }).data()
@@ -186,10 +229,10 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				weaponSelected[i].damage = totalAtk - totalDef
-				weaponSelected[i].frame1 = typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100)
-				weaponSelected[i].frame2 = typeSelected.frame2 * (1 - input.aspdSpell/100)
-				weaponSelected[i].dps = weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 )
+				weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+				weaponSelected[i].frame1 = Math.floor( (typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))*100 )/100
+				weaponSelected[i].frame2 = Math.floor( (typeSelected.frame2 * (1 - input.aspdSpell/100))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			weaponSelected = dbWeapon.chain().find({ 'type': 'arqu3' }).data()
@@ -197,13 +240,13 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				weaponSelected[i].damage = totalAtk - totalDef
-				weaponSelected[i].frame1 = typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100)
-				weaponSelected[i].frame2 = typeSelected.frame2 * (1 - input.aspdSpell/100)
-				weaponSelected[i].dps = weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 )
+				weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+				weaponSelected[i].frame1 = Math.floor( (typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))*100 )/100
+				weaponSelected[i].frame2 = Math.floor( (typeSelected.frame2 * (1 - input.aspdSpell/100))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
-			output = dbWeapon.chain().find({ 'type': 'arqu' }).find({ 'type': 'arqu2' }).find({ 'type': 'arqu3' }).data()
+			output = dbWeapon.chain().find({'$or': [{ 'type': 'arqu' },{ 'type': 'arqu2' },{ 'type': 'arqu3' }]}).data()
 			break
 	}
 	
