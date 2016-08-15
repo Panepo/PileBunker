@@ -23,12 +23,12 @@ export default class MdlTableClass extends Component {
 		} else {
 			tempData.sort(function(a, b){return a[sortKey] - b[sortKey]})
 		}
-		
-		this.state = {
+
+		this.setState({
 			tableBody: tempData,
 			sortKey: sortKey,
 			sortDir: sortDir,
-		}
+		})
 	}
 	
 	handleChange(event) {
@@ -64,19 +64,30 @@ export default class MdlTableClass extends Component {
 			tableBody: tempData,
 			sortKey: newKey,
 			sortDir: newDir,
-		});
-		
+		})
 	}
 	
 	generateTableHead() {
 		const { tableHead, tableId, tableInd } = this.props
+		const { sortDir, sortKey } = this.state
 		
 		var theadOut
 		var theadTemp
 		var theadTempOut = []
+		var theadClass = ''
 		for (var i=0; i<tableHead.length; i++){
+			if ( tableInd[i] === sortKey ) {
+				if ( sortDir === 1 ) {
+					theadClass = 'theadOver'
+				} else {
+					theadClass = 'theadUnder'
+				}
+			} else {
+				theadClass = ''
+			}
+			
 			theadTemp = (
-				<th id={tableInd[i]} key={tableId + " th" + i.toString()} onClick={this.handleSort.bind(this)}>
+				<th className={theadClass} id={tableInd[i]} key={tableId + " th" + i.toString()} onClick={this.handleSort.bind(this)}>
 					{tableHead[i]}
 				</th>
 			)

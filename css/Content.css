@@ -10,3 +10,11 @@
 .outputTable {
 	width: 100%
 }
+
+.theadOver {
+	text-decoration: overline;
+}
+
+.theadUnder {
+	text-decoration: underline;
+}
