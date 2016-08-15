@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class SelectableTable extends Component {
+export default class MdlTableArray extends Component {
 	componentDidUpdate() {
 		componentHandler.upgradeDom()
 	}
@@ -51,21 +51,24 @@ export default class SelectableTable extends Component {
 			for (var j=0; j<=tableData[i].length; j++) {
 				if ( j === 0 ) {
 					tdTemp = (
-						<label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor={tableId + " td" + i.toString() + j.toString()}>
-							<input type="checkbox" id={tableId + " td" + i.toString() + j.toString()} className="mdl-checkbox__input" onChange={this.handleChange.bind(this)} />
-						</label>
+						<td key={tableId + " td" + i.toString() + j.toString()} >
+							<label className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor={tableId + i.toString()}>
+								<input type="checkbox" id={tableId + i.toString()} className="mdl-checkbox__input" onChange={this.handleChange.bind(this)} />
+							</label>
+						</td>
 					)
+					tdTempOut.push(tdTemp)
 				} else {
 					tdTemp = (
 						<td key={tableId + " td" + i.toString() + j.toString()} >
-							tableData[i][j-1]
+							{tableData[i][j-1]}
 						</td>
 					)
 					tdTempOut.push(tdTemp)
 				}
 			}
 			tbodyTemp = (
-				<tr key={tableId + " th" + i.toString()} id={tableId + " th" + i.toString()} >
+				<tr key={tableId + " th" + i.toString()} id={tableId + i.toString() + "tr"} >
 					{tdTempOut}
 				</tr>
 			)
@@ -88,7 +91,7 @@ export default class SelectableTable extends Component {
 	}
 }
 
-SelectableTable.propTypes = {
+MdlTableArray.propTypes = {
 	tableHead: PropTypes.array,
 	tableData: PropTypes.array,
 	tableClass: PropTypes.string,

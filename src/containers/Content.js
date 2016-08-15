@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { typeChange, plainChange, maxChange, inputChange, flyChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
-import SelectableTable from '../components/SelectableTable'
+import OutputTable from './OutputTable'
 import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
@@ -144,6 +144,7 @@ class Content extends Component {
 								defaultValue={defSkillInt}
 								/>
 						</div>
+						<OutputTable />
 					</div>
 				</div>
 			</main>
@@ -164,7 +165,7 @@ Content.propTypes = {
 	defSkillInt: PropTypes.number.isRequired,
 	aspdSkill: PropTypes.number.isRequired,
 	aspdSpell: PropTypes.number.isRequired,
-	output: PropTypes.array.isRequired,
+	
 }
 
 const mapStateToProps = (state) => {

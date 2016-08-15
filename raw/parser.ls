@@ -7,7 +7,7 @@ require! {
 # ===============================================================================
 # PARSE WEAPONS DATA
 # ===============================================================================
-slotWeapon = <[name type atk aspd range rare]>
+slotWeapon = <[name type atk aspd range rare text]>
 outWeapon = []
 for weapon, i in weapons
 	outWeapon[i] = {}
