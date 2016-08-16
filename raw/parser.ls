@@ -17,7 +17,7 @@ for weapon, i in weapons
 
 for weapon, i in outWeapon
 	weapon.ref = 0
-	weapon.refText = ''
+	weapon.refText = '+0'
 
 outWeapon = JSON.stringify outWeapon
 console.log 'weapons.json arrange complete!'

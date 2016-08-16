@@ -4,6 +4,7 @@ import {
 	MAX_CHANGE,
 	INPUT_CHANGE,
 	FLY_CHANGE,
+	REF_CHANGE,
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbType } from './database'
@@ -74,6 +75,87 @@ export default function reducerCalc(state = initialState, action) {
 				max: action.modelId,
 				output: calcOutput(calcTemp)
 			})
+		case REF_CHANGE:
+			var weaponSelected = []
+			switch (action.modelId) {
+				case "ref0":
+					weaponSelected = dbWeapon.chain().data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].ref = 0
+						weaponSelected[i].refText = '+0'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+				case "refAll":
+					weaponSelected = dbWeapon.chain().data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].atk += 10
+						weaponSelected[i].ref = 10
+						weaponSelected[i].refText = '+10'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+				case "ref4":
+					weaponSelected = dbWeapon.chain().find({ 'rare': 4 }).data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].atk += 10
+						weaponSelected[i].ref = 10
+						weaponSelected[i].refText = '+10'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+				case "ref3":
+					weaponSelected = dbWeapon.chain().find({ 'rare': 3 }).data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].atk += 10
+						weaponSelected[i].ref = 10
+						weaponSelected[i].refText = '+10'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+				case "ref2":
+					weaponSelected = dbWeapon.chain().find({ 'rare': 2 }).data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].atk += 10
+						weaponSelected[i].ref = 10
+						weaponSelected[i].refText = '+10'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+				case "ref1":
+					weaponSelected = dbWeapon.chain().find({ 'rare': 1 }).data()
+					for (var i=0; i<weaponSelected.length; i++){
+						weaponSelected[i].atk -= weaponSelected[i].ref
+						weaponSelected[i].atk += 10
+						weaponSelected[i].ref = 10
+						weaponSelected[i].refText = '+10'
+					}
+					dbWeapon.update(weaponSelected)
+					calcTemp = state
+					return Object.assign({}, state, {
+						output: calcOutput(calcTemp)
+					})
+			}
 		case INPUT_CHANGE:
 			switch(action.modelId) {
 				case "atk":
