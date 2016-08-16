@@ -15,6 +15,10 @@ for weapon, i in weapons
 		if slotValue !== 'X'
 			outWeapon[i][slotValue] = weapon[j]
 
+for weapon, i in outWeapon
+	weapon.ref = 0
+	weapon.refText = ''
+
 outWeapon = JSON.stringify outWeapon
 console.log 'weapons.json arrange complete!'
 fs.writeFileSync './raw/weapons.json', outWeapon

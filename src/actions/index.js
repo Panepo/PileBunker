@@ -33,3 +33,10 @@ export function inputChange(modelId, modelValue) {
 		modelValue
 	}
 }
+
+export function refChange(modelId) {
+	return {
+		type: types.REF_CHANGE,
+		modelId
+	}
+}
