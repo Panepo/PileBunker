@@ -29,7 +29,7 @@ class OutputTable extends Component {
 		
 		return (
 			<div>
-				<div>
+				<div className="refine-button">
 					精煉設定：
 					{butOut}
 				</div>
