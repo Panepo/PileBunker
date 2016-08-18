@@ -239,6 +239,8 @@ function calcOutput(input){
 	if ( input.fly === 'fly' ) {
 		if ( input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' ) {
 			flyMux = 0.5
+		} else if ( input.type === 'bow' ) {
+			flyMux = 1.5
 		}
 	}
 	
