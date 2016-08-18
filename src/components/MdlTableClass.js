@@ -105,7 +105,7 @@ export default class MdlTableClass extends Component {
 	}
 	
 	generateTableBody() {
-		const { tableData, tableId, tableInd } = this.props
+		const { tableData, tableId, tableInd, tableFunction } = this.props
 		const { tableBody } = this.state
 		
 		var tbodyOut
@@ -126,7 +126,7 @@ export default class MdlTableClass extends Component {
 					tdTempOut.push(tdTemp)
 				} else {
 					tdTemp = (
-						<td key={tableId + " td" + i.toString() + j.toString()} >
+						<td key={tableId + " td" + i.toString() + j.toString()} onClick={tableFunction.bind(null, tableBody[i].name)}>
 							{tableBody[i][tableInd[j]]}
 						</td>
 					)
@@ -163,4 +163,5 @@ MdlTableClass.propTypes = {
 	tableHead: PropTypes.array,
 	tableData: PropTypes.array,
 	tableClass: PropTypes.string,
+	tableFunction: PropTypes.func,
 }

@@ -5,6 +5,7 @@ import {
 	INPUT_CHANGE,
 	FLY_CHANGE,
 	REF_CHANGE,
+	REF_SIN_CHANGE,
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbType } from './database'
@@ -156,6 +157,22 @@ export default function reducerCalc(state = initialState, action) {
 						output: calcOutput(calcTemp)
 					})
 			}
+		case REF_SIN_CHANGE:
+			weaponSelected = dbWeapon.findOne({'name': action.modelId })
+			if ( weaponSelected.ref === 10 ) {
+				weaponSelected.atk -= 10
+				weaponSelected.ref = 0
+				weaponSelected.refText = '+0'
+			} else {
+				weaponSelected.atk += 1
+				weaponSelected.ref += 1
+				weaponSelected.refText = '+' + weaponSelected.ref.toString()
+			}
+			dbWeapon.update(weaponSelected)
+			calcTemp = state
+			return Object.assign({}, state, {
+				output: calcOutput(calcTemp)
+			})
 		case INPUT_CHANGE:
 			switch(action.modelId) {
 				case "atk":

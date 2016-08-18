@@ -40,3 +40,10 @@ export function refChange(modelId) {
 		modelId
 	}
 }
+
+export function refSinChange(modelId) {
+	return {
+		type: types.REF_SIN_CHANGE,
+		modelId
+	}
+}

@@ -1,14 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { refChange } from '../actions'
+import { refChange, refSinChange } from '../actions'
 import MdlTableClass from '../components/MdlTableClass'
 import ToggleButton from '../components/ToggleButton'
 import { tableHead, tableInd, listRef, listRefS } from '../constants/ConstList'
 
 class OutputTable extends Component {
 	render() {
-		const { output, refChange } = this.props
+		const { output, refChange, refSinChange } = this.props
 		
 		var butTemp
 		var butOut = []
@@ -40,6 +40,7 @@ class OutputTable extends Component {
 						tableHead={tableHead}
 						tableData={output}
 						tableClass={"outputTable mdl-data-table mdl-js-data-table mdl-shadow--2dp"}
+						tableFunction={(modelId) => refSinChange(modelId)}
 						/>
 				</div>
 			</div>
@@ -60,6 +61,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		refChange: bindActionCreators(refChange, dispatch),
+		refSinChange: bindActionCreators(refSinChange, dispatch),
 	}
 }
 
