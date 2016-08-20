@@ -87,7 +87,7 @@ class Content extends Component {
 						<div>
 							<InputBoxValue 
 								classes={"text-input"}
-								title={"城娘攻擊力"}
+								title={"城娘素身攻擊力"}
 								modelId={"atk"}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
 								defaultValue={atk}
