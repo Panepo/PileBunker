@@ -19,6 +19,13 @@ export function flyChange() {
 	}
 }
 
+export function cannonChange() {
+	return {
+		type: types.CANNON_CHANGE
+	}
+}
+
+
 export function maxChange(modelId) {
 	return {
 		type: types.MAX_CHANGE,

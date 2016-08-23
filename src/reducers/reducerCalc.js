@@ -6,6 +6,7 @@ import {
 	FLY_CHANGE,
 	REF_CHANGE,
 	REF_SIN_CHANGE,
+	CANNON_CHANGE,
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbType } from './database'
@@ -15,6 +16,7 @@ const initialState = {
 	type: 'sword',
 	plain: 'plain',
 	fly: '',
+	cannon: 'cannon',
 	max: "max0",
 	atk: 200,
 	def: 100,
@@ -66,6 +68,22 @@ export default function reducerCalc(state = initialState, action) {
 				calcTemp.fly = 'fly'
 				return Object.assign({}, state, {
 					fly: 'fly',
+					output: calcOutput(calcTemp)
+				})
+			}
+		case CANNON_CHANGE:
+			if (state.cannon === 'cannon') {
+				calcTemp = state
+				calcTemp.cannon = ''
+				return Object.assign({}, state, {
+					cannon: '',
+					output: calcOutput(calcTemp)
+				})
+			} else {
+				calcTemp = state
+				calcTemp.cannon = 'cannon'
+				return Object.assign({}, state, {
+					cannon: 'cannon',
 					output: calcOutput(calcTemp)
 				})
 			}
@@ -259,6 +277,10 @@ function calcOutput(input){
 		} else if ( input.type === 'bow' ) {
 			flyMux = 1.5
 		}
+	}
+	
+	if ( input.type === 'cannon' && input.cannon === 'cannon' ) {
+		flyMux = 1.2
 	}
 	
 	switch ( input.max ) {

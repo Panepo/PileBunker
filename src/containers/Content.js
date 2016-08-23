@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { typeChange, plainChange, maxChange, inputChange, flyChange } from '../actions'
+import { typeChange, plainChange, maxChange, inputChange, flyChange, cannonChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
 import OutputTable from './OutputTable'
@@ -9,12 +9,11 @@ import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
-	render() {
-		const { type, typeChange, plain, plainChange, max, maxChange, fly, flyChange } = this.props
-		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
-		
-		var typeTemp
+	generateType() {
+		const { type, typeChange } = this.props
+		var typeTemp = (<label>武器種：</label>)
 		var typeOut = []
+		typeOut.push(typeTemp)
 		for (var i=0; i<listType.length; i++){
 			typeTemp = (
 				<ToggleButton
@@ -29,9 +28,65 @@ class Content extends Component {
 			)
 			typeOut.push(typeTemp)
 		}
+		return typeOut
+	}
+	
+	generateToggle() {
+		const { plain, plainChange, fly, flyChange, cannon, cannonChange, type } = this.props
+		var toggleTemp = (<label>地形適性：</label>)
+		var toggleOut = []
+		toggleOut.push(toggleTemp)
+		toggleTemp = (
+			<ToggleButton
+				key={"inputType plain"}
+				display={plain}
+				title={"地形適性あり"}
+				onClickFunc={(modelId) => plainChange(modelId)}
+				modelId={"plain"}
+				Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
+				Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+				/>
+			)
+		toggleOut.push(toggleTemp)
+		toggleTemp = (<label>飛行兜：</label>)
+		toggleOut.push(toggleTemp)
+		toggleTemp = (
+			<ToggleButton
+				key={"inputType fly"}
+				display={fly}
+				title={"飛行兜あり"}
+				onClickFunc={(modelId) => flyChange(modelId)}
+				modelId={"fly"}
+				Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
+				Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+				/>
+			)
+		toggleOut.push(toggleTemp)
 		
-		var butTemp
+		if ( type === "cannon") {
+			toggleTemp = (<label>大砲直擊：</label>)
+			toggleOut.push(toggleTemp)
+			toggleTemp = (
+				<ToggleButton
+					key={"inputType cannon"}
+					display={cannon}
+					title={"大砲直擊あり"}
+					onClickFunc={(modelId) => cannonChange(modelId)}
+					modelId={"cannon"}
+					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
+					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+					/>
+				)
+			toggleOut.push(toggleTemp)
+		}
+		return toggleOut
+	}
+	
+	generateMax() {
+		const { max, maxChange } = this.props
+		var butTemp = (<label>巨大化：</label>)
 		var butOut = []
+		butOut.push(butTemp)
 		for (var i=0; i<listBut.length; i++){
 			butTemp = (
 				<ToggleButton
@@ -46,7 +101,11 @@ class Content extends Component {
 			)
 			butOut.push(butTemp)
 		}
-		
+		return butOut
+	}
+	
+	render() {
+		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		return (
 			<main className="demo-main mdl-layout__content">
 				<div className="demo-container mdl-grid">
@@ -55,34 +114,13 @@ class Content extends Component {
 						<h4>城プロRE 武器傷害機算機 パイルバンカー</h4>
 						<h5>設定</h5>
 						<div>
-							武器種：
-							{typeOut}
+							{this.generateType()}
 						</div>
 						<div>
-							地形適性：
-							<ToggleButton
-								key={"inputType plain"}
-								display={plain}
-								title={"地形適性あり"}
-								onClickFunc={(modelId) => plainChange(modelId)}
-								modelId={"plain"}
-								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
-								/>
-							飛行兜：
-							<ToggleButton
-								key={"inputType fly"}
-								display={fly}
-								title={"飛行兜あり"}
-								onClickFunc={(modelId) => flyChange(modelId)}
-								modelId={"fly"}
-								Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-								Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
-								/>
+							{this.generateToggle()}
 						</div>
 						<div>
-							巨大化：
-							{butOut}
+							{this.generateMax()}
 						</div>
 						<div>
 							<InputBoxValue 
@@ -155,6 +193,7 @@ class Content extends Component {
 Content.propTypes = {
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
+	cannon: PropTypes.string.isRequired,
 	fly: PropTypes.string.isRequired,
 	max: PropTypes.string.isRequired,
 	atk: PropTypes.number.isRequired,
@@ -172,6 +211,7 @@ const mapStateToProps = (state) => {
 	return {
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
+		cannon: state.reducerCalc.cannon,
 		fly: state.reducerCalc.fly,
 		max: state.reducerCalc.max,
 		atk: state.reducerCalc.atk,
@@ -193,6 +233,7 @@ const mapDispatchToProps = (dispatch) => {
 		flyChange: bindActionCreators(flyChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
+		cannonChange: bindActionCreators(cannonChange, dispatch),
 	}
 }
 
