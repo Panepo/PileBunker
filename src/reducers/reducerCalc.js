@@ -272,7 +272,7 @@ function calcOutput(input){
 	}
 	
 	if ( input.fly === 'fly' ) {
-		if ( input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' ) {
+		if ( input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' || input.type === 'shield' ) {
 			flyMux = 0.5
 		} else if ( input.type === 'bow' ) {
 			flyMux = 1.5
@@ -331,6 +331,7 @@ function calcOutput(input){
 		case 'sword':
 		case 'hammer':
 		case 'lance':
+		case 'shield':
 		case 'bow':
 		case 'spell':
 		case 'cannon':
