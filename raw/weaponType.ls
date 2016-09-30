@@ -1,7 +1,7 @@
 #slotType = [name frame1 frame2 range]
 weaponType = [
 ["sword",			19, 30, 140]
-["lance",			23, 30, 180]
+["lance",			23, 30, 200]
 ["hammer",		32, 30,  90]
 ["shield",		32, 30,  90]
 ["bow",				19, 18, 280]
