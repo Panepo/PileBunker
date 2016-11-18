@@ -11,6 +11,7 @@ import {
 
 import { dbWeapon, dbType } from './database'
 import { listButS } from '../constants/ConstList'
+import * as parameters from '../constants/ConstParameters'
 
 const initialState = {
 	type: 'sword',
@@ -18,8 +19,8 @@ const initialState = {
 	fly: '',
 	cannon: 'cannon',
 	max: "max0",
-	atk: 200,
-	def: 100,
+	atk: parameters.defaultAtk,
+	def: parameters.defaultDef,
 	atkSkill: 0,
 	defSkill: 0,
 	aspdSkill: 0,
@@ -266,38 +267,38 @@ function calcOutput(input){
 	var flyMux = 1
 	
 	if ( input.plain === 'plain' ) {
-		charAtk = input.atk * 1.2
+		charAtk = input.atk * parameters.muxPlain
 	} else {
 		charAtk = input.atk
 	}
 	
 	if ( input.fly === 'fly' ) {
 		if ( input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' || input.type === 'shield' ) {
-			flyMux = 0.5
+			flyMux = parameters.muxFlyMelee
 		} else if ( input.type === 'bow' ) {
-			flyMux = 1.5
+			flyMux = parameters.muxFlyBow
 		}
 	}
 	
 	if ( input.type === 'cannon' && input.cannon === 'cannon' ) {
-		flyMux = 1.2
+		flyMux = parameters.muxCanDirect
 	}
 	
 	switch ( input.max ) {
 		case listButS[1]:
-			maxMux = 1.16
+			maxMux = parameters.muxMax[0]
 			break;
 		case listButS[2]:
-			maxMux = 1.32
+			maxMux = parameters.muxMax[1]
 			break;
 		case listButS[3]:
-			maxMux = 1.48
+			maxMux = parameters.muxMax[2]
 			break;
 		case listButS[4]:
-			maxMux = 1.64
+			maxMux = parameters.muxMax[3]
 			break;
 		case listButS[5]:
-			maxMux = 1.8
+			maxMux = parameters.muxMax[4]
 			break;
 	}
 	
@@ -310,18 +311,18 @@ function calcOutput(input){
 			weaponSelected[i].damage = Math.floor(totalAtk)
 			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 		} else {
 			totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 			totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-			if ( (totalAtk-20) >= totalDef ) {
+			if ( (totalAtk-parameters.valueProDam) >= totalDef ) {
 				weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
 			} else {
-				weaponSelected[i].damage = 20
+				weaponSelected[i].damage = parameters.valueProDam
 			}
 			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 		}
 	}
 	dbWeapon.update(weaponSelected)
@@ -343,14 +344,14 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				if ( (totalAtk-20) >= totalDef ) {
+				if ( (totalAtk-parameters.valueProDam) >= totalDef ) {
 					weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
 				} else {
-					weaponSelected[i].damage = 20
+					weaponSelected[i].damage = parameters.valueProDam
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			
@@ -359,14 +360,14 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				if ( (totalAtk-20) >= totalDef ) {
+				if ( (totalAtk-parameters.valueProDam) >= totalDef ) {
 					weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
 				} else {
-					weaponSelected[i].damage = 20
+					weaponSelected[i].damage = parameters.valueProDam
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			output = dbWeapon.chain().find({'$or': [{ 'type': 'xbow' },{ 'type': 'xbow2' },{ 'type': 'xbow3' }]}).data()
@@ -377,14 +378,14 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				if ( (totalAtk-20) >= totalDef ) {
+				if ( (totalAtk-parameters.valueProDam) >= totalDef ) {
 					weaponSelected[i].damage = Math.floor(totalAtk - totalDef)*2
 				} else {
-					weaponSelected[i].damage = 40
+					weaponSelected[i].damage = parameters.valueProDam*2
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			weaponSelected = dbWeapon.chain().find({ 'type': 'arqu3' }).data()
@@ -392,14 +393,14 @@ function calcOutput(input){
 			for (var i=0; i<weaponSelected.length; i++){
 				totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 				totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
-				if ( (totalAtk-20) >= totalDef ) {
+				if ( (totalAtk-parameters.valueProDam) >= totalDef ) {
 					weaponSelected[i].damage = Math.floor(totalAtk - totalDef)*3
 				} else {
-					weaponSelected[i].damage = 60
+					weaponSelected[i].damage = parameters.valueProDam*3
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * 30 / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			output = dbWeapon.chain().find({'$or': [{ 'type': 'arqu' },{ 'type': 'arqu2' },{ 'type': 'arqu3' }]}).data()
