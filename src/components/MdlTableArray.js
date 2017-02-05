@@ -1,8 +1,34 @@
 import React, { Component, PropTypes } from 'react'
 
 export default class MdlTableArray extends Component {
+	constructor(props, context) {
+		super(props, context)
+		this.state = {
+			tableBody: this.props.tableData,
+			sortKey: 'dps',
+			sortDir: 1,
+		}
+	}
+	
 	componentDidUpdate() {
 		componentHandler.upgradeDom()
+	}
+	
+	componentWillReceiveProps(nextProps) {
+		const { sortDir, sortKey } = this.state
+		var tempData = nextProps.tableData
+		
+		if ( sortDir ) {
+			tempData.sort(function(a, b){return b[sortKey] - a[sortKey]})
+		} else {
+			tempData.sort(function(a, b){return a[sortKey] - b[sortKey]})
+		}
+
+		this.setState({
+			tableBody: tempData,
+			sortKey: sortKey,
+			sortDir: sortDir,
+		})
 	}
 	
 	handleChange(event) {
@@ -14,15 +40,54 @@ export default class MdlTableArray extends Component {
 		}
 	}
 	
+	handleSort(event) {
+		const { sortDir, sortKey, tableBody } = this.state
+		var newKey = event.target.id
+		var tempData = tableBody
+		var newDir = sortDir
+		
+		if ( newKey === sortKey ) {
+			if ( sortDir ) {
+				newDir = 0
+			} else {
+				newDir = 1
+			}
+		}
+		
+		if ( newDir ) {
+			tempData.sort(function(a, b){return b[newKey] - a[newKey]})
+		} else {
+			tempData.sort(function(a, b){return a[newKey] - b[newKey]})
+		}
+		
+		this.setState({
+			tableBody: tempData,
+			sortKey: newKey,
+			sortDir: newDir,
+		})
+	}
+	
 	generateTableHead() {
-		const { tableHead, tableId } = this.props
+		const { tableHead, tableId, tableInd } = this.props
+		const { sortDir, sortKey } = this.state
 		
 		var theadOut
 		var theadTemp
 		var theadTempOut = []
+		var theadClass = ''
 		for (var i=0; i<tableHead.length; i++){
+			if ( tableInd[i] === sortKey ) {
+				if ( sortDir === 1 ) {
+					theadClass = 'theadOver'
+				} else {
+					theadClass = 'theadUnder'
+				}
+			} else {
+				theadClass = ''
+			}
+			
 			theadTemp = (
-				<th id={tableId + " th" + i.toString()} key={tableId + " th" + i.toString()} >
+				<th className={theadClass} id={tableInd[i]} key={tableId + " th" + i.toString()} onClick={this.handleSort.bind(this)}>
 					{tableHead[i]}
 				</th>
 			)
@@ -40,15 +105,16 @@ export default class MdlTableArray extends Component {
 	}
 	
 	generateTableBody() {
-		const { tableData, tableId } = this.props
+		const { tableData, tableId, tableInd, tableFunction } = this.props
+		const { tableBody } = this.state
 		
 		var tbodyOut
 		var tbodyTemp
 		var tbodyTempOut = []
-		for (var i=0; i<tableData.length; i++) {
+		for (var i=0; i<tableBody.length; i++) {
 			var tdTemp
 			var tdTempOut = []
-			for (var j=0; j<=tableData[i].length; j++) {
+			for (var j=0; j<tableInd.length; j++) {
 				if ( j === 0 ) {
 					tdTemp = (
 						<td key={tableId + " td" + i.toString() + j.toString()} >
@@ -60,15 +126,15 @@ export default class MdlTableArray extends Component {
 					tdTempOut.push(tdTemp)
 				} else {
 					tdTemp = (
-						<td key={tableId + " td" + i.toString() + j.toString()} >
-							{tableData[i][j-1]}
+						<td key={tableId + " td" + i.toString() + j.toString()} onClick={tableFunction.bind(null, tableBody[i].name)}>
+							{tableBody[i][tableInd[j]]}
 						</td>
 					)
 					tdTempOut.push(tdTemp)
 				}
 			}
 			tbodyTemp = (
-				<tr key={tableId + " th" + i.toString()} id={tableId + i.toString() + "tr"} >
+				<tr key={tableId + " th" + i.toString()} id={tableId + i.toString() + "tr"}>
 					{tdTempOut}
 				</tr>
 			)
@@ -91,8 +157,11 @@ export default class MdlTableArray extends Component {
 	}
 }
 
-MdlTableArray.propTypes = {
+MdlTableClass.propTypes = {
+	tableId: PropTypes.string,
+	tableInd: PropTypes.array,
 	tableHead: PropTypes.array,
 	tableData: PropTypes.array,
 	tableClass: PropTypes.string,
+	tableFunction: PropTypes.func,
 }
