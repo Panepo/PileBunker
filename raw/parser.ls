@@ -7,11 +7,10 @@ require! {
 # ===============================================================================
 # PARSE WEAPONS DATA
 # ===============================================================================
-slotWeapon = <[name type atk aspd range rare text]>
 outWeapon = []
-for weapon, i in weapons
+for weapon, i in weapons.data
 	outWeapon[i] = {}
-	for slotValue, j in slotWeapon
+	for slotValue, j in weapons.slotWeapon
 		if slotValue !== 'X'
 			outWeapon[i][slotValue] = weapon[j]
 

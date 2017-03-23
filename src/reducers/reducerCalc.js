@@ -311,7 +311,7 @@ function calcOutput(input){
 			weaponSelected[i].damage = Math.floor(totalAtk)
 			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 		} else {
 			totalAtk = (charAtk + weaponSelected[i].atk)*maxMux*flyMux*(1 + input.atkSkill/100 ) + input.atkSkillInt
 			totalDef = input.def*(1 - input.defSkill/100) - input.defSkillInt
@@ -322,7 +322,7 @@ function calcOutput(input){
 			}
 			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+			weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 		}
 	}
 	dbWeapon.update(weaponSelected)
@@ -351,7 +351,7 @@ function calcOutput(input){
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			
@@ -367,7 +367,7 @@ function calcOutput(input){
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			output = dbWeapon.chain().find({'$or': [{ 'type': 'xbow' },{ 'type': 'xbow2' },{ 'type': 'xbow3' }]}).data()
@@ -385,7 +385,7 @@ function calcOutput(input){
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			weaponSelected = dbWeapon.chain().find({ 'type': 'arqu3' }).data()
@@ -400,7 +400,7 @@ function calcOutput(input){
 				}
 				weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd)/100))
 				weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell/100))
-				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
+				weaponSelected[i].dps = Math.floor( (weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / ( weaponSelected[i].frame1 + weaponSelected[i].frame2 ))*100 )/100
 			}
 			dbWeapon.update(weaponSelected)
 			output = dbWeapon.chain().find({'$or': [{ 'type': 'arqu' },{ 'type': 'arqu2' },{ 'type': 'arqu3' }]}).data()
