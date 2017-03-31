@@ -7,7 +7,7 @@ module.exports = {
 	devtool: "sourcemap"
 	entry: [
 		#'webpack-hot-middleware/client'
-		"./src/index.js"
+		"./src/index.jsx"
 	]
 	output: {
 		path: path.join(__dirname, 'build')
@@ -18,10 +18,22 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin()
 		new webpack.NoErrorsPlugin()
 	]
+	resolve:{
+		alias:{
+		}
+		extensions: ['', '.ls', '.js', '.json', '.jsx']
+	}
 	module: {
+		preLoaders: [
+			{
+				test: /\.js[x]?$/
+				loader: 'eslint'
+				include: path.join(__dirname, 'src')
+			}
+		]
 		loaders: [
 			{
-				test: /\.js$/
+				test: /\.js[x]?$/
 				loaders: [ "react-hot", "babel" ]
 				include: path.join(__dirname, 'src')
 			}

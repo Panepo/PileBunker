@@ -1,15 +1,15 @@
-import lokijs from 'lokijs'
+import Lokijs from 'lokijs'
 import weaponData from '../../raw/weapons.json'
 import typeData from '../../raw/weaponTypes.json'
 
-var db = new lokijs('db')
-export var dbWeapon = db.addCollection("dbWeapon")
-export var dbType = db.addCollection("dbType")
+const db = new Lokijs('db')
+export const dbWeapon = db.addCollection('dbWeapon')
+export const dbType = db.addCollection('dbType')
 
-for (var i=0; i<weaponData.length; i++) {
+for (let i = 0; i < weaponData.length; i += 1) {
 	dbWeapon.insert(weaponData[i])
 }
 
-for (var i=0; i<typeData.length; i++) {
+for (let i = 0; i < typeData.length; i += 1) {
 	dbType.insert(typeData[i])
 }

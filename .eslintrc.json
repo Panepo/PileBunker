@@ -37,13 +37,27 @@
       "never"
     ],
 	"no-tabs": "off",
+	"no-bitwise": "off",
+	"no-shadow": "off",
+	"max-len": ["warn", 200],
+	"block-spacing": "off",
+	"spaced-comment": "warn",
 	"react/self-closing-comp": ["warn"],
 	"react/prefer-stateless-function": ["off"],
 	"react/jsx-indent": ["warn", "tab"],
-    /* Advanced Rules*/
-    "no-unused-expressions": "warn",
-    "no-useless-concat": "warn",
-    "block-scoped-var": "error",
-    "consistent-return": "error"
+	"react/jsx-indent-props": ["warn", "tab"],
+	"react/jsx-boolean-value": "warn",
+	"react/forbid-prop-types": "warn",
+	"react/jsx-no-bind": "off",
+	"react/require-default-props": "warn",
+	"no-plusplus": "warn",
+	"no-unused-vars": "warn",
+	"import/no-named-default": "warn",
+	"import/prefer-default-export": "warn",
+	"no-mixed-operators": "off",
+	"no-unused-expressions": "warn",
+	"no-useless-concat": "warn",
+	"block-scoped-var": "error",
+	"consistent-return": "error"
   }
 }

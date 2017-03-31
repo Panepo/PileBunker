@@ -11,40 +11,41 @@ import '../../css/Content.css'
 class Content extends Component {
 	generateType() {
 		const { type, typeChange } = this.props
-		var typeTemp = (<label>武器種：</label>)
-		var typeOut = []
+		let typeTemp = (<label>武器種：</label>)
+		const typeOut = []
 		typeOut.push(typeTemp)
-		for (var i=0; i<listType.length; i++){
+
+		for (let i = 0; i < listType.length; i += 1) {
 			typeTemp = (
 				<ToggleButton
-					key={"inputType" + i.toString()}
+					key={'inputType' + i.toString()}
 					display={type}
 					title={listType[i]}
 					onClickFunc={(modelId) => typeChange(modelId)}
 					modelId={listTypeS[i]}
-					Cactive={"type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-					Cinactive={"type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+					Cactive={'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+					Cinactive={'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 					/>
 			)
 			typeOut.push(typeTemp)
 		}
 		return typeOut
 	}
-	
+
 	generateToggle() {
 		const { plain, plainChange, fly, flyChange, cannon, cannonChange, type } = this.props
-		var toggleTemp = (<label>地形適性：</label>)
-		var toggleOut = []
+		let toggleTemp = (<label>地形適性：</label>)
+		let toggleOut = []
 		toggleOut.push(toggleTemp)
 		toggleTemp = (
 			<ToggleButton
-				key={"inputType plain"}
+				key={'inputType plain'}
 				display={plain}
-				title={"地形適性あり"}
+				title={'地形適性あり'}
 				onClickFunc={(modelId) => plainChange(modelId)}
-				modelId={"plain"}
-				Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-				Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+				modelId={'plain'}
+				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 				/>
 			)
 		toggleOut.push(toggleTemp)
@@ -52,58 +53,58 @@ class Content extends Component {
 		toggleOut.push(toggleTemp)
 		toggleTemp = (
 			<ToggleButton
-				key={"inputType fly"}
+				key={'inputType fly'}
 				display={fly}
-				title={"飛行兜あり"}
+				title={'飛行兜あり'}
 				onClickFunc={(modelId) => flyChange(modelId)}
-				modelId={"fly"}
-				Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-				Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+				modelId={'fly'}
+				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 				/>
 			)
 		toggleOut.push(toggleTemp)
-		
-		if ( type === "cannon") {
+
+		if ( type === 'cannon') {
 			toggleTemp = (<label>大砲直擊：</label>)
 			toggleOut.push(toggleTemp)
 			toggleTemp = (
 				<ToggleButton
-					key={"inputType cannon"}
+					key={'inputType cannon'}
 					display={cannon}
-					title={"大砲直擊あり"}
+					title={'大砲直擊あり'}
 					onClickFunc={(modelId) => cannonChange(modelId)}
-					modelId={"cannon"}
-					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+					modelId={'cannon'}
+					Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+					Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 					/>
 				)
 			toggleOut.push(toggleTemp)
 		}
 		return toggleOut
 	}
-	
+
 	generateMax() {
 		const { max, maxChange } = this.props
-		var butTemp = (<label>巨大化：</label>)
-		var butOut = []
+		let butTemp = (<label>巨大化：</label>)
+		let butOut = []
 		butOut.push(butTemp)
-		for (var i=0; i<listBut.length; i++){
+		for (let i=0; i<listBut.length; i++){
 			butTemp = (
 				<ToggleButton
-					key={"inputBut" + i.toString()}
+					key={'inputBut' + i.toString()}
 					display={max}
 					title={listBut[i]}
 					onClickFunc={(modelId) => maxChange(modelId)}
 					modelId={listButS[i]}
-					Cactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"}
-					Cinactive={"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent"}
+					Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+					Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 					/>
 			)
 			butOut.push(butTemp)
 		}
 		return butOut
 	}
-	
+
 	render() {
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		return (
@@ -124,63 +125,55 @@ class Content extends Component {
 						</div>
 						<div>
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"城娘素身攻擊力"}
-								modelId={"atk"}
+								classes={'text-input'}
+								title={'城娘素身攻擊力'}
+								modelId={'atk'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atk}
-								/>
+								defaultValue={atk} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"兜防禦力"}
-								modelId={"def"}
+								classes={'text-input'}
+								title={'兜防禦力'}
+								modelId={'def'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={def}
-								/>
+								defaultValue={def} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能攻擊速度增加"}
-								modelId={"aspdSkill"}
+								classes={'text-input'}
+								title={'技能攻擊速度增加'}
+								modelId={'aspdSkill'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={aspdSkill}
-								/>
+								defaultValue={aspdSkill} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"策略攻擊速度增加"}
-								modelId={"aspdSpell"}
+								classes={'text-input'}
+								title={'策略攻擊速度增加'}
+								modelId={'aspdSpell'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={aspdSpell}
-								/>
+								defaultValue={aspdSpell} />
 						</div>
 						<div>
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能攻擊力增加(%)"}
-								modelId={"atkSkill"}
+								classes={'text-input'}
+								title={'技能攻擊力增加(%)'}
+								modelId={'atkSkill'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atkSkill}
-								/>
+								defaultValue={atkSkill} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能攻擊力增加"}
-								modelId={"atkSkillInt"}
+								classes={'text-input'}
+								title={'技能攻擊力增加'}
+								modelId={'atkSkillInt'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atkSkillInt}
-								/>
+								defaultValue={atkSkillInt} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能兜防禦力減少(%)"}
-								modelId={"defSkill"}
+								classes={'text-input'}
+								title={'技能兜防禦力減少(%)'}
+								modelId={'defSkill'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={defSkill}
-								/>
+								defaultValue={defSkill} />
 							<InputBoxValue 
-								classes={"text-input"}
-								title={"技能兜防禦力減少"}
-								modelId={"defSkillInt"}
+								classes={'text-input'}
+								title={'技能兜防禦力減少'}
+								modelId={'defSkillInt'}
 								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={defSkillInt}
-								/>
+								defaultValue={defSkillInt} />
 						</div>
 						<OutputTable />
 					</div>
@@ -207,7 +200,7 @@ Content.propTypes = {
 	
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = function(state) {
 	return {
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
@@ -226,7 +219,7 @@ const mapStateToProps = (state) => {
 	}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = function(dispatch) {
 	return {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		plainChange: bindActionCreators(plainChange, dispatch),
@@ -241,3 +234,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(Content)
+
