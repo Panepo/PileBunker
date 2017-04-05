@@ -42,6 +42,7 @@
 	"max-len": ["warn", 200],
 	"block-spacing": "off",
 	"spaced-comment": "warn",
+	"prefer-template": "off",
 	"react/self-closing-comp": ["warn"],
 	"react/prefer-stateless-function": ["off"],
 	"react/jsx-indent": ["warn", "tab"],
