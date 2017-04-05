@@ -11,7 +11,7 @@ import '../../css/Content.css'
 class Content extends Component {
 	generateType() {
 		const { type, typeChange } = this.props
-		let typeTemp = (<label>武器種：</label>)
+		let typeTemp = (<label htmlFor="weaponType">武器種：</label>)
 		const typeOut = []
 		typeOut.push(typeTemp)
 
@@ -21,11 +21,11 @@ class Content extends Component {
 					key={'inputType' + i.toString()}
 					display={type}
 					title={listType[i]}
-					onClickFunc={(modelId) => typeChange(modelId)}
+					onClickFunc={(modelId) => {typeChange(modelId)}}
 					modelId={listTypeS[i]}
 					Cactive={'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 					Cinactive={'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-					/>
+				/>
 			)
 			typeOut.push(typeTemp)
 		}
@@ -34,49 +34,49 @@ class Content extends Component {
 
 	generateToggle() {
 		const { plain, plainChange, fly, flyChange, cannon, cannonChange, type } = this.props
-		let toggleTemp = (<label>地形適性：</label>)
-		let toggleOut = []
+		let toggleTemp = (<label htmlFor="plainType">地形適性：</label>)
+		const toggleOut = []
 		toggleOut.push(toggleTemp)
 		toggleTemp = (
 			<ToggleButton
 				key={'inputType plain'}
 				display={plain}
 				title={'地形適性あり'}
-				onClickFunc={(modelId) => plainChange(modelId)}
+				onClickFunc={(modelId) => {plainChange(modelId)}}
 				modelId={'plain'}
 				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-				/>
+			/>
 			)
 		toggleOut.push(toggleTemp)
-		toggleTemp = (<label>飛行兜：</label>)
+		toggleTemp = (<label htmlFor="flyType">飛行兜：</label>)
 		toggleOut.push(toggleTemp)
 		toggleTemp = (
 			<ToggleButton
 				key={'inputType fly'}
 				display={fly}
 				title={'飛行兜あり'}
-				onClickFunc={(modelId) => flyChange(modelId)}
+				onClickFunc={(modelId) => {flyChange(modelId)}}
 				modelId={'fly'}
 				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-				/>
+			/>
 			)
 		toggleOut.push(toggleTemp)
 
-		if ( type === 'cannon') {
-			toggleTemp = (<label>大砲直擊：</label>)
+		if (type === 'cannon') {
+			toggleTemp = (<label htmlFor="cannonType">大砲直擊：</label>)
 			toggleOut.push(toggleTemp)
 			toggleTemp = (
 				<ToggleButton
 					key={'inputType cannon'}
 					display={cannon}
 					title={'大砲直擊あり'}
-					onClickFunc={(modelId) => cannonChange(modelId)}
+					onClickFunc={(modelId) => {cannonChange(modelId)}}
 					modelId={'cannon'}
 					Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 					Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-					/>
+				/>
 				)
 			toggleOut.push(toggleTemp)
 		}
@@ -85,20 +85,20 @@ class Content extends Component {
 
 	generateMax() {
 		const { max, maxChange } = this.props
-		let butTemp = (<label>巨大化：</label>)
-		let butOut = []
+		let butTemp = (<label htmlFor="maxType">巨大化：</label>)
+		const butOut = []
 		butOut.push(butTemp)
-		for (let i=0; i<listBut.length; i++){
+		for (let i = 0; i < listBut.length; i += 1) {
 			butTemp = (
 				<ToggleButton
 					key={'inputBut' + i.toString()}
 					display={max}
 					title={listBut[i]}
-					onClickFunc={(modelId) => maxChange(modelId)}
+					onClickFunc={(modelId) => {maxChange(modelId)}}
 					modelId={listButS[i]}
 					Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 					Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-					/>
+				/>
 			)
 			butOut.push(butTemp)
 		}
@@ -124,56 +124,64 @@ class Content extends Component {
 							{this.generateMax()}
 						</div>
 						<div>
-							<InputBoxValue 
+							<InputBoxValue
 								classes={'text-input'}
 								title={'城娘素身攻擊力'}
 								modelId={'atk'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atk} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={atk}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'兜防禦力'}
 								modelId={'def'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={def} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={def}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'技能攻擊速度增加'}
 								modelId={'aspdSkill'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={aspdSkill} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={aspdSkill}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'策略攻擊速度增加'}
 								modelId={'aspdSpell'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={aspdSpell} />
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={aspdSpell}
+							/>
 						</div>
 						<div>
-							<InputBoxValue 
+							<InputBoxValue
 								classes={'text-input'}
 								title={'技能攻擊力增加(%)'}
 								modelId={'atkSkill'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atkSkill} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={atkSkill}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'技能攻擊力增加'}
 								modelId={'atkSkillInt'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={atkSkillInt} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={atkSkillInt}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'技能兜防禦力減少(%)'}
 								modelId={'defSkill'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={defSkill} />
-							<InputBoxValue 
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={defSkill}
+							/>
+							<InputBoxValue
 								classes={'text-input'}
 								title={'技能兜防禦力減少'}
 								modelId={'defSkillInt'}
-								inputFunc={(modelId, modelValue) => inputChange(modelId, modelValue)}
-								defaultValue={defSkillInt} />
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={defSkillInt}
+							/>
 						</div>
 						<OutputTable />
 					</div>
@@ -197,10 +205,15 @@ Content.propTypes = {
 	defSkillInt: PropTypes.number.isRequired,
 	aspdSkill: PropTypes.number.isRequired,
 	aspdSpell: PropTypes.number.isRequired,
-	
+	typeChange: PropTypes.func.isRequired,
+	plainChange: PropTypes.func.isRequired,
+	maxChange: PropTypes.func.isRequired,
+	inputChange: PropTypes.func.isRequired,
+	flyChange: PropTypes.func.isRequired,
+	cannonChange: PropTypes.func.isRequired
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function mapStateToProps(state) {
 	return {
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
@@ -215,18 +228,18 @@ const mapStateToProps = function(state) {
 		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,
 		aspdSpell: state.reducerCalc.aspdSpell,
-		output: state.reducerCalc.output,
+		output: state.reducerCalc.output
 	}
 }
 
-const mapDispatchToProps = function(dispatch) {
+const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	return {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		plainChange: bindActionCreators(plainChange, dispatch),
 		flyChange: bindActionCreators(flyChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
-		cannonChange: bindActionCreators(cannonChange, dispatch),
+		cannonChange: bindActionCreators(cannonChange, dispatch)
 	}
 }
 
