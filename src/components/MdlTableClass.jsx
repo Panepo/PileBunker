@@ -3,8 +3,12 @@ import React, { Component, PropTypes } from 'react'
 export default class MdlTableClass extends Component {
 	constructor(props, context) {
 		super(props, context)
+
+		const tempData = this.props.tableData
+		tempData.sort((a, b) => { return b.dps - a.dps })
+
 		this.state = {
-			tableBody: this.props.tableData,
+			tableBody: tempData,
 			sortKey: 'dps',
 			sortDir: 1
 		}
