@@ -25,12 +25,10 @@ fs.writeFileSync './raw/weapons.json', outWeapon
 # ===============================================================================
 # PARSE WEAPON TYPES DATA
 # ===============================================================================
-slotType = <[name frame1 frame2 range]>
 outType = []
-
-for type, i in weaponType
+for type, i in weaponType.data
 	outType[i] = {}
-	for slotValue, j in slotType
+	for slotValue, j in weaponType.slotType
 		if slotValue !== 'X'
 				outType[i][slotValue] = type[j]
 
