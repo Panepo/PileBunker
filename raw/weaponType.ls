@@ -1,4 +1,11 @@
-#slotType = [name frame1 frame2 range]
+# ============================================================================
+# Column settings
+# ============================================================================
+# name:		name of this weapon
+# frame1:	the frame number of the attack motion
+# frame2:   the frame number of the rest motion
+# range:    the attack range of this weapon
+# ============================================================================
 
 weaponType = {
 	slotType: <[name frame1 frame2 range]>
