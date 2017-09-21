@@ -12,3 +12,6 @@ export const muxMax = [1.16, 1.32, 1.48, 1.64, 1.8]
 export const valueProDam = 20						// define the promised damage when hit
 export const valueFPS = 30							// define the system frame per second
 export const valueMaxRef = 10						// define the maximum refine value
+
+export const maxAspdSkill = 75						// define the maximum aspd skill value
+export const maxAspdSpell = 75						// define the maximum aspd spell value

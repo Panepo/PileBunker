@@ -230,16 +230,24 @@ export default function reducerCalc(state = initialState, action) {
 			})
 		case 'aspdSkill':
 			calcTemp = state
-			calcTemp.aspdSkill = action.modelValue
+			if (action.modelValue >= parameters.maxAspdSkill) {
+				calcTemp.aspdSkill = parameters.maxAspdSkill
+			} else {
+				calcTemp.aspdSkill = action.modelValue
+			}
 			return Object.assign({}, state, {
-				aspdSkill: action.modelValue,
+				aspdSkill: calcTemp.aspdSkill,
 				output: calcOutput(calcTemp)
 			})
 		case 'aspdSpell':
 			calcTemp = state
-			calcTemp.aspdSpell = action.modelValue
+			if (action.modelValue >= parameters.maxAspdSpell) {
+				calcTemp.aspdSpell = parameters.maxAspdSpell
+			} else {
+				calcTemp.aspdSpell = action.modelValue
+			}
 			return Object.assign({}, state, {
-				aspdSpell: action.modelValue,
+				aspdSpell: calcTemp.aspdSpell,
 				output: calcOutput(calcTemp)
 			})
 		default:

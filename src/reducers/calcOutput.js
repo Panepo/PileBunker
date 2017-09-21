@@ -11,6 +11,7 @@ export function calcOutput(input) {
 	let totalAtk
 	let totalDef
 	let output = []
+	let dataAspdSkill
 
 	if (input.plain === 'plain') {
 		charAtk = input.atk * parameters.muxPlain
@@ -50,6 +51,12 @@ export function calcOutput(input) {
 		maxMux = 1
 	}
 
+	if (input.aspdSpell >= input.aspdSkill) {
+		dataAspdSkill = 0
+	} else {
+		dataAspdSkill = input.aspdSkill
+	}
+
 	switch (input.type) {
 	case 'sword':
 		weaponSelected = dbWeapon.chain().find({ type: 'sword' }).data()
@@ -62,7 +69,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -78,7 +85,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -94,7 +101,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -110,7 +117,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -128,7 +135,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -144,7 +151,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -160,7 +167,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -176,7 +183,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -192,7 +199,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -210,7 +217,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -226,7 +233,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -242,7 +249,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -258,7 +265,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -274,7 +281,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -290,7 +297,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -308,7 +315,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -326,7 +333,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -342,7 +349,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -358,7 +365,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -374,7 +381,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -390,7 +397,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -403,7 +410,7 @@ export function calcOutput(input) {
 		for (let i = 0; i < weaponSelected.length; i += 1) {
 			totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
 			weaponSelected[i].damage = Math.floor(totalAtk)
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -414,7 +421,7 @@ export function calcOutput(input) {
 		for (let i = 0; i < weaponSelected.length; i += 1) {
 			totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
 			weaponSelected[i].damage = Math.floor(totalAtk)
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -425,7 +432,7 @@ export function calcOutput(input) {
 		for (let i = 0; i < weaponSelected.length; i += 1) {
 			totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
 			weaponSelected[i].damage = Math.floor(totalAtk)
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -436,7 +443,7 @@ export function calcOutput(input) {
 		for (let i = 0; i < weaponSelected.length; i += 1) {
 			totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
 			weaponSelected[i].damage = Math.floor(totalAtk)
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -454,7 +461,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -470,7 +477,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -486,7 +493,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -502,7 +509,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -518,7 +525,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -537,7 +544,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -553,7 +560,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -569,7 +576,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -585,7 +592,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -601,7 +608,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -617,7 +624,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -633,7 +640,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -651,7 +658,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -667,7 +674,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -683,7 +690,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -699,7 +706,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -715,7 +722,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -731,7 +738,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam * 2
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}
@@ -746,7 +753,7 @@ export function calcOutput(input) {
 			} else {
 				weaponSelected[i].damage = parameters.valueProDam * 3
 			}
-			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (input.aspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
+			weaponSelected[i].frame1 = Math.ceil(typeSelected.frame1 * (1 - (dataAspdSkill + input.aspdSpell + weaponSelected[i].aspd) / 100))
 			weaponSelected[i].frame2 = Math.ceil(typeSelected.frame2 * (1 - input.aspdSpell / 100))
 			weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 		}

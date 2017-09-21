@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import * as parameters from '../constants/ConstParameters'
 
 export default class InputBoxValue extends Component {
 	constructor(props, context) {
@@ -15,6 +16,19 @@ export default class InputBoxValue extends Component {
 		if (isNaN(modelValue)) {
 			modelValue = 0
 			this.setState({ text: modelValue })
+			this.props.inputFunc(modelId, modelValue)
+		} else if (modelId === 'aspdSkill') {
+			if (modelValue > parameters.maxAspdSkill) {
+				modelValue = parameters.maxAspdSkill
+			}
+			this.setState({ text: modelValue })
+			this.props.inputFunc(modelId, modelValue)
+		} else if (modelId === 'aspdSpell') {
+			if (modelValue > parameters.maxAspdSpell) {
+				modelValue = parameters.maxAspdSpell
+			}
+			this.setState({ text: modelValue })
+			this.props.inputFunc(modelId, modelValue)
 		} else {
 			this.setState({ text: modelValue })
 			this.props.inputFunc(modelId, modelValue)
