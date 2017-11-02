@@ -65,8 +65,8 @@ export function calcOutput(input) {
 		} else {
 			weaponSelected[i].damage = parameters.valueProDam
 		}
-		weaponSelected[i].frame1 = Math.ceil(weaponSelected[i].frame1 * (1 - dataAspdSkill / 100))
-		weaponSelected[i].frame2 = Math.ceil(weaponSelected[i].frame2 * (1 - input.aspdSpell / 100))
+		weaponSelected[i].frame1 = Math.ceil(weaponSelected[i].f1 * (1 - dataAspdSkill / 100))
+		weaponSelected[i].frame2 = Math.ceil(weaponSelected[i].f2 * (1 - input.aspdSpell / 100))
 		weaponSelected[i].dps = Math.floor((weaponSelected[i].damage * weaponSelected[i].hit * parameters.valueFPS / (weaponSelected[i].frame1 + weaponSelected[i].frame2)) * 100) / 100
 	}
 	dbWeapon.update(weaponSelected)
