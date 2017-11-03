@@ -13,5 +13,5 @@ export const valueProDam = 20						// define the promised damage when hit
 export const valueFPS = 30							// define the system frame per second
 export const valueMaxRef = 10						// define the maximum refine value
 
-export const maxAspdSkill = 75						// define the maximum aspd skill value
-export const maxAspdSpell = 75						// define the maximum aspd spell value
+export const maxAspdSkill = 95						// define the maximum aspd skill value
+export const maxAspdSpell = 100						// define the maximum aspd spell value

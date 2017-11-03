@@ -140,14 +140,14 @@ class Content extends Component {
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'技能攻擊速度增加'}
+								title={'攻撃速度上昇(%)'}
 								modelId={'aspdSkill'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={aspdSkill}
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'策略攻擊速度增加'}
+								title={'攻撃後の隙短縮(%)'}
 								modelId={'aspdSpell'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={aspdSpell}
