@@ -9,6 +9,12 @@ export default class InputBoxValue extends Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			text: nextProps.defaultValue
+		})
+	}
+
 	handleInput(event) {
 		const modelId = event.target.id
 		let modelValue = parseInt(event.target.value, 10)
@@ -39,7 +45,7 @@ export default class InputBoxValue extends Component {
 		const { title, modelId, classes } = this.props
 
 		return (
-			<div className={classes + ' mdl-textfield mdl-js-textfield mdl-textfield--floating-label'}>
+			<div className={classes + ' mdl-textfield mdl-js-textfield mdl-textfield--floating-label'} key={title}>
 				<input className="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id={modelId} onChange={this.handleInput.bind(this)} value={this.state.text} />
 				<label className="mdl-textfield__label" htmlFor={modelId}>{title}</label>
 				<span className="mdl-textfield__error">数値が正しくありません</span>

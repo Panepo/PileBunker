@@ -106,16 +106,38 @@ class Content extends Component {
 	}
 
 	render() {
+		const { level, HPParm, AtkParm, DefParm, com } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		return (
 			<main className="demo-main mdl-layout__content">
 				<div className="demo-container mdl-grid">
 					<div className="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
-						<h4>城プロRE 武器傷害機算機 パイルバンカー</h4>
-						<h5>設定</h5>
 						<div>
 							{this.generateType()}
+						</div>
+						<div>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'城娘等級'}
+								modelId={'level'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={level}
+							/>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'攻擊係數(%)'}
+								modelId={'AtkParm'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={AtkParm}
+							/>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'伴'}
+								modelId={'com'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={com}
+							/>
 						</div>
 						<div>
 							{this.generateToggle()}
@@ -192,6 +214,11 @@ class Content extends Component {
 }
 
 Content.propTypes = {
+	level: PropTypes.number.isRequired,
+	HPParm: PropTypes.number.isRequired,
+	AtkParm: PropTypes.number.isRequired,
+	DefParm: PropTypes.number.isRequired,
+	com: PropTypes.number.isRequired,
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
 	cannon: PropTypes.string.isRequired,
@@ -215,6 +242,11 @@ Content.propTypes = {
 
 const mapStateToProps = function mapStateToProps(state) {
 	return {
+		level: state.reducerCalc.level,
+		HPParm: state.reducerCalc.HPParm,
+		AtkParm: state.reducerCalc.AtkParm,
+		DefParm: state.reducerCalc.DefParm,
+		com: state.reducerCalc.com,
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
 		cannon: state.reducerCalc.cannon,

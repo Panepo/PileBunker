@@ -1,74 +1,35 @@
 # ============================================================================
 # Column settings
 # ============================================================================
-# name:		name of this weapon
-# frame1:	the frame number of the attack motion
-# frame2:   the frame number of the rest motion
-# range:    the attack range of this weapon
+# name:		weapon name of this class
+# cname:	weapon name of this class
+# frame1:	frame number of attack animation
+# frame2:	frame number of rest after attack
+# range:	attack range
+# hp:		class HP at level 0
+# atk:		class ATK at level 0
+# def:		class DEF at level 0
+# hpM:		class HP at level 1000
+# atkM:		class ATK at level 1000
+# defM:		class DEF at level 1000
 # ============================================================================
 
 weaponType = {
-	slotType: <[name frame1 frame2 range]>
-	data: [
-		["sword",			19, 30, 140]
-		["sword1",			17, 30, 140]
-		["sword2",			16, 30, 140]
-		["sword3",			15, 30, 140]
-		
-		["lance",			23, 30, 200]
-		["lance1",			20, 30, 200]
-		["lance2",			19, 30, 200]
-		["lance3",			18, 30, 200]
-		["lancex1",			40, 30, 200] #利家の巨槍
-		["lancex2",			57, 30, 200] #両刃櫃槍
-		
-		["hammer",			27, 30, 100]
-		["hammer1",			23, 30, 100]
-		["hammer2",			22, 30, 100]
-		["hammer3",			21, 30, 100]
-		["hammerx1",		42, 30, 100] #義弘の暴槌
-		
-		["shield",			24, 30,  90]
-		
-		["bow",				19, 18, 280]
-		["bow1",			17, 18, 280]
-		["bow2",			16, 18, 280]
-		["bow3",			15, 18, 280]
-		["bowx1",			69, 18, 280] #元就の謀弓
-		
-		["xbow",			24, 30, 250]
-		["xbow1",			21, 30, 250]
-		["xbow2",			20, 30, 250]
-		["xbow3",			18, 30, 250]
-		["xbowx1",			42, 30, 250] #連弩
-		["xbowx2",			57, 30, 250] #無雙弩
-		["xbowx3",			38, 30, 250] #正則の剛弩
-		
-		["arqu",			37, 30, 340]
-		["arqu1",			32, 30, 340]
-		["arqu2",			31, 30, 340]
-		["arqu3",			28, 30, 340]
-		["arqux1",			82, 30, 340] #連裝銃
-		["arqux2",		   102, 30, 340] #回転砲
-		["arqux3",			62, 30, 340] #三成の烈砲
-		
-		["cannon",			42, 45, 340]
-		["cannon1",			36, 45, 340]
-		["cannon2",			35, 45, 340]
-		["cannon3",			32, 45, 340]
-		["cannonx1",		67, 45, 340] #長政の激砲
-		
-		["spell",			42, 30, 240]
-		["spell1",			36, 30, 240]
-		["spell2",			34, 30, 240]
-		["spell3",			32, 30, 240]
-		
-		["dance",			62, 60, 300]
-		
-		["staff",			37, 30, 240]
-		
-		["fist",			32, 19,  90]
+	slotType: <[name cname frame1 frame2 range hp atk def hpM atkM defM]>
+	data:[
+		["sword"	"刀"			19 30 140 1560 66 65 12072 1626 1585]
+		["lance"	"槍"			23 30 200 1140 51 48  8820 1267 1192]
+		["hammer"	"槌"			27 30 100 1680 90 66 15540 2194 1742]
+		["shield"	"盾"			24 30  90 1800 61 90 15800 1501 1890]
+		["bow"		"弓"			19 18 280  960 50 39  7432 1234  959]
+		["xbow"		"石弓"			24 30 250 1080 72 45  8360 1776 1117]
+		["arqu"		"鉄砲"			37 30 340  840 90 36  6505 2226  892]
+		["cannon"	"大砲"			42 45 340  870 69 39  6734 1701  959]
+		["dance"	"歌舞"			62 60 300  900 41 37  6972 1037  933]
+		["spell"	"法術"			42 30 240  960 48 34  7432 1192  858]
+		["bell"		"鈴"			62 60 320 1000 45 36  8000 1197  932]
+		["staff"	"杖"			37 30 220  850 90 34  6350 2194  858]
+		["fist"		"拳"			32 19  90 1900 48 40 16900 1168 1240]
 	]
 }
-
 module.exports = weaponType

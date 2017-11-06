@@ -5,7 +5,8 @@
 # type:		type of this weapon
 # atk:		attack of this weapon
 # hit:		hit number of this weapon
-# aspd:		attack speed boost of this weapon
+# f1:		the frame number of the attack motion
+# f2:		the frame number of the rest motion
 # range:	range boost of this weapon
 # rare:		rarity of this weapon
 # text:		extra message of this weapon

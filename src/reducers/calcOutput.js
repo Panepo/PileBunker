@@ -5,17 +5,20 @@ import * as parameters from '../constants/ConstParameters'
 export function calcOutput(input) {
 	let weaponSelected = dbWeapon.chain().find({ type: input.type }).data()
 	let typeSelected = dbType.findOne({ name: input.type })
-	let charAtk = 0
 	let maxMux = 1
 	let flyMux = 1
 	let totalAtk
 	let totalDef
 	let output = []
 
+	let typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+	let comAtk = 1 + Math.floor(input.com / 10) / 100
+	let charAtk = Math.floor(typeAtk * input.level + typeSelected.atk)
+	charAtk = Math.floor(charAtk * input.AtkParm / 100)
+	charAtk = Math.floor(charAtk * comAtk)
+
 	if (input.plain === 'plain') {
-		charAtk = input.atk * parameters.muxPlain
-	} else {
-		charAtk = input.atk
+		charAtk *= parameters.muxPlain
 	}
 
 	if (input.fly === 'fly') {

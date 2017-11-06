@@ -12,7 +12,7 @@ export default class ToggleButton extends Component {
 		}
 
 		return (
-			<button className={bClassName} onClick={onClickFunc.bind(null, modelId)}>{title}</button>
+			<button className={bClassName} onClick={onClickFunc.bind(null, modelId)} key={title}>{title}</button>
 		)
 	}
 }

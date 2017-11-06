@@ -9,7 +9,7 @@ import {
 	CANNON_CHANGE
 } from '../constants/ConstActionTypes'
 
-import { dbWeapon } from './database'
+import { dbWeapon, dbType } from './database'
 import * as parameters from '../constants/ConstParameters'
 import { calcOutput } from './calcOutput'
 
@@ -19,7 +19,12 @@ const initialState = {
 	fly: '',
 	cannon: 'cannon',
 	max: 'max0',
-	atk: parameters.defaultAtk,
+	level: parameters.defaultLevel,
+	HPParm: parameters.defaultHPParm,
+	AtkParm: parameters.defaultAtkParm,
+	DefParm: parameters.defaultDefParm,
+	com: parameters.defaultCompanion,
+	atk: 0,
 	def: parameters.defaultDef,
 	atkSkill: 0,
 	defSkill: 0,
@@ -34,14 +39,25 @@ const initialState = {
 export default function reducerCalc(state = initialState, action) {
 	let calcTemp = {}
 	let weaponSelected = []
+	let typeSelected = []
+	let typeAtk = 0
+	let comAtk = 0
+	let charAtk = 0
 
 	switch (action.type) {
 	case TYPE_CHANGE:
 		calcTemp = state
 		calcTemp.type = action.modelId
+		typeSelected = dbType.findOne({ name: calcTemp.type })
+		typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+		comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
+		charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
+		charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
+		charAtk = Math.floor(charAtk * comAtk)
 		return Object.assign({}, state, {
 			type: action.modelId,
-			output: calcOutput(calcTemp)
+			output: calcOutput(calcTemp),
+			atk: charAtk
 		})
 	case PLAIN_CHANGE:
 		if (state.plain === 'plain') {
@@ -186,6 +202,48 @@ export default function reducerCalc(state = initialState, action) {
 		})
 	case INPUT_CHANGE:
 		switch (action.modelId) {
+		case 'level':
+			calcTemp = state
+			calcTemp.level = action.modelValue
+			typeSelected = dbType.findOne({ name: calcTemp.type })
+			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
+			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
+			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
+			charAtk = Math.floor(charAtk * comAtk)
+			return Object.assign({}, state, {
+				level: action.modelValue,
+				atk: charAtk,
+				output: calcOutput(calcTemp),
+			})
+		case 'AtkParm':
+			calcTemp = state
+			calcTemp.AtkParm = action.modelValue
+			typeSelected = dbType.findOne({ name: calcTemp.type })
+			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
+			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
+			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
+			charAtk = Math.floor(charAtk * comAtk)
+			return Object.assign({}, state, {
+				AtkParm: action.modelValue,
+				atk: charAtk,
+				output: calcOutput(calcTemp),
+			})
+		case 'com':
+			calcTemp = state
+			calcTemp.com = action.modelValue
+			typeSelected = dbType.findOne({ name: calcTemp.type })
+			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
+			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
+			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
+			charAtk = Math.floor(charAtk * comAtk)
+			return Object.assign({}, state, {
+				com: action.modelValue,
+				atk: charAtk,
+				output: calcOutput(calcTemp),
+			})
 		case 'atk':
 			calcTemp = state
 			calcTemp.atk = action.modelValue
@@ -254,8 +312,15 @@ export default function reducerCalc(state = initialState, action) {
 			return state
 		}
 	default:
+		typeSelected = dbType.findOne({ name: state.type })
+		typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+		comAtk = 1 + Math.floor(state.com / 10) / 100
+		charAtk = Math.floor(typeAtk * state.level + typeSelected.atk)
+		charAtk = Math.floor(charAtk * state.AtkParm / 100)
+		charAtk = Math.floor(charAtk * comAtk)
 		calcTemp = state
 		return Object.assign({}, state, {
+			atk: charAtk,
 			output: calcOutput(calcTemp)
 		})
 	}
