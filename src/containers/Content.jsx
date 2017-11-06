@@ -133,7 +133,7 @@ class Content extends Component {
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'伴'}
+								title={'絆'}
 								modelId={'com'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={com}
