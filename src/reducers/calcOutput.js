@@ -22,7 +22,7 @@ export function calcOutput(input) {
 	}
 
 	if (input.fly === 'fly') {
-		if (input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' || input.type === 'shield') {
+		if (input.type === 'sword' || input.type === 'lance' || input.type === 'hammer' || input.type === 'shield' || input.type === 'fist') {
 			flyMux = parameters.muxFlyMelee
 		} else if (input.type === 'bow') {
 			flyMux = parameters.muxFlyBow
@@ -53,9 +53,14 @@ export function calcOutput(input) {
 		maxMux = 1
 	}
 
+	if (input.type === 'spell' || input.type === 'dance' || input.type === 'staff' || input.type === 'bell') {
+		totalDef = 0
+	} else {
+		totalDef = input.def * (1 - input.defSkill / 100) - input.defSkillInt
+	}
+
 	for (let i = 0; i < weaponSelected.length; i += 1) {
 		totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
-		totalDef = input.def * (1 - input.defSkill / 100) - input.defSkillInt
 		if ((totalAtk - parameters.valueProDam) >= totalDef) {
 			weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
 		} else {
