@@ -4,8 +4,8 @@ import '../../css/Header.css'
 export default class Header extends Component {
 	render() {
 		return (
-			<header className="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
-				<div className="mdl-layout__header-row">
+			<header className="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
+				<div className="mdl-layout__header-row mdl-shadow--4dp">
 					<span className="mdl-layout-title"><b>城プロRE 武器傷害機算機 パイルバンカー</b></span>
 					<div className="mdl-layout-spacer"></div>
 					<nav className="mdl-navigation">
