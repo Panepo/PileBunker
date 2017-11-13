@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { typeChange, plainChange, maxChange, inputChange, flyChange, cannonChange } from '../actions'
+import { modelOpen, modelClose, typeChange, plainChange, maxChange, inputChange, flyChange, cannonChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
 import OutputTable from './OutputTable'
@@ -108,6 +108,7 @@ class Content extends Component {
 	render() {
 		const { level, HPParm, AtkParm, DefParm, com } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
+		const { modelOpen, modelClose } = this.props
 		return (
 			<main className="demo-main mdl-layout__content">
 				<div className="demo-container mdl-grid">
@@ -115,6 +116,14 @@ class Content extends Component {
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 						<div>
 							{this.generateType()}
+						</div>
+						<div>
+							<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
+								城娘選擇
+							</button>
+							<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
+								兜選擇
+							</button>
 						</div>
 						<div>
 							<InputBoxValue
@@ -237,7 +246,9 @@ Content.propTypes = {
 	maxChange: PropTypes.func.isRequired,
 	inputChange: PropTypes.func.isRequired,
 	flyChange: PropTypes.func.isRequired,
-	cannonChange: PropTypes.func.isRequired
+	cannonChange: PropTypes.func.isRequired,
+	modelOpen: PropTypes.func.isRequired,
+	modelClose: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = function mapStateToProps(state) {
@@ -271,7 +282,9 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		flyChange: bindActionCreators(flyChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
-		cannonChange: bindActionCreators(cannonChange, dispatch)
+		cannonChange: bindActionCreators(cannonChange, dispatch),
+		modelOpen: bindActionCreators(modelOpen, dispatch),
+		modelClose: bindActionCreators(modelClose, dispatch)
 	}
 }
 
