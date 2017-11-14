@@ -9,9 +9,13 @@ import {
 	CANNON_CHANGE
 } from '../constants/ConstActionTypes'
 
-import { dbWeapon, dbType } from './database'
+import { dbWeapon } from './database'
 import * as parameters from '../constants/ConstParameters'
-import { calcOutput } from './calcOutput'
+import { calcOutput, calcAtk } from './calcOutput'
+
+// ===============================================================================
+// initial status
+// ===============================================================================
 
 const initialState = {
 	type: 'sword',
@@ -35,6 +39,9 @@ const initialState = {
 	output: []
 }
 
+// ===============================================================================
+// reducer main function
+// ===============================================================================
 
 export default function reducerCalc(state = initialState, action) {
 	let calcTemp = {}
@@ -45,20 +52,20 @@ export default function reducerCalc(state = initialState, action) {
 	let charAtk = 0
 
 	switch (action.type) {
+	// ===============================================================================
+	// weapon types change
+	// ===============================================================================
 	case TYPE_CHANGE:
 		calcTemp = state
 		calcTemp.type = action.modelId
-		typeSelected = dbType.findOne({ name: calcTemp.type })
-		typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-		comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
-		charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
-		charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
-		charAtk = Math.floor(charAtk * comAtk)
 		return Object.assign({}, state, {
 			type: action.modelId,
 			output: calcOutput(calcTemp),
-			atk: charAtk
+			atk: calcAtk(calcTemp)
 		})
+	// ===============================================================================
+	// plain bonus switch
+	// ===============================================================================
 	case PLAIN_CHANGE:
 		if (state.plain === 'plain') {
 			calcTemp = state
@@ -71,6 +78,9 @@ export default function reducerCalc(state = initialState, action) {
 			plain: calcTemp.plain,
 			output: calcOutput(calcTemp)
 		})
+	// ===============================================================================
+	// enemy fly status switch
+	// ===============================================================================
 	case FLY_CHANGE:
 		if (state.fly === 'fly') {
 			calcTemp = state
@@ -83,6 +93,9 @@ export default function reducerCalc(state = initialState, action) {
 			fly: calcTemp.fly,
 			output: calcOutput(calcTemp)
 		})
+	// ===============================================================================
+	// cannon direct hit switch
+	// ===============================================================================
 	case CANNON_CHANGE:
 		if (state.cannon === 'cannon') {
 			calcTemp = state
@@ -95,6 +108,9 @@ export default function reducerCalc(state = initialState, action) {
 			cannon: calcTemp.cannon,
 			output: calcOutput(calcTemp)
 		})
+	// ===============================================================================
+	// maximum level switch
+	// ===============================================================================
 	case MAX_CHANGE:
 		calcTemp = state
 		calcTemp.max = action.modelId
@@ -102,6 +118,9 @@ export default function reducerCalc(state = initialState, action) {
 			max: action.modelId,
 			output: calcOutput(calcTemp)
 		})
+	// ===============================================================================
+	// weapons refine change
+	// ===============================================================================
 	case REF_CHANGE:
 		switch (action.modelId) {
 		case 'ref0':
@@ -184,6 +203,9 @@ export default function reducerCalc(state = initialState, action) {
 		default:
 			return state
 		}
+	// ===============================================================================
+	// weapon refine change toggle
+	// ===============================================================================
 	case REF_SIN_CHANGE:
 		weaponSelected = dbWeapon.findOne({ name: action.modelId })
 		if (weaponSelected.ref === parameters.valueMaxRef) {
@@ -200,48 +222,33 @@ export default function reducerCalc(state = initialState, action) {
 		return Object.assign({}, state, {
 			output: calcOutput(calcTemp)
 		})
+	// ===============================================================================
+	// text input change
+	// ===============================================================================
 	case INPUT_CHANGE:
 		switch (action.modelId) {
 		case 'level':
 			calcTemp = state
 			calcTemp.level = action.modelValue
-			typeSelected = dbType.findOne({ name: calcTemp.type })
-			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
-			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
-			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
-			charAtk = Math.floor(charAtk * comAtk)
 			return Object.assign({}, state, {
 				level: action.modelValue,
-				atk: charAtk,
+				atk: calcAtk(calcTemp),
 				output: calcOutput(calcTemp),
 			})
 		case 'AtkParm':
 			calcTemp = state
 			calcTemp.AtkParm = action.modelValue
-			typeSelected = dbType.findOne({ name: calcTemp.type })
-			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
-			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
-			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
-			charAtk = Math.floor(charAtk * comAtk)
 			return Object.assign({}, state, {
 				AtkParm: action.modelValue,
-				atk: charAtk,
+				atk: calcAtk(calcTemp),
 				output: calcOutput(calcTemp),
 			})
 		case 'com':
 			calcTemp = state
 			calcTemp.com = action.modelValue
-			typeSelected = dbType.findOne({ name: calcTemp.type })
-			typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-			comAtk = 1 + Math.floor(calcTemp.com / 10) / 100
-			charAtk = Math.floor(typeAtk * calcTemp.level + typeSelected.atk)
-			charAtk = Math.floor(charAtk * calcTemp.AtkParm / 100)
-			charAtk = Math.floor(charAtk * comAtk)
 			return Object.assign({}, state, {
 				com: action.modelValue,
-				atk: charAtk,
+				atk: calcAtk(calcTemp),
 				output: calcOutput(calcTemp),
 			})
 		case 'atk':
@@ -311,16 +318,13 @@ export default function reducerCalc(state = initialState, action) {
 		default:
 			return state
 		}
+	// ===============================================================================
+	// default status
+	// ===============================================================================
 	default:
-		typeSelected = dbType.findOne({ name: state.type })
-		typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-		comAtk = 1 + Math.floor(state.com / 10) / 100
-		charAtk = Math.floor(typeAtk * state.level + typeSelected.atk)
-		charAtk = Math.floor(charAtk * state.AtkParm / 100)
-		charAtk = Math.floor(charAtk * comAtk)
 		calcTemp = state
 		return Object.assign({}, state, {
-			atk: charAtk,
+			atk: calcAtk(calcTemp),
 			output: calcOutput(calcTemp)
 		})
 	}
