@@ -19,6 +19,12 @@ export function flyChange() {
 	}
 }
 
+export function monsChange() {
+	return {
+		type: types.MONS_CHANGE
+	}
+}
+
 export function cannonChange() {
 	return {
 		type: types.CANNON_CHANGE

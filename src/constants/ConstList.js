@@ -12,3 +12,4 @@ export const tableInd = ['', 'rare', 'name', 'refText', 'atk', 'damage', 'dps', 
 
 export const listMelee = ['sword', 'lance', 'hammer', 'fist', 'shield']
 export const listMagic = ['spell', 'staff', 'dance', 'bell']
+export const listPhys = ['sword', 'lance', 'hammer', 'fist', 'shield', 'bow', 'xbow', 'arqu', 'cannon']

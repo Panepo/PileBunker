@@ -9,6 +9,7 @@ export const defaultDef = 100				// define the default defense value
 export const muxPlain = 1.2					// define the multiplier when attacker have plain
 export const muxFlyBow = 1.5				// define the multiplier when bow attack a flying enemy
 export const muxFlyMelee = 0.5				// define the multiplier when melee attack a flying enemy
+export const muxMonsMelee = 0.5				// define the multiplier when physical attack a monster
 export const muxCanDirect = 1.5				// define the multiplier when cannon direct hit
 
 export const muxMax = [1.16, 1.32, 1.48, 1.64, 1.8]

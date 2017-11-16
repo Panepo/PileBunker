@@ -1,5 +1,5 @@
 import { dbWeapon, dbType } from './database'
-import { listButS, listMelee, listMagic } from '../constants/ConstList'
+import { listButS, listMelee, listMagic, listPhys } from '../constants/ConstList'
 import * as parameters from '../constants/ConstParameters'
 
 // ===============================================================================
@@ -58,11 +58,11 @@ export function calcOutput(input) {
 	// 飛行敵に対する攻撃力ボーナス
 	if (input.fly === 'fly') {
 		if (input.type === 'bow') {
-			flyMux = parameters.muxFlyBow
+			flyMux *= parameters.muxFlyBow
 		} else {
 			for (let i = 0; i < listMelee.length; i += 1) {
 				if (input.type === listMelee[i]) {
-					flyMux = parameters.muxFlyMelee
+					flyMux *= parameters.muxFlyMelee
 					break
 				}
 			}
@@ -70,9 +70,20 @@ export function calcOutput(input) {
 	}
 
 	// ===============================================================
+	// 妖怪敵に対する攻撃力ボーナス
+	if (input.mons === 'mons') {
+		for (let i = 0; i < listPhys.length; i += 1) {
+			if (input.type === listPhys[i]) {
+				flyMux *= parameters.muxMonsMelee
+				break
+			}
+		}
+	}
+
+	// ===============================================================
 	// 砲弾が敵に直撃した場合、攻撃力が50%アップ。
 	if (input.type === 'cannon' && input.cannon === 'cannon') {
-		flyMux = parameters.muxCanDirect
+		flyMux *= parameters.muxCanDirect
 	}
 
 	// ===============================================================

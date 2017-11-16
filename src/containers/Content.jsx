@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { modelOpen, modelClose, typeChange, plainChange, maxChange, inputChange, flyChange, cannonChange } from '../actions'
+import { modelOpen, modelClose, typeChange, plainChange, maxChange, inputChange, flyChange, monsChange, cannonChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
 import OutputTable from './OutputTable'
@@ -33,7 +33,7 @@ class Content extends Component {
 	}
 
 	generateToggle() {
-		const { plain, plainChange, fly, flyChange, cannon, cannonChange, type } = this.props
+		const { plain, plainChange, fly, flyChange, mons, monsChange, cannon, cannonChange, type } = this.props
 		let toggleTemp = (<label htmlFor="plainType">地形適性：</label>)
 		const toggleOut = []
 		toggleOut.push(toggleTemp)
@@ -49,6 +49,7 @@ class Content extends Component {
 			/>
 			)
 		toggleOut.push(toggleTemp)
+
 		toggleTemp = (<label htmlFor="flyType">飛行兜：</label>)
 		toggleOut.push(toggleTemp)
 		toggleTemp = (
@@ -58,6 +59,21 @@ class Content extends Component {
 				title={'飛行兜あり'}
 				onClickFunc={(modelId) => {flyChange(modelId)}}
 				modelId={'fly'}
+				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
+			/>
+			)
+		toggleOut.push(toggleTemp)
+
+		toggleTemp = (<label htmlFor="flyType">妖怪：</label>)
+		toggleOut.push(toggleTemp)
+		toggleTemp = (
+			<ToggleButton
+				key={'inputType mons'}
+				display={mons}
+				title={'妖怪あり'}
+				onClickFunc={(modelId) => {monsChange(modelId)}}
+				modelId={'mons'}
 				Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 				Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 			/>
@@ -232,6 +248,7 @@ Content.propTypes = {
 	plain: PropTypes.string.isRequired,
 	cannon: PropTypes.string.isRequired,
 	fly: PropTypes.string.isRequired,
+	mons: PropTypes.string.isRequired,
 	max: PropTypes.string.isRequired,
 	atk: PropTypes.number.isRequired,
 	def: PropTypes.number.isRequired,
@@ -246,6 +263,7 @@ Content.propTypes = {
 	maxChange: PropTypes.func.isRequired,
 	inputChange: PropTypes.func.isRequired,
 	flyChange: PropTypes.func.isRequired,
+	monsChange: PropTypes.func.isRequired,
 	cannonChange: PropTypes.func.isRequired,
 	modelOpen: PropTypes.func.isRequired,
 	modelClose: PropTypes.func.isRequired,
@@ -262,6 +280,7 @@ const mapStateToProps = function mapStateToProps(state) {
 		plain: state.reducerCalc.plain,
 		cannon: state.reducerCalc.cannon,
 		fly: state.reducerCalc.fly,
+		mons: state.reducerCalc.mons,
 		max: state.reducerCalc.max,
 		atk: state.reducerCalc.atk,
 		def: state.reducerCalc.def,
@@ -280,6 +299,7 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		plainChange: bindActionCreators(plainChange, dispatch),
 		flyChange: bindActionCreators(flyChange, dispatch),
+		monsChange: bindActionCreators(monsChange, dispatch),
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
 		cannonChange: bindActionCreators(cannonChange, dispatch),

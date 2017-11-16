@@ -4,6 +4,7 @@ import {
 	MAX_CHANGE,
 	INPUT_CHANGE,
 	FLY_CHANGE,
+	MONS_CHANGE,
 	REF_CHANGE,
 	REF_SIN_CHANGE,
 	CANNON_CHANGE
@@ -21,6 +22,7 @@ const initialState = {
 	type: 'sword',
 	plain: 'plain',
 	fly: '',
+	mons: '',
 	cannon: 'cannon',
 	max: 'max0',
 	level: parameters.defaultLevel,
@@ -91,6 +93,21 @@ export default function reducerCalc(state = initialState, action) {
 		}
 		return Object.assign({}, state, {
 			fly: calcTemp.fly,
+			output: calcOutput(calcTemp)
+		})
+	// ===============================================================================
+	// enemy monster status switch
+	// ===============================================================================
+	case MONS_CHANGE:
+		if (state.mons === 'mons') {
+			calcTemp = state
+			calcTemp.mons = ''
+		} else {
+			calcTemp = state
+			calcTemp.mons = 'mons'
+		}
+		return Object.assign({}, state, {
+			mons: calcTemp.mons,
 			output: calcOutput(calcTemp)
 		})
 	// ===============================================================================
