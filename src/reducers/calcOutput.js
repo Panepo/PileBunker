@@ -42,7 +42,7 @@ export function calcAtk(input) {
 export function calcOutput(input) {
 	let weaponSelected = dbWeapon.chain().find({ type: input.type }).data()
 	let maxMux = 1
-	let flyMux = 1
+	let paraMux = 1
 	let totalAtk
 	let totalDef
 	let output = []
@@ -58,11 +58,11 @@ export function calcOutput(input) {
 	// 飛行敵に対する攻撃力ボーナス
 	if (input.fly === 'fly') {
 		if (input.type === 'bow') {
-			flyMux *= parameters.muxFlyBow
+			paraMux *= parameters.muxFlyBow
 		} else {
 			for (let i = 0; i < listMelee.length; i += 1) {
 				if (input.type === listMelee[i]) {
-					flyMux *= parameters.muxFlyMelee
+					paraMux *= parameters.muxFlyMelee
 					break
 				}
 			}
@@ -74,7 +74,7 @@ export function calcOutput(input) {
 	if (input.mons === 'mons') {
 		for (let i = 0; i < listPhys.length; i += 1) {
 			if (input.type === listPhys[i]) {
-				flyMux *= parameters.muxMonsMelee
+				paraMux *= parameters.muxMonsMelee
 				break
 			}
 		}
@@ -83,7 +83,7 @@ export function calcOutput(input) {
 	// ===============================================================
 	// 砲弾が敵に直撃した場合、攻撃力が50%アップ。
 	if (input.type === 'cannon' && input.cannon === 'cannon') {
-		flyMux *= parameters.muxCanDirect
+		paraMux *= parameters.muxCanDirect
 	}
 
 	// ===============================================================
@@ -109,19 +109,24 @@ export function calcOutput(input) {
 	}
 
 	// ===============================================================
-	// 魔法攻擊補正
+	// 兜防禦力計算
 	totalDef = input.def * (1 - input.defSkill / 100) - input.defSkillInt
-	for (let i = 0; i < listMagic.length; i += 1) {
-		if (input.type === listMagic[i]) {
-			totalDef = 0
-			break
+	if (totalDef <= 0) {
+		totalDef = 0
+	} else {
+		for (let i = 0; i < listMagic.length; i += 1) {
+			if (input.type === listMagic[i]) {
+				totalDef = 0
+				break
+			}
 		}
 	}
 
 	// ===============================================================
 	// ダメージ計算
 	for (let i = 0; i < weaponSelected.length; i += 1) {
-		totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * flyMux * (1 + input.atkSkill / 100) + input.atkSkillInt
+		totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * (1 + input.atkSkill / 100) + input.atkSkillInt
+		totalAtk *= paraMux
 		if ((totalAtk - parameters.valueProDam) >= totalDef) {
 			weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
 		} else {

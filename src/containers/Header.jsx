@@ -16,7 +16,7 @@ class Header extends Component {
 					modelClose={() => modelClose(0)}
 				/>
 				<div className="mdl-layout__header-row mdl-shadow--4dp">
-					<span className="mdl-layout-title"><b>城プロRE 武器傷害機算機 パイルバンカー</b></span>
+					<span className="mdl-layout-title"><b>城プロRE 武器傷害機算機 蓬萊パイルバンカー</b></span>
 					<div className="mdl-layout-spacer"></div>
 					<nav className="mdl-navigation">
 						<a className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>
