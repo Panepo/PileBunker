@@ -151,7 +151,7 @@ class Content extends Component {
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'攻擊係數(%)'}
+								title={'攻擊成長係數(%)'}
 								modelId={'AtkParm'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={AtkParm}
