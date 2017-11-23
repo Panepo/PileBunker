@@ -15,9 +15,9 @@ import * as parameters from '../constants/ConstParameters'
 //        INT(INT((1234-50)/1000*110+50)*1.10)=198
 
 export function calcAtk(input) {
-	let typeSelected = dbType.findOne({ name: input.type })
-	let typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
-	let comAtk = 1 + Math.floor(input.com / 10) / 100
+	const typeSelected = dbType.findOne({ name: input.type })
+	const typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
+	const comAtk = 1 + Math.floor(input.com / 10) / 100
 	let charAtk = Math.floor(typeAtk * input.level + typeSelected.atk)
 	charAtk = Math.floor(charAtk * input.AtkParm / 100)
 	charAtk = Math.floor(charAtk * comAtk)
@@ -40,7 +40,7 @@ export function calcAtk(input) {
 //		※計算結果は小數點以下四捨五入
 
 export function calcOutput(input) {
-	let weaponSelected = dbWeapon.chain().find({ type: input.type }).data()
+	const weaponSelected = dbWeapon.chain().find({ type: input.type }).data()
 	let maxMux = 1
 	let paraMux = 1
 	let totalAtk

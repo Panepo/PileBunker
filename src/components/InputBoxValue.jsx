@@ -61,3 +61,10 @@ InputBoxValue.propTypes = {
 	inputFunc: PropTypes.func,
 	defaultValue: PropTypes.number
 }
+
+InputBoxValue.defaultProps = {
+	classes: 'InputBoxValue',
+	title: 'InputBoxValue',
+	modelId: 'InputBoxValue',
+	defaultValue: 0
+}

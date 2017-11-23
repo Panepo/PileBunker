@@ -30,6 +30,6 @@ ToggleButton.defaultProps = {
 	display: 0,
 	title: 'ToggleButton',
 	modelId: 'ToggleButton',
-	classActive: 'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary',
-	classInactive: 'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
+	Cactive: 'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary',
+	Cinactive: 'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
 }

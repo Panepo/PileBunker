@@ -112,7 +112,7 @@ export default class MdlTableClass extends Component {
 
 		let tbodyOut
 		let tbodyTemp
-		let tbodyTempOut = []
+		const tbodyTempOut = []
 		let tdTemp
 		let tdTempOut = []
 

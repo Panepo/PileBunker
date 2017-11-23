@@ -48,10 +48,6 @@ const initialState = {
 export default function reducerCalc(state = initialState, action) {
 	let calcTemp = {}
 	let weaponSelected = []
-	let typeSelected = []
-	let typeAtk = 0
-	let comAtk = 0
-	let charAtk = 0
 
 	switch (action.type) {
 	// ===============================================================================
@@ -250,7 +246,7 @@ export default function reducerCalc(state = initialState, action) {
 			return Object.assign({}, state, {
 				level: action.modelValue,
 				atk: calcAtk(calcTemp),
-				output: calcOutput(calcTemp),
+				output: calcOutput(calcTemp)
 			})
 		case 'AtkParm':
 			calcTemp = state
@@ -258,7 +254,7 @@ export default function reducerCalc(state = initialState, action) {
 			return Object.assign({}, state, {
 				AtkParm: action.modelValue,
 				atk: calcAtk(calcTemp),
-				output: calcOutput(calcTemp),
+				output: calcOutput(calcTemp)
 			})
 		case 'com':
 			calcTemp = state
@@ -266,7 +262,7 @@ export default function reducerCalc(state = initialState, action) {
 			return Object.assign({}, state, {
 				com: action.modelValue,
 				atk: calcAtk(calcTemp),
-				output: calcOutput(calcTemp),
+				output: calcOutput(calcTemp)
 			})
 		case 'atk':
 			calcTemp = state

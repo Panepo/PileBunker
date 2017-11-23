@@ -128,7 +128,7 @@ class Content extends Component {
 		return (
 			<main className="demo-main mdl-layout__content">
 				<div className="demo-container mdl-grid">
-					<div className="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+					<div className="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone" />
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 						<div>
 							{this.generateType()}
@@ -266,7 +266,7 @@ Content.propTypes = {
 	monsChange: PropTypes.func.isRequired,
 	cannonChange: PropTypes.func.isRequired,
 	modelOpen: PropTypes.func.isRequired,
-	modelClose: PropTypes.func.isRequired,
+	modelClose: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {
