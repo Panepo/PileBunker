@@ -2,6 +2,7 @@ require! {
 	'fs': fs
 	'./weapons.ls': weapons
 	'./weaponType.ls': weaponType
+	'./chars.ls': chars
 }
 
 # ===============================================================================
@@ -30,8 +31,22 @@ for type, i in weaponType.data
 	outType[i] = {}
 	for slotValue, j in weaponType.slotType
 		if slotValue !== 'X'
-				outType[i][slotValue] = type[j]
+			outType[i][slotValue] = type[j]
 
 outType = JSON.stringify outType
 console.log 'weaponTypes.json arrange complete!'
 fs.writeFileSync './raw/weaponTypes.json', outType
+
+# ===============================================================================
+# PARSE CHARACTER DATA
+# ===============================================================================
+outChar = []
+for char, i in chars.data
+	outChar[i] = {}
+	for slotValue, j in chars.slotChar
+		if slotValue !== 'X'
+			outChar[i][slotValue] = type[j]
+
+outChar = JSON.stringify outChar
+console.log 'chars.json arrange complete!'
+fs.writeFileSync './raw/chars.json', outChar
