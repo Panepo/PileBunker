@@ -45,7 +45,7 @@ for char, i in chars.data
 	outChar[i] = {}
 	for slotValue, j in chars.slotChar
 		if slotValue !== 'X'
-			outChar[i][slotValue] = type[j]
+			outChar[i][slotValue] = char[j]
 
 outChar = JSON.stringify outChar
 console.log 'chars.json arrange complete!'
