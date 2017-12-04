@@ -1,5 +1,7 @@
 # [PileBunker](https://github.com/Panepo/PileBunker)
 
+[![Build Status](https://travis-ci.org/Panepo/KamoLite.svg?branch=master)](https://travis-ci.org/Panepo/KamoLite)
+
 Shiropro RE weapon damage calculator PileBunker
 
 城プロRE 武器傷害機算機 パイルバンカー
