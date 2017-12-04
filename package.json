@@ -8,7 +8,8 @@
     "setdelp": "SET NODE_ENV=development",
     "setprod": "SET NODE_ENV=production",
     "start": "lsc server.ls --nodejs --harmoy",
-    "build": "webpack --config webpack.config.ls"
+    "build": "webpack --config webpack.config.ls",
+	"test": "webpack --config webpack.config.ls"
   },
   "author": "Panepo <panepo@github.io>",
   "license": "MIT",
