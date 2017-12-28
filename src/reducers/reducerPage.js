@@ -4,7 +4,7 @@ import {
 } from '../constants/ConstActionTypes'
 
 const initialState = {
-	modelStatus: 0
+	modelStatus: '0'
 }
 
 export default function reducerPage(state = initialState, action) {
@@ -15,7 +15,7 @@ export default function reducerPage(state = initialState, action) {
 		})
 	case MODEL_CLOSE:
 		return Object.assign({}, state, {
-			modelStatus: 0
+			modelStatus: '0'
 		})
 	default:
 		return state

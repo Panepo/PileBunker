@@ -3,70 +3,57 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { modelOpen, modelClose } from '../actions'
 import MdlTableClass from '../components/MdlTableClass'
-import { tableHead, tableInd, listRef, listRefS } from '../constants/ConstList'
+import { tableCharHead, tableCharInd } from '../constants/ConstList'
 
-class OutputTable extends Component {
+class IndexTable extends Component {
 	render() {
-		const { output, refChange, refSinChange } = this.props
+		const { modelStatus, modelOpen, modelClose, outputChar } = this.props
 
-		let butTemp
-		const butOut = []
-		for (let i = 0; i < listRef.length; i += 1) {
-			butTemp = (
-				<ToggleButton
-					key={'inputRef' + i.toString()}
-					display={listRefS[i]}
-					title={listRef[i]}
-					onClickFunc={(modelId) => {refChange(modelId)}}
-					modelId={listRefS[i]}
-					Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
-					Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-				/>
+		if (modelStatus === '1') {
+			return (
+				<div className="modal">
+					<button className="close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onClick={modelClose} >
+						<div className="material-icons">clear</div>
+					</button>
+					<div className="modal-content">
+						<MdlTableClass
+							tableId={'charTable'}
+							tableInd={tableCharInd}
+							tableHead={tableCharHead}
+							tableData={outputChar}
+							tableClass={'charTable mdl-data-table mdl-js-data-table mdl-shadow--2dp'}
+							tableFunction={(modelId) => {modelOpen(modelId)}}
+						/>
+					</div>
+				</div>
 			)
-			butOut.push(butTemp)
 		}
-
-		return (
-			<div>
-				<div className="refine-button">
-					精煉設定：
-					{butOut}
-				</div>
-				<div>
-					<MdlTableClass
-						tableId={'outputTable'}
-						tableInd={tableInd}
-						tableHead={tableHead}
-						tableData={output}
-						tableClass={'outputTable mdl-data-table mdl-js-data-table mdl-shadow--2dp'}
-						tableFunction={(modelId) => {refSinChange(modelId)}}
-					/>
-				</div>
-			</div>
-		)
+		return null
 	}
 }
 
-OutputTable.propTypes = {
-	output: PropTypes.array.isRequired,
-	refChange: PropTypes.func.isRequired,
-	refSinChange: PropTypes.func.isRequired
+IndexTable.propTypes = {
+	outputChar: PropTypes.array.isRequired,
+	modelStatus: PropTypes.string.isRequired,
+	modelOpen: PropTypes.func.isRequired,
+	modelClose: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {
 	return {
-		output: state.reducerCalc.output
+		modelStatus: state.reducerPage.modelStatus,
+		outputChar: state.reducerCalc.outputChar
 	}
 }
 
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	return {
-		refChange: bindActionCreators(refChange, dispatch),
-		refSinChange: bindActionCreators(refSinChange, dispatch)
+		modelOpen: bindActionCreators(modelOpen, dispatch),
+		modelClose: bindActionCreators(modelClose, dispatch)
 	}
 }
 
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(OutputTable)
+)(IndexTable)

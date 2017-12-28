@@ -9,19 +9,6 @@ import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
-	//generateButton() {
-	//	const butOut = (
-		//	<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
-		//		城娘選擇
-		//	</button>
-		//	<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
-		//		兜選擇
-		//	</button>
-	//	)
-
-	//	return butOut
-	//}
-
 	generateType() {
 		const { type, typeChange } = this.props
 		let typeTemp = (<label htmlFor="weaponType">武器種：</label>)
@@ -145,6 +132,26 @@ class Content extends Component {
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 						<div>
 							{this.generateType()}
+						</div>
+						<div>
+						<ToggleButton
+							key={'button char'}
+							display={'1'}
+							title={'城娘選擇'}
+							onClickFunc={(modelId) => {modelOpen(modelId)}}
+							modelId={'1'}
+							Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+							Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
+						/>
+						<ToggleButton
+							key={'button enemy'}
+							display={'2'}
+							title={'兜選擇'}
+							onClickFunc={(modelId) => {modelOpen(modelId)}}
+							modelId={'2'}
+							Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
+							Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
+						/>
 						</div>
 						<div>
 							<InputBoxValue

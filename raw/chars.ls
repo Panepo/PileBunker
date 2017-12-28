@@ -12,7 +12,7 @@
 # ============================================================================
 
 char = {
-	slotChar: <[name class rarity plain hpF atF dfF totF]>
+	slotChar: <[name weapon rarity plain hpF atF dfF totF]>
 	data:[
 		<[千代城	刀	2	山	0.91	1.05	0.94	2.90]>
 		<[千代城[改壱]	刀	3	山	0.94	1.08	0.97	2.99]>

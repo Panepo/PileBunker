@@ -11,9 +11,10 @@ import {
 	CHAR_SELECT
 } from '../constants/ConstActionTypes'
 
-import { dbWeapon } from './database'
+import { dbWeapon, dbChar } from './database'
 import * as parameters from '../constants/ConstParameters'
 import { calcOutput, calcAtk } from './calcOutput'
+import { listType, listTypeS } from '../constants/ConstList'
 
 // ===============================================================================
 // initial status
@@ -39,7 +40,8 @@ const initialState = {
 	aspdSpell: 0,
 	atkSkillInt: 0,
 	defSkillInt: 0,
-	output: []
+	output: [],
+	outputChar: dbChar.chain().find({ weapon: '刀' }).data()
 }
 
 // ===============================================================================
@@ -49,6 +51,7 @@ const initialState = {
 export default function reducerCalc(state = initialState, action) {
 	let calcTemp = {}
 	let weaponSelected = []
+	let charTemp = []
 
 	switch (action.type) {
 	// ===============================================================================
@@ -57,10 +60,17 @@ export default function reducerCalc(state = initialState, action) {
 	case TYPE_CHANGE:
 		calcTemp = state
 		calcTemp.type = action.modelId
+		for (let i = 0; i < listTypeS.length; i += 1) {
+			if (action.modelId === listTypeS[i]) {
+				charTemp = dbChar.chain().find({ weapon: listType[i] }).data()
+				break
+			}
+		}
 		return Object.assign({}, state, {
 			type: action.modelId,
 			output: calcOutput(calcTemp),
-			atk: calcAtk(calcTemp)
+			atk: calcAtk(calcTemp),
+			outputChar: charTemp
 		})
 	// ===============================================================================
 	// plain bonus switch
