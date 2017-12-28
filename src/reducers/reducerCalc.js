@@ -7,7 +7,8 @@ import {
 	MONS_CHANGE,
 	REF_CHANGE,
 	REF_SIN_CHANGE,
-	CANNON_CHANGE
+	CANNON_CHANGE,
+	CHAR_SELECT
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon } from './database'
@@ -331,6 +332,17 @@ export default function reducerCalc(state = initialState, action) {
 		default:
 			return state
 		}
+	// ===============================================================================
+	// weapon types change
+	// ===============================================================================
+	case CHAR_SELECT:
+		calcTemp = state
+		calcTemp.AtkParm = action.modelId
+		return Object.assign({}, state, {
+			AtkParm: action.modelId,
+			output: calcOutput(calcTemp),
+			atk: calcAtk(calcTemp)
+		})
 	// ===============================================================================
 	// default status
 	// ===============================================================================

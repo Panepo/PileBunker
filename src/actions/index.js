@@ -74,3 +74,10 @@ export function modelClose(modelId) {
 		modelId
 	}
 }
+
+export function charSelect(modelId) {
+	return {
+		type: types.CHAR_SELECT,
+		modelId
+	}
+}

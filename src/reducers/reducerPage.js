@@ -4,19 +4,18 @@ import {
 } from '../constants/ConstActionTypes'
 
 const initialState = {
-	modelStatus: false,
-	textOutput: []
+	modelStatus: 0
 }
 
 export default function reducerPage(state = initialState, action) {
 	switch (action.type) {
 	case MODEL_OPEN:
 		return Object.assign({}, state, {
-			modelStatus: true
+			modelStatus: action.modelId
 		})
 	case MODEL_CLOSE:
 		return Object.assign({}, state, {
-			modelStatus: false
+			modelStatus: 0
 		})
 	default:
 		return state

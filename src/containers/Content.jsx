@@ -9,6 +9,19 @@ import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
+	//generateButton() {
+	//	const butOut = (
+		//	<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
+		//		城娘選擇
+		//	</button>
+		//	<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
+		//		兜選擇
+		//	</button>
+	//	)
+
+	//	return butOut
+	//}
+
 	generateType() {
 		const { type, typeChange } = this.props
 		let typeTemp = (<label htmlFor="weaponType">武器種：</label>)
@@ -132,14 +145,6 @@ class Content extends Component {
 					<div className="content demo-content mdl-color--white mdl-shadow--4dp mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
 						<div>
 							{this.generateType()}
-						</div>
-						<div>
-							<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
-								城娘選擇
-							</button>
-							<button className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary" onClick={modelOpen}>
-								兜選擇
-							</button>
 						</div>
 						<div>
 							<InputBoxValue
