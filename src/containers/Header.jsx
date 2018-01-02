@@ -34,7 +34,7 @@ Header.propTypes = {
 
 const mapStateToProps = function mapStateToProps(state) {
 	return {
-		modelStatus: state.reducerPage.modelStatus
+		modelStatus: state.reducerCalc.modelStatus
 	}
 }
 

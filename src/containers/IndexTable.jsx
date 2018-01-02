@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { modelOpen, modelClose, typeChange } from '../actions'
+import { modelOpen, modelClose, typeChange, charSelect } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import MdlTableClass from '../components/MdlTableClass'
 import { tableCharHead, tableCharInd, listType, listTypeS } from '../constants/ConstList'
@@ -16,7 +16,7 @@ class IndexTable extends Component {
 		for (let i = 0; i < listType.length; i += 1) {
 			typeTemp = (
 				<ToggleButton
-					key={'inputType' + i.toString()}
+					key={'indexType' + i.toString()}
 					display={type}
 					title={listType[i]}
 					onClickFunc={(modelId) => {typeChange(modelId)}}
@@ -31,7 +31,7 @@ class IndexTable extends Component {
 	}
 
 	render() {
-		const { modelStatus, modelOpen, modelClose, outputChar } = this.props
+		const { modelStatus, modelOpen, modelClose, outputChar, charSelect } = this.props
 
 		if (modelStatus === '1') {
 			return (
@@ -51,7 +51,7 @@ class IndexTable extends Component {
 								tableHead={tableCharHead}
 								tableData={outputChar}
 								tableClass={'charTable mdl-data-table mdl-js-data-table mdl-shadow--2dp'}
-								tableFunction={(modelId) => {modelOpen(modelId)}}
+								tableFunction={(modelId) => {charSelect(modelId)}}
 							/>
 						</div>
 					</div>
@@ -65,6 +65,7 @@ class IndexTable extends Component {
 IndexTable.propTypes = {
 	type: PropTypes.string.isRequired,
 	typeChange: PropTypes.func.isRequired,
+	charSelect: PropTypes.func.isRequired,
 	outputChar: PropTypes.array.isRequired,
 	modelStatus: PropTypes.string.isRequired,
 	modelOpen: PropTypes.func.isRequired,
@@ -74,7 +75,7 @@ IndexTable.propTypes = {
 const mapStateToProps = function mapStateToProps(state) {
 	return {
 		type: state.reducerCalc.type,
-		modelStatus: state.reducerPage.modelStatus,
+		modelStatus: state.reducerCalc.modelStatus,
 		outputChar: state.reducerCalc.outputChar
 	}
 }
@@ -82,6 +83,7 @@ const mapStateToProps = function mapStateToProps(state) {
 const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	return {
 		typeChange: bindActionCreators(typeChange, dispatch),
+		charSelect: bindActionCreators(charSelect, dispatch),
 		modelOpen: bindActionCreators(modelOpen, dispatch),
 		modelClose: bindActionCreators(modelClose, dispatch)
 	}

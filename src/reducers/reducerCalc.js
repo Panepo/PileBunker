@@ -8,7 +8,9 @@ import {
 	REF_CHANGE,
 	REF_SIN_CHANGE,
 	CANNON_CHANGE,
-	CHAR_SELECT
+	CHAR_SELECT,
+	MODEL_OPEN,
+	MODEL_CLOSE
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbChar } from './database'
@@ -41,7 +43,8 @@ const initialState = {
 	atkSkillInt: 0,
 	defSkillInt: 0,
 	output: [],
-	outputChar: dbChar.chain().find({ weapon: '刀' }).data()
+	outputChar: dbChar.chain().find({ weapon: '刀' }).data(),
+	modelStatus: '0'
 }
 
 // ===============================================================================
@@ -54,6 +57,14 @@ export default function reducerCalc(state = initialState, action) {
 	let charTemp = []
 
 	switch (action.type) {
+	case MODEL_OPEN:
+		return Object.assign({}, state, {
+			modelStatus: action.modelId
+		})
+	case MODEL_CLOSE:
+		return Object.assign({}, state, {
+			modelStatus: '0'
+		})
 	// ===============================================================================
 	// weapon types change
 	// ===============================================================================
@@ -343,15 +354,17 @@ export default function reducerCalc(state = initialState, action) {
 			return state
 		}
 	// ===============================================================================
-	// weapon types change
+	// character select change
 	// ===============================================================================
 	case CHAR_SELECT:
 		calcTemp = state
-		calcTemp.AtkParm = action.modelId
+		charTemp = dbChar.findOne({ name: action.modelId })
+		calcTemp.AtkParm = parseFloat(charTemp.atF, 10) * 100
 		return Object.assign({}, state, {
-			AtkParm: action.modelId,
+			AtkParm: parseFloat(charTemp.atF, 10) * 100,
 			output: calcOutput(calcTemp),
-			atk: calcAtk(calcTemp)
+			atk: calcAtk(calcTemp),
+			modelStatus: '0'
 		})
 	// ===============================================================================
 	// default status
