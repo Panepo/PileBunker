@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { modelOpen, modelClose, typeChange, charSelect } from '../actions'
+import { modelClose, typeChange, charSelect } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import MdlTableClass from '../components/MdlTableClass'
 import { tableCharHead, tableCharInd, listType, listTypeS } from '../constants/ConstList'
@@ -31,17 +31,16 @@ class IndexTable extends Component {
 	}
 
 	render() {
-		const { modelStatus, modelOpen, modelClose, outputChar, charSelect } = this.props
+		const { modelStatus, modelClose, outputChar, charSelect } = this.props
 
 		if (modelStatus === '1') {
 			return (
-				<div className="modal mdl-grid">
+				<div className="modal">
 					<button className="close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect" onClick={modelClose} >
 						<div className="material-icons">clear</div>
 					</button>
-					<div className="mdl-cell mdl-cell--4-col" />
-					<div className="mdl-cell mdl-cell--6-col index-content modal-content mdl-color--white mdl-color-text--grey-800 ">
-						<div>
+					<div className="index-content modal-content mdl-color--white mdl-color-text--grey-800 ">
+						<div className="char-type-button">
 							{this.generateType()}
 						</div>
 						<div>
@@ -68,7 +67,6 @@ IndexTable.propTypes = {
 	charSelect: PropTypes.func.isRequired,
 	outputChar: PropTypes.array.isRequired,
 	modelStatus: PropTypes.string.isRequired,
-	modelOpen: PropTypes.func.isRequired,
 	modelClose: PropTypes.func.isRequired
 }
 
@@ -84,7 +82,6 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	return {
 		typeChange: bindActionCreators(typeChange, dispatch),
 		charSelect: bindActionCreators(charSelect, dispatch),
-		modelOpen: bindActionCreators(modelOpen, dispatch),
 		modelClose: bindActionCreators(modelClose, dispatch)
 	}
 }

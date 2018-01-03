@@ -143,15 +143,6 @@ class Content extends Component {
 							Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
 							Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
 						/>
-						<ToggleButton
-							key={'button enemy'}
-							display={'2'}
-							title={'兜選擇'}
-							onClickFunc={(modelId) => {modelOpen(modelId)}}
-							modelId={'2'}
-							Cactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'}
-							Cinactive={'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'}
-						/>
 						</div>
 						<div>
 							<InputBoxValue
