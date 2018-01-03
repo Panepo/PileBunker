@@ -359,9 +359,9 @@ export default function reducerCalc(state = initialState, action) {
 	case CHAR_SELECT:
 		calcTemp = state
 		charTemp = dbChar.findOne({ name: action.modelId })
-		calcTemp.AtkParm = parseFloat(charTemp.atF, 10) * 100
+		calcTemp.AtkParm = Math.round(parseFloat(charTemp.atF, 10) * 100)
 		return Object.assign({}, state, {
-			AtkParm: parseFloat(charTemp.atF, 10) * 100,
+			AtkParm: Math.round(parseFloat(charTemp.atF, 10) * 100),
 			output: calcOutput(calcTemp),
 			atk: calcAtk(calcTemp),
 			modelStatus: '0'
