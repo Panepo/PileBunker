@@ -81,3 +81,10 @@ export function charSelect(modelId) {
 		modelId
 	}
 }
+
+export function plainSelect(modelId) {
+	return {
+		type: types.PLAIN_SELECT,
+		modelId
+	}
+}

@@ -10,13 +10,14 @@ import {
 	CANNON_CHANGE,
 	CHAR_SELECT,
 	MODEL_OPEN,
-	MODEL_CLOSE
+	MODEL_CLOSE,
+	PLAIN_SELECT
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbChar } from './database'
 import * as parameters from '../constants/ConstParameters'
 import { calcOutput, calcAtk } from './calcOutput'
-import { listType, listTypeS } from '../constants/ConstList'
+import { listType, listTypeS, listPlain, listPlainS, listPlainQ } from '../constants/ConstList'
 
 // ===============================================================================
 // initial status
@@ -44,7 +45,8 @@ const initialState = {
 	defSkillInt: 0,
 	output: [],
 	outputChar: dbChar.chain().find({ weapon: '刀' }).data(),
-	modelStatus: '0'
+	modelStatus: '0',
+	plainStatus: 1 | 2 | 4 | 8
 }
 
 // ===============================================================================
@@ -55,6 +57,7 @@ export default function reducerCalc(state = initialState, action) {
 	let calcTemp = {}
 	let weaponSelected = []
 	let charTemp = []
+	let plainTemp
 
 	switch (action.type) {
 	case MODEL_OPEN:
@@ -73,7 +76,7 @@ export default function reducerCalc(state = initialState, action) {
 		calcTemp.type = action.modelId
 		for (let i = 0; i < listTypeS.length; i += 1) {
 			if (action.modelId === listTypeS[i]) {
-				charTemp = dbChar.chain().find({ weapon: listType[i] }).data()
+				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { '$in': listPlainQ[state.plainStatus - 1] } }] }).data()
 				break
 			}
 		}
@@ -365,6 +368,27 @@ export default function reducerCalc(state = initialState, action) {
 			output: calcOutput(calcTemp),
 			atk: calcAtk(calcTemp),
 			modelStatus: '0'
+		})
+	// ===============================================================================
+	// character plain select change
+	// ===============================================================================
+	case PLAIN_SELECT:
+		plainTemp = state.plainStatus
+		if (plainTemp & action.modelId) {
+			plainTemp ^= action.modelId
+		} else {
+			plainTemp |= action.modelId
+		}
+
+		for (let i = 0; i < listTypeS.length; i += 1) {
+			if (state.type === listTypeS[i]) {
+				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { '$in': listPlainQ[plainTemp - 1] } }] }).data()
+				break
+			}
+		}
+		return Object.assign({}, state, {
+			plainStatus: plainTemp,
+			outputChar: charTemp
 		})
 	// ===============================================================================
 	// default status

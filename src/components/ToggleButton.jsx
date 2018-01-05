@@ -27,7 +27,7 @@ ToggleButton.propTypes = {
 }
 
 ToggleButton.defaultProps = {
-	display: 0,
+	display: '0',
 	title: 'ToggleButton',
 	modelId: 'ToggleButton',
 	Cactive: 'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary',
