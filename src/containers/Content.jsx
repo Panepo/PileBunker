@@ -122,7 +122,7 @@ class Content extends Component {
 	}
 
 	render() {
-		const { level, HPParm, AtkParm, DefParm, com } = this.props
+		const { level, HPParm, AtkParm, DefParm, com, damUp, damUp2 } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		const { modelOpen, modelClose } = this.props
 		return (
@@ -233,6 +233,22 @@ class Content extends Component {
 								defaultValue={defSkillInt}
 							/>
 						</div>
+						<div>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'与えるダメージが上昇(%)'}
+								modelId={'damUp'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={damUp}
+							/>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'兜の被ダメージが上昇(%)'}
+								modelId={'damUp2'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={damUp2}
+							/>
+						</div>
 						<OutputTable />
 					</div>
 				</div>
@@ -261,6 +277,8 @@ Content.propTypes = {
 	defSkillInt: PropTypes.number.isRequired,
 	aspdSkill: PropTypes.number.isRequired,
 	aspdSpell: PropTypes.number.isRequired,
+	damUp: PropTypes.number.isRequired,
+	damUp2: PropTypes.number.isRequired,
 	typeChange: PropTypes.func.isRequired,
 	plainChange: PropTypes.func.isRequired,
 	maxChange: PropTypes.func.isRequired,
@@ -289,6 +307,8 @@ const mapStateToProps = function mapStateToProps(state) {
 		def: state.reducerCalc.def,
 		atkSkill: state.reducerCalc.atkSkill,
 		defSkill: state.reducerCalc.defSkill,
+		damUp: state.reducerCalc.damUp,
+		damUp2: state.reducerCalc.damUp2,
 		atkSkillInt: state.reducerCalc.atkSkillInt,
 		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,

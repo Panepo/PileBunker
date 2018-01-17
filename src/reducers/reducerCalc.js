@@ -43,6 +43,8 @@ const initialState = {
 	aspdSpell: 0,
 	atkSkillInt: 0,
 	defSkillInt: 0,
+	damUp: 0,
+	damUp2: 0,
 	output: [],
 	outputChar: dbChar.chain().find({ weapon: '刀' }).data(),
 	modelStatus: '0',
@@ -351,6 +353,20 @@ export default function reducerCalc(state = initialState, action) {
 			}
 			return Object.assign({}, state, {
 				aspdSpell: calcTemp.aspdSpell,
+				output: calcOutput(calcTemp)
+			})
+		case 'damUp':
+			calcTemp = state
+			calcTemp.damUp = action.modelValue
+			return Object.assign({}, state, {
+				damUp: action.modelValue,
+				output: calcOutput(calcTemp)
+			})
+		case 'damUp2':
+			calcTemp = state
+			calcTemp.damUp2 = action.modelValue
+			return Object.assign({}, state, {
+				damUp2: action.modelValue,
 				output: calcOutput(calcTemp)
 			})
 		default:

@@ -128,9 +128,9 @@ export function calcOutput(input) {
 		totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * (1 + input.atkSkill / 100) + input.atkSkillInt
 		totalAtk *= paraMux
 		if ((totalAtk - parameters.valueProDam) >= totalDef) {
-			weaponSelected[i].damage = Math.floor(totalAtk - totalDef)
+			weaponSelected[i].damage = Math.floor(Math.floor(totalAtk - totalDef) * (1 + (input.damUp + input.damUp2) / 100))
 		} else {
-			weaponSelected[i].damage = parameters.valueProDam
+			weaponSelected[i].damage = Math.floor(parameters.valueProDam * (1 + (input.damUp + input.damUp2) / 100))
 		}
 		weaponSelected[i].frame1 = Math.ceil(weaponSelected[i].f1 * (1 - input.aspdSkill / 100))
 		weaponSelected[i].frame2 = Math.ceil(weaponSelected[i].f2 * (1 - input.aspdSpell / 100))
