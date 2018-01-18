@@ -206,28 +206,28 @@ class Content extends Component {
 						<div>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'技能攻擊力增加(%)'}
+								title={'攻擊力增加(%)'}
 								modelId={'atkSkill'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={atkSkill}
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'技能攻擊力增加'}
+								title={'攻擊力增加'}
 								modelId={'atkSkillInt'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={atkSkillInt}
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'技能兜防禦力減少(%)'}
+								title={'兜防禦力減少(%)'}
 								modelId={'defSkill'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={defSkill}
 							/>
 							<InputBoxValue
 								classes={'text-input'}
-								title={'技能兜防禦力減少'}
+								title={'兜防禦力減少'}
 								modelId={'defSkillInt'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={defSkillInt}
