@@ -122,7 +122,7 @@ class Content extends Component {
 	}
 
 	render() {
-		const { level, HPParm, AtkParm, DefParm, com, damUp, damUp2 } = this.props
+		const { level, HPParm, AtkParm, DefParm, com, damUp, damUp2, struAtk } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
 		const { modelOpen, modelClose } = this.props
 		return (
@@ -248,6 +248,13 @@ class Content extends Component {
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={damUp2}
 							/>
+							<InputBoxValue
+								classes={'text-input'}
+								title={'設施攻擊'}
+								modelId={'struAtk'}
+								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+								defaultValue={struAtk}
+							/>
 						</div>
 						<OutputTable />
 					</div>
@@ -279,6 +286,7 @@ Content.propTypes = {
 	aspdSpell: PropTypes.number.isRequired,
 	damUp: PropTypes.number.isRequired,
 	damUp2: PropTypes.number.isRequired,
+	struAtk: PropTypes.number.isRequired,
 	typeChange: PropTypes.func.isRequired,
 	plainChange: PropTypes.func.isRequired,
 	maxChange: PropTypes.func.isRequired,
@@ -309,6 +317,7 @@ const mapStateToProps = function mapStateToProps(state) {
 		defSkill: state.reducerCalc.defSkill,
 		damUp: state.reducerCalc.damUp,
 		damUp2: state.reducerCalc.damUp2,
+		struAtk: state.reducerCalc.struAtk,
 		atkSkillInt: state.reducerCalc.atkSkillInt,
 		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,

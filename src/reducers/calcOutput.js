@@ -123,6 +123,10 @@ export function calcOutput(input) {
 	}
 
 	// ===============================================================
+	// 設施攻擊力計算
+	charAtk += input.struAtk
+
+	// ===============================================================
 	// ダメージ計算
 	for (let i = 0; i < weaponSelected.length; i += 1) {
 		totalAtk = (charAtk + weaponSelected[i].atk) * maxMux * (1 + input.atkSkill / 100) + input.atkSkillInt
