@@ -46,6 +46,7 @@ const initialState = {
 	damUp: 0,
 	damUp2: 0,
 	struAtk: 0,
+	cannonD: 0,
 	output: [],
 	outputChar: dbChar.chain().find({ weapon: '刀' }).data(),
 	modelStatus: '0',
@@ -375,6 +376,13 @@ export default function reducerCalc(state = initialState, action) {
 			calcTemp.struAtk = action.modelValue
 			return Object.assign({}, state, {
 				struAtk: action.modelValue,
+				output: calcOutput(calcTemp)
+			})
+		case 'cannonD':
+			calcTemp = state
+			calcTemp.cannonD = action.modelValue
+			return Object.assign({}, state, {
+				cannonD: action.modelValue,
 				output: calcOutput(calcTemp)
 			})
 		default:

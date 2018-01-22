@@ -83,7 +83,7 @@ export function calcOutput(input) {
 	// ===============================================================
 	// 砲弾が敵に直撃した場合、攻撃力が50%アップ。
 	if (input.type === 'cannon' && input.cannon === 'cannon') {
-		paraMux *= parameters.muxCanDirect
+		paraMux *= 1 + parameters.muxCanDirect * (100 + input.cannonD) / 100
 	}
 
 	// ===============================================================

@@ -121,6 +121,23 @@ class Content extends Component {
 		return butOut
 	}
 
+	generateCannonDirect() {
+		const { type, cannonD, inputChange } = this.props
+		if (type === 'cannon') {
+			return (
+				<InputBoxValue
+					key={'button cannon'}
+					classes={'text-input'}
+					title={'砲撃直撃時の攻撃ボーナス上昇(%)'}
+					modelId={'cannonD'}
+					inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
+					defaultValue={cannonD}
+				/>
+			)
+		}
+		return null
+	}
+
 	render() {
 		const { level, HPParm, AtkParm, DefParm, com, damUp, damUp2, struAtk } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
@@ -146,6 +163,7 @@ class Content extends Component {
 						</div>
 						<div>
 							<InputBoxValue
+								key={'button level'}
 								classes={'text-input'}
 								title={'城娘等級'}
 								modelId={'level'}
@@ -153,6 +171,7 @@ class Content extends Component {
 								defaultValue={level}
 							/>
 							<InputBoxValue
+								key={'button AtkParm'}
 								classes={'text-input'}
 								title={'攻擊成長係數(%)'}
 								modelId={'AtkParm'}
@@ -160,6 +179,7 @@ class Content extends Component {
 								defaultValue={AtkParm}
 							/>
 							<InputBoxValue
+								key={'button com'}
 								classes={'text-input'}
 								title={'絆'}
 								modelId={'com'}
@@ -175,6 +195,7 @@ class Content extends Component {
 						</div>
 						<div>
 							<InputBoxValue
+								key={'button atk'}
 								classes={'text-input'}
 								title={'城娘素身攻擊力'}
 								modelId={'atk'}
@@ -182,6 +203,7 @@ class Content extends Component {
 								defaultValue={atk}
 							/>
 							<InputBoxValue
+								key={'button def'}
 								classes={'text-input'}
 								title={'兜防禦力'}
 								modelId={'def'}
@@ -189,6 +211,7 @@ class Content extends Component {
 								defaultValue={def}
 							/>
 							<InputBoxValue
+								key={'button aspdSkill'}
 								classes={'text-input'}
 								title={'攻撃速度上昇(%)'}
 								modelId={'aspdSkill'}
@@ -196,6 +219,7 @@ class Content extends Component {
 								defaultValue={aspdSkill}
 							/>
 							<InputBoxValue
+								key={'button aspdSpell'}
 								classes={'text-input'}
 								title={'攻撃後の隙短縮(%)'}
 								modelId={'aspdSpell'}
@@ -205,6 +229,7 @@ class Content extends Component {
 						</div>
 						<div>
 							<InputBoxValue
+								key={'button atkSkill'}
 								classes={'text-input'}
 								title={'攻擊力增加(%)'}
 								modelId={'atkSkill'}
@@ -212,6 +237,7 @@ class Content extends Component {
 								defaultValue={atkSkill}
 							/>
 							<InputBoxValue
+								key={'button atkSkillInt'}
 								classes={'text-input'}
 								title={'攻擊力增加'}
 								modelId={'atkSkillInt'}
@@ -219,6 +245,7 @@ class Content extends Component {
 								defaultValue={atkSkillInt}
 							/>
 							<InputBoxValue
+								key={'button defSkill'}
 								classes={'text-input'}
 								title={'兜防禦力減少(%)'}
 								modelId={'defSkill'}
@@ -226,6 +253,7 @@ class Content extends Component {
 								defaultValue={defSkill}
 							/>
 							<InputBoxValue
+								key={'button defSkillInt'}
 								classes={'text-input'}
 								title={'兜防禦力減少'}
 								modelId={'defSkillInt'}
@@ -235,6 +263,7 @@ class Content extends Component {
 						</div>
 						<div>
 							<InputBoxValue
+								key={'button damUp'}
 								classes={'text-input'}
 								title={'与えるダメージが上昇(%)'}
 								modelId={'damUp'}
@@ -242,6 +271,7 @@ class Content extends Component {
 								defaultValue={damUp}
 							/>
 							<InputBoxValue
+								key={'button damUp2'}
 								classes={'text-input'}
 								title={'兜の被ダメージが上昇(%)'}
 								modelId={'damUp2'}
@@ -249,12 +279,14 @@ class Content extends Component {
 								defaultValue={damUp2}
 							/>
 							<InputBoxValue
+								key={'button struAtk'}
 								classes={'text-input'}
 								title={'設施攻擊'}
 								modelId={'struAtk'}
 								inputFunc={(modelId, modelValue) => {inputChange(modelId, modelValue)}}
 								defaultValue={struAtk}
 							/>
+							{this.generateCannonDirect()}
 						</div>
 						<OutputTable />
 					</div>
@@ -287,6 +319,7 @@ Content.propTypes = {
 	damUp: PropTypes.number.isRequired,
 	damUp2: PropTypes.number.isRequired,
 	struAtk: PropTypes.number.isRequired,
+	cannonD: PropTypes.number.isRequired,
 	typeChange: PropTypes.func.isRequired,
 	plainChange: PropTypes.func.isRequired,
 	maxChange: PropTypes.func.isRequired,
@@ -318,6 +351,7 @@ const mapStateToProps = function mapStateToProps(state) {
 		damUp: state.reducerCalc.damUp,
 		damUp2: state.reducerCalc.damUp2,
 		struAtk: state.reducerCalc.struAtk,
+		cannonD: state.reducerCalc.cannonD,
 		atkSkillInt: state.reducerCalc.atkSkillInt,
 		defSkillInt: state.reducerCalc.defSkillInt,
 		aspdSkill: state.reducerCalc.aspdSkill,
