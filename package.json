@@ -4,12 +4,14 @@
   "description": "shiropro weapon calculator pilebunker",
   "main": "index.js",
   "scripts": {
-    "parser": "lsc  ./raw/parser.ls --nodejs --harmoy",
+    "parser": "npm run parserC && npm run parserL",
     "setdelp": "SET NODE_ENV=development",
     "setprod": "SET NODE_ENV=production",
     "start": "lsc server.ls --nodejs --harmoy",
     "build": "webpack --config webpack.config.ls",
-    "test": "webpack --config webpack.config.ls"
+    "test": "webpack --config webpack.config.ls",
+    "parserL": "lsc  ./raw/parser.ls --nodejs --harmoy",
+    "parserC": "python ./raw/charDataParaser.py"
   },
   "author": "Panepo <panepo@github.io>",
   "license": "MIT",
