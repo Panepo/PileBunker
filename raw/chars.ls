@@ -1,19 +1,19 @@
 # ============================================================================
-# Column settings
-# ============================================================================
-# name:		name of this character
-# class:	class of this character
-# rarity:	rarity of this character
-# plain:	plain type of this character
-# hpF:		HP increase factor
-# atF:		ATK increase factor
-# dfF:		DEF increase factor
-# totF:		total increase factor
-# ============================================================================
+	# Column settings
+	# ============================================================================
+	# name:		name of this character
+	# class:	class of this character
+	# rarity:	rarity of this character
+	# plain:	plain type of this character
+	# hpF:		HP increase factor
+	# atF:		ATK increase factor
+	# dfF:		DEF increase factor
+	# totF:		total increase factor
+	# ============================================================================
 
-char = {
-	slotChar: <[name weapon rarity plain hpF atF dfF totF]>
-	data:[
+	char = {
+		slotChar: <[name weapon rarity plain hpF atF dfF totF]>
+		data:[
 		<[﻿福山館	弓	1	平山水	1.00	1.02	0.96	2.98]>
 		<[福山館[改壱]	弓	2	平山水	1.03	1.05	0.99	3.07]>
 		<[松前城	鉄砲	4	平山水	1.08	1.09	1.07	3.24]>
@@ -418,5 +418,5 @@ char = {
 		<[ペーナ宮殿	杖	6	山	1.15	1.21	1.12	3.48]>
 		<[鬼ノ城	歌舞	4	山	1.09	1.04	1.11	3.24]>
 		]
-}
-module.exports = char
+	}
+	module.exports = char
