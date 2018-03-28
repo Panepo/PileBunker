@@ -95,7 +95,7 @@ IndexTable.propTypes = {
 	modelStatus: PropTypes.string.isRequired,
 	modelClose: PropTypes.func.isRequired,
 	plainStatus: PropTypes.number.isRequired,
-	plainSelect: PropTypes.func.isRequired,
+	plainSelect: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {

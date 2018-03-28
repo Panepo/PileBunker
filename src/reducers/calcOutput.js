@@ -1,5 +1,5 @@
 import { dbWeapon, dbType } from './database'
-import { listButS, listMelee, listMagic, listPhys } from '../constants/ConstList'
+import { listMelee, listMagic, listPhys } from '../constants/ConstList'
 import * as parameters from '../constants/ConstParameters'
 
 // ===============================================================================
@@ -88,25 +88,7 @@ export function calcOutput(input) {
 
 	// ===============================================================
 	// 巨大化補正
-	switch (input.max) {
-	case listButS[1]:
-		maxMux = parameters.muxMax[0]
-		break
-	case listButS[2]:
-		maxMux = parameters.muxMax[1]
-		break
-	case listButS[3]:
-		maxMux = parameters.muxMax[2]
-		break
-	case listButS[4]:
-		maxMux = parameters.muxMax[3]
-		break
-	case listButS[5]:
-		maxMux = parameters.muxMax[4]
-		break
-	default:
-		maxMux = 1
-	}
+	maxMux = parameters.muxMax[input.max]
 
 	// ===============================================================
 	// 兜防禦力計算

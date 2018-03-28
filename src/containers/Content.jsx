@@ -139,9 +139,9 @@ class Content extends Component {
 	}
 
 	render() {
-		const { level, HPParm, AtkParm, DefParm, com, damUp, damUp2, struAtk } = this.props
+		const { level, AtkParm, com, damUp, damUp2, struAtk } = this.props
 		const { atk, def, atkSkill, defSkill, aspdSkill, aspdSpell, inputChange, atkSkillInt, defSkillInt } = this.props
-		const { modelOpen, modelClose } = this.props
+		const { modelOpen } = this.props
 		return (
 			<main className="demo-main mdl-layout__content">
 				<div className="demo-container mdl-grid">
@@ -298,9 +298,9 @@ class Content extends Component {
 
 Content.propTypes = {
 	level: PropTypes.number.isRequired,
-	HPParm: PropTypes.number.isRequired,
+	//HPParm: PropTypes.number.isRequired,
 	AtkParm: PropTypes.number.isRequired,
-	DefParm: PropTypes.number.isRequired,
+	//DefParm: PropTypes.number.isRequired,
 	com: PropTypes.number.isRequired,
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
@@ -328,15 +328,15 @@ Content.propTypes = {
 	monsChange: PropTypes.func.isRequired,
 	cannonChange: PropTypes.func.isRequired,
 	modelOpen: PropTypes.func.isRequired,
-	modelClose: PropTypes.func.isRequired
+	//modelClose: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {
 	return {
 		level: state.reducerCalc.level,
-		HPParm: state.reducerCalc.HPParm,
+		//HPParm: state.reducerCalc.HPParm,
 		AtkParm: state.reducerCalc.AtkParm,
-		DefParm: state.reducerCalc.DefParm,
+		//DefParm: state.reducerCalc.DefParm,
 		com: state.reducerCalc.com,
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
@@ -370,7 +370,7 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		inputChange: bindActionCreators(inputChange, dispatch),
 		cannonChange: bindActionCreators(cannonChange, dispatch),
 		modelOpen: bindActionCreators(modelOpen, dispatch),
-		modelClose: bindActionCreators(modelClose, dispatch)
+		//modelClose: bindActionCreators(modelClose, dispatch)
 	}
 }
 

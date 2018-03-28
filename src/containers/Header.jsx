@@ -3,12 +3,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { modelOpen, modelClose } from '../actions'
 import IndexTable from './IndexTable'
-import TextModel from '../components/TextModel'
 import '../../css/Header.css'
 
 class Header extends Component {
 	render() {
-		const { modelStatus, modelOpen, modelClose } = this.props
 		return (
 			<header className="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-800">
 				<IndexTable />

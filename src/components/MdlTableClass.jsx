@@ -5,7 +5,7 @@ export default class MdlTableClass extends Component {
 		super(props, context)
 
 		const tempData = this.props.tableData
-		tempData.sort((a, b) => { return b.dps - a.dps })
+		tempData.sort((a, b) => b.dps - a.dps)
 
 		this.state = {
 			tableBody: tempData,
@@ -19,9 +19,9 @@ export default class MdlTableClass extends Component {
 		const tempData = nextProps.tableData
 
 		if (sortDir) {
-			tempData.sort((a, b) => { return b[sortKey] - a[sortKey] })
+			tempData.sort((a, b) => b[sortKey] - a[sortKey])
 		} else {
-			tempData.sort((a, b) => { return a[sortKey] - b[sortKey] })
+			tempData.sort((a, b) => a[sortKey] - b[sortKey])
 		}
 
 		this.setState({
@@ -57,9 +57,9 @@ export default class MdlTableClass extends Component {
 		}
 
 		if (newDir) {
-			tempData.sort((a, b) => { return b[newKey] - a[newKey] })
+			tempData.sort((a, b) => b[newKey] - a[newKey])
 		} else {
-			tempData.sort((a, b) => { return a[newKey] - b[newKey] })
+			tempData.sort((a, b) => a[newKey] - b[newKey])
 		}
 
 		this.setState({
@@ -73,7 +73,6 @@ export default class MdlTableClass extends Component {
 		const { tableHead, tableId, tableInd } = this.props
 		const { sortDir, sortKey } = this.state
 
-		let theadOut
 		let theadTemp
 		const theadTempOut = []
 		let theadClass = ''
@@ -95,7 +94,7 @@ export default class MdlTableClass extends Component {
 			)
 			theadTempOut.push(theadTemp)
 		}
-		theadOut = (
+		const theadOut = (
 			<thead>
 				<tr>
 					{theadTempOut}
@@ -110,7 +109,6 @@ export default class MdlTableClass extends Component {
 		const { tableId, tableInd, tableFunction } = this.props
 		const { tableBody } = this.state
 
-		let tbodyOut
 		let tbodyTemp
 		const tbodyTempOut = []
 		let tdTemp
@@ -144,7 +142,7 @@ export default class MdlTableClass extends Component {
 			)
 			tbodyTempOut.push(tbodyTemp)
 		}
-		tbodyOut = <tbody>{tbodyTempOut}</tbody>
+		const tbodyOut = <tbody>{tbodyTempOut}</tbody>
 
 		return tbodyOut
 	}

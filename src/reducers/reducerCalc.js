@@ -17,7 +17,7 @@ import {
 import { dbWeapon, dbChar } from './database'
 import * as parameters from '../constants/ConstParameters'
 import { calcOutput, calcAtk } from './calcOutput'
-import { listType, listTypeS, listPlain, listPlainS, listPlainQ } from '../constants/ConstList'
+import { listType, listTypeS, listPlainQ } from '../constants/ConstList'
 
 // ===============================================================================
 // initial status
@@ -80,7 +80,7 @@ export default function reducerCalc(state = initialState, action) {
 		calcTemp.type = action.modelId
 		for (let i = 0; i < listTypeS.length; i += 1) {
 			if (action.modelId === listTypeS[i]) {
-				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { '$in': listPlainQ[state.plainStatus - 1] } }] }).data()
+				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { $in: listPlainQ[state.plainStatus - 1] } }] }).data()
 				break
 			}
 		}
@@ -414,7 +414,7 @@ export default function reducerCalc(state = initialState, action) {
 
 		for (let i = 0; i < listTypeS.length; i += 1) {
 			if (state.type === listTypeS[i]) {
-				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { '$in': listPlainQ[plainTemp - 1] } }] }).data()
+				charTemp = dbChar.chain().find({ $and: [{ weapon: listType[i] }, { plain: { $in: listPlainQ[plainTemp - 1] } }] }).data()
 				break
 			}
 		}
