@@ -4,29 +4,28 @@
   "description": "shiropro weapon calculator pilebunker",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf ./build/bundle.js",
     "parser": "npm run parserC && npm run parserL",
-    "setdelp": "SET NODE_ENV=development",
-    "setprod": "SET NODE_ENV=production",
-    "start": "lsc server.ls --nodejs --harmoy",
-    "build": "webpack --config webpack.config.ls",
-    "test": "webpack --config webpack.config.ls",
     "parserL": "lsc  ./raw/parser.ls --nodejs --harmoy",
-    "parserC": "python ./raw/charDataParaser.py"
+    "parserC": "python ./raw/charDataParaser.py",
+    "start": "cross-env NODE_ENV=development lsc server.ls --nodejs --harmoy",
+    "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.ls",
+    "test": "npm run clean && cross-env NODE_ENV=development webpack --config webpack.config.ls"
   },
   "author": "Panepo <panepo@github.io>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Panepo/PileBunker.git"
+    "url": "git+https://github.com/Panepo/PileBunker.git"
   },
   "dependencies": {
     "babel-polyfill": "^6.7.4",
     "lokijs": "^1.3.16",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
-    "redux-logger": "^2.6.1",
     "react-redux": "^4.4.1",
     "redux": "^3.3.1",
+    "redux-logger": "^2.6.1",
     "redux-thunk": "^2.0.1"
   },
   "devDependencies": {
@@ -36,6 +35,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-react-hmre": "^1.1.1",
+    "cross-env": "^5.1.4",
     "css-loader": "^0.23.1",
     "eslint": "^3.14.1",
     "eslint-config-airbnb": "^14.0.0",
@@ -51,6 +51,7 @@
     "livescript-loader": "^0.1.5",
     "node-sass": "^4.7.2",
     "react-hot-loader": "^1.3.0",
+	"rimraf": "^2.6.2",
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
