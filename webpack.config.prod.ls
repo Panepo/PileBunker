@@ -1,9 +1,10 @@
 require! {
+	"html-webpack-plugin": HtmlWebpackPlugin
 	"path": path
 	"webpack": webpack
 }
 
-module.exports = {
+webpackConfig = {
 	devtool: "sourcemap"
 	entry: [
 		#'webpack-hot-middleware/client'
@@ -14,9 +15,20 @@ module.exports = {
 		filename: 'bundle.js'
 	}
 	plugins: [
+		new HtmlWebpackPlugin {
+			path: path.join(__dirname, 'build')
+			template: './src/index.html'
+			inject: true
+		}
 		new webpack.optimize.OccurenceOrderPlugin()
-		new webpack.HotModuleReplacementPlugin()
-		new webpack.NoErrorsPlugin()
+		new webpack.optimize.DedupePlugin()
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				unused: true,
+				dead_code: true,
+				warnings: false
+			}
+		})
 	]
 	resolve:{
 		alias:{
@@ -63,3 +75,5 @@ module.exports = {
 		fs: "empty"
 	}
 }
+
+module.exports = webpackConfig

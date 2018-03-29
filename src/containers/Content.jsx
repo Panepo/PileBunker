@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { modelOpen, modelClose, typeChange, plainChange, maxChange, inputChange, flyChange, monsChange, cannonChange } from '../actions'
+import { modelOpen, typeChange, plainChange, maxChange, inputChange, flyChange, monsChange, cannonChange } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
 import OutputTable from './OutputTable'
@@ -298,9 +298,9 @@ class Content extends Component {
 
 Content.propTypes = {
 	level: PropTypes.number.isRequired,
-	//HPParm: PropTypes.number.isRequired,
+	// HPParm: PropTypes.number.isRequired,
 	AtkParm: PropTypes.number.isRequired,
-	//DefParm: PropTypes.number.isRequired,
+	// DefParm: PropTypes.number.isRequired,
 	com: PropTypes.number.isRequired,
 	type: PropTypes.string.isRequired,
 	plain: PropTypes.string.isRequired,
@@ -327,16 +327,16 @@ Content.propTypes = {
 	flyChange: PropTypes.func.isRequired,
 	monsChange: PropTypes.func.isRequired,
 	cannonChange: PropTypes.func.isRequired,
-	modelOpen: PropTypes.func.isRequired,
-	//modelClose: PropTypes.func.isRequired
+	modelOpen: PropTypes.func.isRequired
+	// modelClose: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {
 	return {
 		level: state.reducerCalc.level,
-		//HPParm: state.reducerCalc.HPParm,
+		// HPParm: state.reducerCalc.HPParm,
 		AtkParm: state.reducerCalc.AtkParm,
-		//DefParm: state.reducerCalc.DefParm,
+		// DefParm: state.reducerCalc.DefParm,
 		com: state.reducerCalc.com,
 		type: state.reducerCalc.type,
 		plain: state.reducerCalc.plain,
@@ -369,8 +369,8 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		maxChange: bindActionCreators(maxChange, dispatch),
 		inputChange: bindActionCreators(inputChange, dispatch),
 		cannonChange: bindActionCreators(cannonChange, dispatch),
-		modelOpen: bindActionCreators(modelOpen, dispatch),
-		//modelClose: bindActionCreators(modelClose, dispatch)
+		modelOpen: bindActionCreators(modelOpen, dispatch)
+		// modelClose: bindActionCreators(modelClose, dispatch)
 	}
 }
 
