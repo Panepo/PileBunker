@@ -10,7 +10,8 @@
     "parserC": "python ./raw/charDataParaser.py",
     "start": "cross-env NODE_ENV=development lsc server.ls --nodejs --harmoy",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.ls",
-    "test": "npm run clean && cross-env NODE_ENV=development webpack --config webpack.config.dev.ls"
+    "dev": "npm run clean && cross-env NODE_ENV=development webpack --config webpack.config.dev.ls",
+	"test": "mocha --compilers js:babel-core/register"
   },
   "author": "Panepo <panepo@github.io>",
   "license": "MIT",
@@ -50,10 +51,12 @@
     "json-loader": "^0.5.4",
     "livescript": "^1.4.0",
     "livescript-loader": "^0.1.5",
+    "mocha": "^5.0.5",
     "node-sass": "^4.7.2",
     "react-hot-loader": "^1.3.0",
     "rimraf": "^2.6.2",
     "sass-loader": "^3.2.0",
+    "should": "^13.2.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
