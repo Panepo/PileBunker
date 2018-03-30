@@ -13,6 +13,7 @@ Shiropro RE weapon damage calculator PileBunker
 ## Development Requirements
 * node `^5.0.0`
 * npm `^3.0.0`
+* python `^3.0.0`
 
 ## Getting Start
 
