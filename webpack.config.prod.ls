@@ -18,7 +18,11 @@ webpackConfig = {
 		new HtmlWebpackPlugin {
 			path: path.join(__dirname, 'build')
 			template: './src/index.html'
-			inject: true
+			hash: false
+			inject: 'body'
+			minify: {
+				collapseWhitespace: true
+			}
 		}
 		new webpack.optimize.OccurenceOrderPlugin()
 		new webpack.optimize.DedupePlugin()
