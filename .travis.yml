@@ -21,8 +21,6 @@ script:
   - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker travis
   # Generate static pages
   - npm run build
-
-after_success:
   - cd travis
   - cd build
   - git add -A .
