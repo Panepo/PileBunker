@@ -18,11 +18,14 @@ script:
   - git config --global user.name "$GIT_NAME"
   - git config --global user.email "$GIT_EMAIL"
   - git config --global push.default simple
-  - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker build
+  - git clone --depth 1 --branch gh-pages https://$GH_TOKEN@github.com/Panepo/PileBunker travis
   # Generate static pages
   - npm run build
+
+after_success:
+  - cd travis
   - cd build
   - git add -A .
   - MESSAGE=`date +\ %Y-%m-%d\ %H:%M:%S`
-  - git commit -m "Site updated:$MESSAGE"
+  - git commit -m "Travis CI auto deploy:$MESSAGE"
   - git push --quiet
