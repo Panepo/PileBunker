@@ -33,6 +33,7 @@ webpackConfig = {
     new webpack.HotModuleReplacementPlugin!
     new webpack.NoErrorsPlugin!
     new webpack.optimize.CommonsChunkPlugin 'vendors' 'vendors.js'
+    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')})
   ]
   resolve:{
     alias:{
