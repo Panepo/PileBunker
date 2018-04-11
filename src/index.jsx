@@ -8,13 +8,14 @@ import thunk from 'redux-thunk'
 import reducer from './reducers'
 import App from './containers/App'
 
-const middleware = process.env.NODE_ENV === 'production' ? [thunk] : [thunk, logger()]
+const middleware =
+  process.env.NODE_ENV === 'production' ? [thunk] : [thunk, logger()]
 
 const store = createStore(reducer, applyMiddleware(...middleware))
 
 render(
-	<Provider store={store}>
-		<App />
-	</Provider>,
-	document.getElementById('pilebunker')
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('pilebunker')
 )

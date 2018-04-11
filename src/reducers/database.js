@@ -9,13 +9,13 @@ export const dbType = db.addCollection('dbType')
 export const dbChar = db.addCollection('dbChar')
 
 for (let i = 0; i < weaponData.length; i += 1) {
-	dbWeapon.insert(weaponData[i])
+  dbWeapon.insert(weaponData[i])
 }
 
 for (let i = 0; i < typeData.length; i += 1) {
-	dbType.insert(typeData[i])
+  dbType.insert(typeData[i])
 }
 
 for (let i = 0; i < charData.length; i += 1) {
-	dbChar.insert(charData[i])
+  dbChar.insert(charData[i])
 }
