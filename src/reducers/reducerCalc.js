@@ -37,16 +37,17 @@ const initialState = {
   com: parameters.defaultCompanion,
   atk: 0,
   def: parameters.defaultDef,
-  atkSkill: 0,
-  defSkill: 0,
-  aspdSkill: 0,
-  aspdSpell: 0,
-  atkSkillInt: 0,
-  defSkillInt: 0,
-  damUp: 0,
-  damUp2: 0,
+  skillAtkUp: 0,
+  skillDefDown: 0,
+  skillSpdUpF: 0,
+  skillSpdUpB: 0,
+  skillAtkUpInt: 0,
+  skillDefDownInt: 0,
+  skillDamUp: 0,
+  skillRecDamUp: 0,
   struAtk: 0,
-  cannonD: 0,
+  skillCanDirUp: 0,
+  skillMelIgdef: 0,
   output: [],
   outputChar: dbChar
     .chain()
@@ -330,68 +331,68 @@ export default function reducerCalc(state = initialState, action) {
             def: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'atkSkill':
+        case 'skillAtkUp':
           calcTemp = state
-          calcTemp.atkSkill = action.modelValue
+          calcTemp.skillAtkUp = action.modelValue
           return Object.assign({}, state, {
-            atkSkill: action.modelValue,
+            skillAtkUp: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'atkSkillInt':
+        case 'skillAtkUpInt':
           calcTemp = state
-          calcTemp.atkSkillInt = action.modelValue
+          calcTemp.skillAtkUpInt = action.modelValue
           return Object.assign({}, state, {
-            atkSkillInt: action.modelValue,
+            skillAtkUpInt: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'defSkill':
+        case 'skillDefDown':
           calcTemp = state
-          calcTemp.defSkill = action.modelValue
+          calcTemp.skillDefDown = action.modelValue
           return Object.assign({}, state, {
-            defSkill: action.modelValue,
+            skillDefDown: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'defSkillInt':
+        case 'skillDefDownInt':
           calcTemp = state
-          calcTemp.defSkillInt = action.modelValue
+          calcTemp.skillDefDownInt = action.modelValue
           return Object.assign({}, state, {
-            defSkillInt: action.modelValue,
+            skillDefDownInt: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'aspdSkill':
+        case 'skillSpdUpF':
           calcTemp = state
-          if (action.modelValue >= parameters.maxAspdSkill) {
-            calcTemp.aspdSkill = parameters.maxAspdSkill
+          if (action.modelValue >= parameters.maxskillSpdUpF) {
+            calcTemp.skillSpdUpF = parameters.maxskillSpdUpF
           } else {
-            calcTemp.aspdSkill = action.modelValue
+            calcTemp.skillSpdUpF = action.modelValue
           }
           return Object.assign({}, state, {
-            aspdSkill: calcTemp.aspdSkill,
+            skillSpdUpF: calcTemp.skillSpdUpF,
             output: calcOutput(calcTemp)
           })
-        case 'aspdSpell':
+        case 'skillSpdUpB':
           calcTemp = state
-          if (action.modelValue >= parameters.maxAspdSpell) {
-            calcTemp.aspdSpell = parameters.maxAspdSpell
+          if (action.modelValue >= parameters.maxskillSpdUpB) {
+            calcTemp.skillSpdUpB = parameters.maxskillSpdUpB
           } else {
-            calcTemp.aspdSpell = action.modelValue
+            calcTemp.skillSpdUpB = action.modelValue
           }
           return Object.assign({}, state, {
-            aspdSpell: calcTemp.aspdSpell,
+            skillSpdUpB: calcTemp.skillSpdUpB,
             output: calcOutput(calcTemp)
           })
-        case 'damUp':
+        case 'skillDamUp':
           calcTemp = state
-          calcTemp.damUp = action.modelValue
+          calcTemp.skillDamUp = action.modelValue
           return Object.assign({}, state, {
-            damUp: action.modelValue,
+            skillDamUp: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'damUp2':
+        case 'skillRecDamUp':
           calcTemp = state
-          calcTemp.damUp2 = action.modelValue
+          calcTemp.skillRecDamUp = action.modelValue
           return Object.assign({}, state, {
-            damUp2: action.modelValue,
+            skillRecDamUp: action.modelValue,
             output: calcOutput(calcTemp)
           })
         case 'struAtk':
@@ -401,11 +402,18 @@ export default function reducerCalc(state = initialState, action) {
             struAtk: action.modelValue,
             output: calcOutput(calcTemp)
           })
-        case 'cannonD':
+        case 'skillCanDirUp':
           calcTemp = state
-          calcTemp.cannonD = action.modelValue
+          calcTemp.skillCanDirUp = action.modelValue
           return Object.assign({}, state, {
-            cannonD: action.modelValue,
+            skillCanDirUp: action.modelValue,
+            output: calcOutput(calcTemp)
+          })
+        case 'skillMelIgdef':
+          calcTemp = state
+          calcTemp.skillMelIgdef = action.modelValue
+          return Object.assign({}, state, {
+            skillMelIgdef: action.modelValue,
             output: calcOutput(calcTemp)
           })
         default:

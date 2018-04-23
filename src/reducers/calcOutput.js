@@ -86,10 +86,10 @@ export function calcOutput(input) {
   // ===============================================================
   // 砲弾が敵に直撃した場合、攻撃力が50%アップ。
   if (input.type === 'cannon' && input.cannon === 'cannon') {
-    if (input.cannonD === 0) {
+    if (input.skillCanDirUp === 0) {
       paraMux *= 1 + parameters.muxCanDirect
     } else {
-      paraMux *= 1 + input.cannonD / 100
+      paraMux *= 1 + input.skillCanDirUp / 100
     }
   }
 
@@ -99,7 +99,19 @@ export function calcOutput(input) {
 
   // ===============================================================
   // 兜防禦力計算
-  totalDef = input.def * (1 - input.defSkill / 100) - input.defSkillInt
+  for (let i = 0; i < listMelee.length; i += 1) {
+    if (input.type === listMelee[i]) {
+      totalDef =
+        input.def *
+          (1 - input.skillDefDown / 100) *
+          (1 - input.skillMelIgdef / 100) -
+        input.skillDefDownInt
+    } else {
+      totalDef =
+        input.def * (1 - input.skillDefDown / 100) - input.skillDefDownInt
+    }
+  }
+
   if (totalDef <= 0) {
     totalDef = 0
   } else {
@@ -119,27 +131,29 @@ export function calcOutput(input) {
   // ダメージ計算
   for (let i = 0; i < weaponSelected.length; i += 1) {
     totalAtk =
-      (charAtk + weaponSelected[i].atk) * maxMux * (1 + input.atkSkill / 100) +
-      input.atkSkillInt
+      (charAtk + weaponSelected[i].atk) *
+        maxMux *
+        (1 + input.skillAtkUp / 100) +
+      input.skillAtkUpInt
     totalAtk *= paraMux
     if (totalAtk - parameters.valueProDam >= totalDef) {
       weaponSelected[i].damage = Math.floor(
         Math.floor(totalAtk - totalDef) *
-          (1 + input.damUp / 100) *
-          (1 + input.damUp2 / 100)
+          (1 + input.skillDamUp / 100) *
+          (1 + input.skillRecDamUp / 100)
       )
     } else {
       weaponSelected[i].damage = Math.floor(
         parameters.valueProDam *
-          (1 + input.damUp / 100) *
-          (1 + input.damUp2 / 100)
+          (1 + input.skillDamUp / 100) *
+          (1 + input.skillRecDamUp / 100)
       )
     }
     weaponSelected[i].frame1 = Math.ceil(
-      weaponSelected[i].f1 * (1 - input.aspdSkill / 100)
+      weaponSelected[i].f1 * (1 - input.skillSpdUpF / 100)
     )
     weaponSelected[i].frame2 = Math.ceil(
-      weaponSelected[i].f2 * (1 - input.aspdSpell / 100)
+      weaponSelected[i].f2 * (1 - input.skillSpdUpB / 100)
     )
     weaponSelected[i].dps =
       Math.floor(

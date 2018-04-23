@@ -23,15 +23,15 @@ export default class InputBoxValue extends Component {
       modelValue = 0
       this.setState({ text: modelValue })
       this.props.inputFunc(modelId, modelValue)
-    } else if (modelId === 'aspdSkill') {
-      if (modelValue > parameters.maxAspdSkill) {
-        modelValue = parameters.maxAspdSkill
+    } else if (modelId === 'skillSpdUpF') {
+      if (modelValue > parameters.maxskillSpdUpF) {
+        modelValue = parameters.maxskillSpdUpF
       }
       this.setState({ text: modelValue })
       this.props.inputFunc(modelId, modelValue)
-    } else if (modelId === 'aspdSpell') {
-      if (modelValue > parameters.maxAspdSpell) {
-        modelValue = parameters.maxAspdSpell
+    } else if (modelId === 'skillSpdUpB') {
+      if (modelValue > parameters.maxskillSpdUpB) {
+        modelValue = parameters.maxskillSpdUpB
       }
       this.setState({ text: modelValue })
       this.props.inputFunc(modelId, modelValue)

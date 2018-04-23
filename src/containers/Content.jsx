@@ -14,7 +14,13 @@ import {
 import ToggleButton from '../components/ToggleButton'
 import InputBoxValue from '../components/InputBoxValue'
 import OutputTable from './OutputTable'
-import { listType, listTypeS, listBut, listButS } from '../constants/ConstList'
+import {
+  listType,
+  listTypeS,
+  listBut,
+  listButS,
+  listMelee
+} from '../constants/ConstList'
 import '../../css/Content.css'
 
 class Content extends Component {
@@ -176,37 +182,65 @@ class Content extends Component {
     return butOut
   }
 
-  generateCannonDirect() {
-    const { type, cannonD, inputChange } = this.props
+  generateCannonDirectHit() {
+    const { type, skillCanDirUp, inputChange } = this.props
     if (type === 'cannon') {
       return (
         <InputBoxValue
           key={'button cannon'}
           classes={'text-input'}
           title={'砲撃直撃時の攻撃ボーナス上昇(%)'}
-          modelId={'cannonD'}
+          modelId={'skillCanDirUp'}
           inputFunc={(modelId, modelValue) => {
             inputChange(modelId, modelValue)
           }}
-          defaultValue={cannonD}
+          defaultValue={skillCanDirUp}
         />
       )
     }
     return null
   }
 
+  generateMeleeIgnoreDef() {
+    const { type, skillMelIgdef, inputChange } = this.props
+
+    for (let i = 0; i < listMelee.length; i += 1) {
+      if (type === listMelee[i]) {
+        return (
+          <InputBoxValue
+            key={'button cannon'}
+            classes={'text-input'}
+            title={'近接攻撃が敵の防御を無視する(%)'}
+            modelId={'skillMelIgdef'}
+            inputFunc={(modelId, modelValue) => {
+              inputChange(modelId, modelValue)
+            }}
+            defaultValue={skillMelIgdef}
+          />
+        )
+      }
+    }
+  }
+
   render() {
-    const { level, AtkParm, com, damUp, damUp2, struAtk } = this.props
+    const {
+      level,
+      AtkParm,
+      com,
+      skillDamUp,
+      skillRecDamUp,
+      struAtk
+    } = this.props
     const {
       atk,
       def,
-      atkSkill,
-      defSkill,
-      aspdSkill,
-      aspdSpell,
+      skillAtkUp,
+      skillDefDown,
+      skillSpdUpF,
+      skillSpdUpB,
       inputChange,
-      atkSkillInt,
-      defSkillInt
+      skillAtkUpInt,
+      skillDefDownInt
     } = this.props
     const { modelOpen } = this.props
     return (
@@ -288,88 +322,88 @@ class Content extends Component {
                 defaultValue={def}
               />
               <InputBoxValue
-                key={'button aspdSkill'}
+                key={'button skillSpdUpF'}
                 classes={'text-input'}
                 title={'攻撃速度上昇(%)'}
-                modelId={'aspdSkill'}
+                modelId={'skillSpdUpF'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={aspdSkill}
+                defaultValue={skillSpdUpF}
               />
               <InputBoxValue
-                key={'button aspdSpell'}
+                key={'button skillSpdUpB'}
                 classes={'text-input'}
                 title={'攻撃後の隙短縮(%)'}
-                modelId={'aspdSpell'}
+                modelId={'skillSpdUpB'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={aspdSpell}
+                defaultValue={skillSpdUpB}
               />
             </div>
             <div>
               <InputBoxValue
-                key={'button atkSkill'}
+                key={'button skillAtkUp'}
                 classes={'text-input'}
                 title={'攻擊力增加(%)'}
-                modelId={'atkSkill'}
+                modelId={'skillAtkUp'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={atkSkill}
+                defaultValue={skillAtkUp}
               />
               <InputBoxValue
-                key={'button atkSkillInt'}
+                key={'button skillAtkUpInt'}
                 classes={'text-input'}
                 title={'攻擊力增加'}
-                modelId={'atkSkillInt'}
+                modelId={'skillAtkUpInt'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={atkSkillInt}
+                defaultValue={skillAtkUpInt}
               />
               <InputBoxValue
-                key={'button defSkill'}
+                key={'button skillDefDown'}
                 classes={'text-input'}
                 title={'兜防禦力減少(%)'}
-                modelId={'defSkill'}
+                modelId={'skillDefDown'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={defSkill}
+                defaultValue={skillDefDown}
               />
               <InputBoxValue
-                key={'button defSkillInt'}
+                key={'button skillDefDownInt'}
                 classes={'text-input'}
                 title={'兜防禦力減少'}
-                modelId={'defSkillInt'}
+                modelId={'skillDefDownInt'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={defSkillInt}
+                defaultValue={skillDefDownInt}
               />
             </div>
             <div>
               <InputBoxValue
-                key={'button damUp'}
+                key={'button skillDamUp'}
                 classes={'text-input'}
                 title={'与えるダメージが上昇(%)'}
-                modelId={'damUp'}
+                modelId={'skillDamUp'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={damUp}
+                defaultValue={skillDamUp}
               />
               <InputBoxValue
-                key={'button damUp2'}
+                key={'button skillRecDamUp'}
                 classes={'text-input'}
                 title={'兜の被ダメージが上昇(%)'}
-                modelId={'damUp2'}
+                modelId={'skillRecDamUp'}
                 inputFunc={(modelId, modelValue) => {
                   inputChange(modelId, modelValue)
                 }}
-                defaultValue={damUp2}
+                defaultValue={skillRecDamUp}
               />
               <InputBoxValue
                 key={'button struAtk'}
@@ -381,7 +415,8 @@ class Content extends Component {
                 }}
                 defaultValue={struAtk}
               />
-              {this.generateCannonDirect()}
+              {this.generateCannonDirectHit()}
+              {this.generateMeleeIgnoreDef()}
             </div>
             <OutputTable />
           </div>
@@ -405,16 +440,17 @@ Content.propTypes = {
   max: PropTypes.string.isRequired,
   atk: PropTypes.number.isRequired,
   def: PropTypes.number.isRequired,
-  atkSkill: PropTypes.number.isRequired,
-  defSkill: PropTypes.number.isRequired,
-  atkSkillInt: PropTypes.number.isRequired,
-  defSkillInt: PropTypes.number.isRequired,
-  aspdSkill: PropTypes.number.isRequired,
-  aspdSpell: PropTypes.number.isRequired,
-  damUp: PropTypes.number.isRequired,
-  damUp2: PropTypes.number.isRequired,
+  skillAtkUp: PropTypes.number.isRequired,
+  skillDefDown: PropTypes.number.isRequired,
+  skillAtkUpInt: PropTypes.number.isRequired,
+  skillDefDownInt: PropTypes.number.isRequired,
+  skillSpdUpF: PropTypes.number.isRequired,
+  skillSpdUpB: PropTypes.number.isRequired,
+  skillDamUp: PropTypes.number.isRequired,
+  skillRecDamUp: PropTypes.number.isRequired,
   struAtk: PropTypes.number.isRequired,
-  cannonD: PropTypes.number.isRequired,
+  skillCanDirUp: PropTypes.number.isRequired,
+  skillMelIgdef: PropTypes.number.isRequired,
   typeChange: PropTypes.func.isRequired,
   plainChange: PropTypes.func.isRequired,
   maxChange: PropTypes.func.isRequired,
@@ -441,16 +477,17 @@ const mapStateToProps = function mapStateToProps(state) {
     max: state.reducerCalc.max,
     atk: state.reducerCalc.atk,
     def: state.reducerCalc.def,
-    atkSkill: state.reducerCalc.atkSkill,
-    defSkill: state.reducerCalc.defSkill,
-    damUp: state.reducerCalc.damUp,
-    damUp2: state.reducerCalc.damUp2,
+    skillAtkUp: state.reducerCalc.skillAtkUp,
+    skillDefDown: state.reducerCalc.skillDefDown,
+    skillDamUp: state.reducerCalc.skillDamUp,
+    skillRecDamUp: state.reducerCalc.skillRecDamUp,
     struAtk: state.reducerCalc.struAtk,
-    cannonD: state.reducerCalc.cannonD,
-    atkSkillInt: state.reducerCalc.atkSkillInt,
-    defSkillInt: state.reducerCalc.defSkillInt,
-    aspdSkill: state.reducerCalc.aspdSkill,
-    aspdSpell: state.reducerCalc.aspdSpell,
+    skillCanDirUp: state.reducerCalc.skillCanDirUp,
+    skillMelIgdef: state.reducerCalc.skillMelIgdef,
+    skillAtkUpInt: state.reducerCalc.skillAtkUpInt,
+    skillDefDownInt: state.reducerCalc.skillDefDownInt,
+    skillSpdUpF: state.reducerCalc.skillSpdUpF,
+    skillSpdUpB: state.reducerCalc.skillSpdUpB,
     output: state.reducerCalc.output
   }
 }
