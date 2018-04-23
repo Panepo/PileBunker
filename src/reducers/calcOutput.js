@@ -86,7 +86,11 @@ export function calcOutput(input) {
   // ===============================================================
   // 砲弾が敵に直撃した場合、攻撃力が50%アップ。
   if (input.type === 'cannon' && input.cannon === 'cannon') {
-    paraMux *= 1 + parameters.muxCanDirect * (100 + input.cannonD) / 100
+    if (input.cannonD === 0) {
+      paraMux *= 1 + parameters.muxCanDirect
+    } else {
+      paraMux *= 1 + input.cannonD / 100
+    }
   }
 
   // ===============================================================
@@ -121,11 +125,14 @@ export function calcOutput(input) {
     if (totalAtk - parameters.valueProDam >= totalDef) {
       weaponSelected[i].damage = Math.floor(
         Math.floor(totalAtk - totalDef) *
-          (1 + (input.damUp + input.damUp2) / 100)
+          (1 + input.damUp / 100) *
+          (1 + input.damUp2 / 100)
       )
     } else {
       weaponSelected[i].damage = Math.floor(
-        parameters.valueProDam * (1 + (input.damUp + input.damUp2) / 100)
+        parameters.valueProDam *
+          (1 + input.damUp / 100) *
+          (1 + input.damUp2 / 100)
       )
     }
     weaponSelected[i].frame1 = Math.ceil(
