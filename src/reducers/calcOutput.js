@@ -149,11 +149,11 @@ export function calcOutput(input) {
           (1 + input.skillRecDamUp / 100)
       )
     }
-    weaponSelected[i].frame1 = Math.ceil(
-      weaponSelected[i].f1 * (1 - input.skillSpdUpF / 100)
+    weaponSelected[i].frame1 = Math.round(
+      weaponSelected[i].f1 / (1 + input.skillSpdUpF / 100)
     )
-    weaponSelected[i].frame2 = Math.ceil(
-      weaponSelected[i].f2 * (1 - input.skillSpdUpB / 100)
+    weaponSelected[i].frame2 = Math.round(
+      weaponSelected[i].f2 / (1 + input.skillSpdUpB / 100)
     )
     weaponSelected[i].dps =
       Math.floor(
