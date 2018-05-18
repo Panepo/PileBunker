@@ -1,7 +1,7 @@
 language: python
 
 node_js:
-  - 3.6
+  - "3.6"
 
 env:
   global:
@@ -14,10 +14,10 @@ install:
   - npm install
 
 script:
-  # Unit testing
-  - npm run test
   # Generate raw data
   - npm run parser
+  # Unit testing
+  - npm run test
   # Set Git config
   - git config --global user.name "$GIT_NAME"
   - git config --global user.email "$GIT_EMAIL"
