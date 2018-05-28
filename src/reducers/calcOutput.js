@@ -130,24 +130,45 @@ export function calcOutput(input) {
   // ===============================================================
   // ダメージ計算
   for (let i = 0; i < weaponSelected.length; i += 1) {
+    let tempDef
+
     totalAtk =
       (charAtk + weaponSelected[i].atk) *
         maxMux *
         (1 + input.skillAtkUp / 100) +
       input.skillAtkUpInt
     totalAtk *= paraMux
-    if (totalAtk - parameters.valueProDam >= totalDef) {
-      weaponSelected[i].damage = Math.floor(
-        Math.floor(totalAtk - totalDef) *
-          (1 + input.skillDamUp / 100) *
-          (1 + input.skillRecDamUp / 100)
-      )
+    
+    if (weaponSelected[i].name === '氏康の獅盾' || weaponSelected[i].name === '真・氏康の獅盾') {
+      tempDef = Math.round(totalDef * 0.9)
+
+      if (totalAtk - parameters.valueProDam >= tempDef) {
+        weaponSelected[i].damage = Math.floor(
+          Math.floor(totalAtk - tempDef) *
+            (1 + input.skillDamUp / 100) *
+            (1 + input.skillRecDamUp / 100)
+        )
+      } else {
+        weaponSelected[i].damage = Math.floor(
+          parameters.valueProDam *
+            (1 + input.skillDamUp / 100) *
+            (1 + input.skillRecDamUp / 100)
+        )
+      }
     } else {
-      weaponSelected[i].damage = Math.floor(
-        parameters.valueProDam *
-          (1 + input.skillDamUp / 100) *
-          (1 + input.skillRecDamUp / 100)
-      )
+      if (totalAtk - parameters.valueProDam >= totalDef) {
+        weaponSelected[i].damage = Math.floor(
+          Math.floor(totalAtk - totalDef) *
+            (1 + input.skillDamUp / 100) *
+            (1 + input.skillRecDamUp / 100)
+        )
+      } else {
+        weaponSelected[i].damage = Math.floor(
+          parameters.valueProDam *
+            (1 + input.skillDamUp / 100) *
+            (1 + input.skillRecDamUp / 100)
+        )
+      }
     }
     weaponSelected[i].frame1 = Math.round(
       weaponSelected[i].f1 / (1 + input.skillSpdUpF / 100)
