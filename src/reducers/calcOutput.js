@@ -138,8 +138,11 @@ export function calcOutput(input) {
         (1 + input.skillAtkUp / 100) +
       input.skillAtkUpInt
     totalAtk *= paraMux
-    
-    if (weaponSelected[i].name === '氏康の獅盾' || weaponSelected[i].name === '真・氏康の獅盾') {
+
+    if (
+      weaponSelected[i].name === '氏康の獅盾' ||
+      weaponSelected[i].name === '真・氏康の獅盾'
+    ) {
       tempDef = Math.round(totalDef * 0.9)
 
       if (totalAtk - parameters.valueProDam >= tempDef) {
