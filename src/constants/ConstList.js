@@ -4,6 +4,7 @@ export const listType = [
   '槌',
   '拳',
   '盾',
+  '投剣',
   '弓',
   '石弓',
   '鉄砲',
@@ -19,6 +20,7 @@ export const listTypeS = [
   'hammer',
   'fist',
   'shield',
+  'kunai',
   'bow',
   'xbow',
   'arqu',
@@ -108,7 +110,8 @@ export const listPhys = [
   'bow',
   'xbow',
   'arqu',
-  'cannon'
+  'cannon',
+  'kunai'
 ]
 
 export const listPlain = ['平', '平山', '山', '水']
