@@ -297,6 +297,16 @@ class Content extends Component {
                 }}
                 defaultValue={com}
               />
+              <InputBoxValue
+                key={'button struAtk'}
+                classes={'text-input'}
+                title={'設施攻擊'}
+                modelId={'struAtk'}
+                inputFunc={(modelId, modelValue) => {
+                  inputChange(modelId, modelValue)
+                }}
+                defaultValue={struAtk}
+              />
             </div>
             <div>{this.generateToggle()}</div>
             <div>{this.generateMax()}</div>
@@ -404,16 +414,6 @@ class Content extends Component {
                   inputChange(modelId, modelValue)
                 }}
                 defaultValue={skillRecDamUp}
-              />
-              <InputBoxValue
-                key={'button struAtk'}
-                classes={'text-input'}
-                title={'設施攻擊'}
-                modelId={'struAtk'}
-                inputFunc={(modelId, modelValue) => {
-                  inputChange(modelId, modelValue)
-                }}
-                defaultValue={struAtk}
               />
               {this.generateCannonDirectHit()}
               {this.generateMeleeIgnoreDef()}
