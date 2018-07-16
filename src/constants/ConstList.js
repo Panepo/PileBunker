@@ -148,3 +148,7 @@ export const listPlainQ = [
   listPQ14,
   listPQ15
 ]
+
+export const listRarity = [1, 2, 3, 4, 5, 6, 7, 8]
+export const listRarityS = [1, 2, 4, 8, 16, 32, 64, 128]
+export const listRarityQ = ['★1', '★2', '★3', '★4', '★5', '★6', '★7', '★8']

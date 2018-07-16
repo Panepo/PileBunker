@@ -11,7 +11,8 @@ import {
   CHAR_SELECT,
   MODEL_OPEN,
   MODEL_CLOSE,
-  PLAIN_SELECT
+  PLAIN_SELECT,
+  RARITY_SELECT
 } from '../constants/ConstActionTypes'
 
 import { dbWeapon, dbChar } from './database'
@@ -54,7 +55,8 @@ const initialState = {
     .find({ weapon: '刀' })
     .data(),
   modelStatus: '0',
-  plainStatus: 1 | 2 | 4 | 8
+  plainStatus: 1 | 2 | 4 | 8,
+  rarityStatus: 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128
 }
 
 // ===============================================================================
@@ -66,6 +68,7 @@ export default function reducerCalc(state = initialState, action) {
   let weaponSelected = []
   let charTemp = []
   let plainTemp
+  let rarityTemp
 
   switch (action.type) {
     case MODEL_OPEN:
@@ -459,6 +462,32 @@ export default function reducerCalc(state = initialState, action) {
       }
       return Object.assign({}, state, {
         plainStatus: plainTemp,
+        outputChar: charTemp
+      })
+    // ===============================================================================
+    // character rarity select change
+    // ===============================================================================
+    case RARITY_SELECT:
+      rarityTemp = state.rarityStatus
+      if (rarityTemp & action.modelId) {
+        rarityTemp ^= action.modelId
+      } else {
+        rarityTemp |= action.modelId
+      }
+
+      for (let i = 0; i < listTypeS.length; i += 1) {
+        if (state.type === listTypeS[i]) {
+          charTemp = dbChar
+            .chain()
+            .find({
+              $and: [{ weapon: listType[i] }, { rarity: { $and: rarityTemp } }]
+            })
+            .data()
+          break
+        }
+      }
+      return Object.assign({}, state, {
+        rarityStatus: rarityTemp,
         outputChar: charTemp
       })
     // ===============================================================================

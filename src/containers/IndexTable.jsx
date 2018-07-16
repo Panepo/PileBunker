@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { modelClose, typeChange, charSelect, plainSelect } from '../actions'
+import {
+  modelClose,
+  typeChange,
+  charSelect,
+  plainSelect,
+  raritySelect
+} from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import MdlTableClass from '../components/MdlTableClass'
 import {
@@ -10,7 +16,9 @@ import {
   listType,
   listTypeS,
   listPlain,
-  listPlainS
+  listPlainS,
+  listRarityS,
+  listRarityQ
 } from '../constants/ConstList'
 
 class IndexTable extends Component {
@@ -72,6 +80,35 @@ class IndexTable extends Component {
     return plainOut
   }
 
+  generateRarity() {
+    const { rarityStatus, raritySelect } = this.props
+    let rarityTemp = <label htmlFor="indexPlain">稀有度：</label>
+    const rarityOut = []
+    rarityOut.push(rarityTemp)
+
+    for (let i = 0; i < listRarityQ.length; i += 1) {
+      rarityTemp = (
+        <ToggleButton
+          key={'indexPlain' + i.toString()}
+          display={(rarityStatus & listRarityS[i]).toString()}
+          title={listRarityQ[i]}
+          onClickFunc={modelId => {
+            raritySelect(modelId)
+          }}
+          modelId={listRarityS[i].toString()}
+          Cactive={
+            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
+          }
+          Cinactive={
+            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
+          }
+        />
+      )
+      rarityOut.push(rarityTemp)
+    }
+    return rarityOut
+  }
+
   render() {
     const { modelStatus, modelClose, outputChar, charSelect } = this.props
 
@@ -80,8 +117,7 @@ class IndexTable extends Component {
         <div className="modal">
           <button
             className="close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-            onClick={modelClose}
-          >
+            onClick={modelClose}>
             <div className="material-icons">clear</div>
           </button>
           <div className="index-content modal-content mdl-color--white mdl-color-text--grey-800 ">
@@ -117,7 +153,9 @@ IndexTable.propTypes = {
   modelStatus: PropTypes.string.isRequired,
   modelClose: PropTypes.func.isRequired,
   plainStatus: PropTypes.number.isRequired,
-  plainSelect: PropTypes.func.isRequired
+  plainSelect: PropTypes.func.isRequired,
+  rarityStatus: PropTypes.number.isRequired,
+  raritySelect: PropTypes.func.isRequired
 }
 
 const mapStateToProps = function mapStateToProps(state) {
@@ -125,7 +163,8 @@ const mapStateToProps = function mapStateToProps(state) {
     type: state.reducerCalc.type,
     modelStatus: state.reducerCalc.modelStatus,
     outputChar: state.reducerCalc.outputChar,
-    plainStatus: state.reducerCalc.plainStatus
+    plainStatus: state.reducerCalc.plainStatus,
+    rarityStatus: state.reducerCalc.rarityStatus
   }
 }
 
@@ -134,7 +173,8 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
     typeChange: bindActionCreators(typeChange, dispatch),
     charSelect: bindActionCreators(charSelect, dispatch),
     modelClose: bindActionCreators(modelClose, dispatch),
-    plainSelect: bindActionCreators(plainSelect, dispatch)
+    plainSelect: bindActionCreators(plainSelect, dispatch),
+    raritySelect: bindActionCreators(raritySelect, dispatch)
   }
 }
 

@@ -87,3 +87,10 @@ export function plainSelect(modelId) {
     modelId
   }
 }
+
+export function raritySelect(modelId) {
+  return {
+    type: types.RARITY_SELECT,
+    modelId
+  }
+}
