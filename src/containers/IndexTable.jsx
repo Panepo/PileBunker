@@ -122,6 +122,7 @@ class IndexTable extends Component {
           </button>
           <div className="index-content modal-content mdl-color--white mdl-color-text--grey-800 ">
             <div className="char-type-button">{this.generateType()}</div>
+            <div className="char-rarity-button">{this.generateRarity()}</div>
             <div className="char-plain-button">{this.generatePlain()}</div>
             <div>
               <MdlTableClass

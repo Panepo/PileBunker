@@ -41,13 +41,6 @@ webpackConfig = {
     extensions: ['', '.ls', '.js', '.json', '.jsx']
   }
   module: {
-    preLoaders: [
-      {
-        test: /\.js[x]?$/
-        loader: 'eslint'
-        include: path.join(__dirname, 'src')
-      }
-    ]
     loaders: [
       {
         test: /\.js[x]?$/

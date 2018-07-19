@@ -85,25 +85,15 @@ export default function reducerCalc(state = initialState, action) {
     case TYPE_CHANGE:
       calcTemp = state
       calcTemp.type = action.modelId
-      for (let i = 0; i < listTypeS.length; i += 1) {
-        if (action.modelId === listTypeS[i]) {
-          charTemp = dbChar
-            .chain()
-            .find({
-              $and: [
-                { weapon: listType[i] },
-                { plain: { $in: listPlainQ[state.plainStatus - 1] } }
-              ]
-            })
-            .data()
-          break
-        }
-      }
       return Object.assign({}, state, {
         type: action.modelId,
         output: calcOutput(calcTemp),
         atk: calcAtk(calcTemp),
-        outputChar: charTemp
+        outputChar: queryChar(
+          action.modelId,
+          state.plainStatus,
+          state.rarityStatus
+        )
       })
     // ===============================================================================
     // plain bonus switch
@@ -446,23 +436,9 @@ export default function reducerCalc(state = initialState, action) {
         plainTemp |= action.modelId
       }
 
-      for (let i = 0; i < listTypeS.length; i += 1) {
-        if (state.type === listTypeS[i]) {
-          charTemp = dbChar
-            .chain()
-            .find({
-              $and: [
-                { weapon: listType[i] },
-                { plain: { $in: listPlainQ[plainTemp - 1] } }
-              ]
-            })
-            .data()
-          break
-        }
-      }
       return Object.assign({}, state, {
         plainStatus: plainTemp,
-        outputChar: charTemp
+        outputChar: queryChar(state.type, plainTemp, state.rarityStatus)
       })
     // ===============================================================================
     // character rarity select change
@@ -475,20 +451,9 @@ export default function reducerCalc(state = initialState, action) {
         rarityTemp |= action.modelId
       }
 
-      for (let i = 0; i < listTypeS.length; i += 1) {
-        if (state.type === listTypeS[i]) {
-          charTemp = dbChar
-            .chain()
-            .find({
-              $and: [{ weapon: listType[i] }, { rarity: { $and: rarityTemp } }]
-            })
-            .data()
-          break
-        }
-      }
       return Object.assign({}, state, {
         rarityStatus: rarityTemp,
-        outputChar: charTemp
+        outputChar: queryChar(state.type, state.plainStatus, rarityTemp)
       })
     // ===============================================================================
     // default status
@@ -500,4 +465,170 @@ export default function reducerCalc(state = initialState, action) {
         output: calcOutput(calcTemp)
       })
   }
+}
+
+function queryChar(type, plain, rarity) {
+  let charTemp = []
+  let charTemp2 = []
+
+  for (let i = 0; i < listTypeS.length; i += 1) {
+    if (type === listTypeS[i]) {
+      if (rarity & 1) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '1' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 2) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '2' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 4) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '3' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 16) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '4' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 32) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '5' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 64) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '6' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 128) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '7' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+      if (rarity & 256) {
+        charTemp2 = dbChar
+          .chain()
+          .find({
+            $and: [
+              { weapon: listType[i] },
+              {
+                $and: [
+                  { plain: { $in: listPlainQ[plain - 1] } },
+                  { rarity: '8' }
+                ]
+              }
+            ]
+          })
+          .data()
+        for (let j = 0; j < charTemp2.length; j += 1) {
+          charTemp.push(charTemp2[j])
+        }
+      }
+
+      break
+    }
+  }
+
+  return charTemp
 }
