@@ -56,7 +56,7 @@ const initialState = {
     .data(),
   modelStatus: '0',
   plainStatus: 1 | 2 | 4 | 8,
-  rarityStatus: 1 | 2 | 4 | 8 | 16 | 32 | 64 | 128
+  rarityStatus: 64
 }
 
 // ===============================================================================
