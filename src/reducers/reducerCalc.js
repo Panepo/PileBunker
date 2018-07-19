@@ -50,10 +50,7 @@ const initialState = {
   skillCanDirUp: 0,
   skillMelIgdef: 0,
   output: [],
-  outputChar: dbChar
-    .chain()
-    .find({ weapon: '刀' })
-    .data(),
+  outputChar: queryChar('sword', 15, 64),
   modelStatus: '0',
   plainStatus: 1 | 2 | 4 | 8,
   rarityStatus: 64
