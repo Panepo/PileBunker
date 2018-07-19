@@ -176,9 +176,13 @@ export function calcOutput(input) {
     weaponSelected[i].frame1 = Math.round(
       weaponSelected[i].f1 / (1 + input.skillSpdUpF / 100)
     )
-    weaponSelected[i].frame2 = Math.round(
-      weaponSelected[i].f2 / (1 + input.skillSpdUpB / 100)
-    )
+    if (input.skillSpdUpB > 500) {
+      weaponSelected[i].frame2 = 0
+    } else {
+      weaponSelected[i].frame2 = Math.round(
+        weaponSelected[i].f2 / (1 + input.skillSpdUpB / 100)
+      )
+    }
     weaponSelected[i].dps =
       Math.floor(
         weaponSelected[i].damage *

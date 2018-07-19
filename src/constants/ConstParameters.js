@@ -28,4 +28,4 @@ export const valueFPS = 30 // define the system frame per second
 export const valueMaxRef = 10 // define the maximum refine value
 
 export const maxskillSpdUpF = 500 // define the maximum aspd skill value
-export const maxskillSpdUpB = 500 // define the maximum aspd spell value
+export const maxskillSpdUpB = 501 // define the maximum aspd spell value
