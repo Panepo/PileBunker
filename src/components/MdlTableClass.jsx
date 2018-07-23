@@ -92,8 +92,7 @@ export default class MdlTableClass extends Component {
           className={theadClass}
           id={tableInd[i]}
           key={tableId + ' th' + i.toString()}
-          onClick={this.handleSort.bind(this)}
-        >
+          onClick={this.handleSort.bind(this)}>
           {tableHead[i]}
         </th>
       )
@@ -125,8 +124,7 @@ export default class MdlTableClass extends Component {
             <td key={tableId + ' td' + i.toString() + j.toString()}>
               <label
                 className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
-                htmlFor={tableId + i.toString()}
-              >
+                htmlFor={tableId + i.toString()}>
                 <input
                   type="checkbox"
                   id={tableId + i.toString()}
@@ -141,8 +139,7 @@ export default class MdlTableClass extends Component {
           tdTemp = (
             <td
               key={tableId + ' td' + i.toString() + j.toString()}
-              onClick={tableFunction.bind(null, tableBody[i].name)}
-            >
+              onClick={tableFunction.bind(null, tableBody[i].name)}>
               {tableBody[i][tableInd[j]]}
             </td>
           )
@@ -152,8 +149,7 @@ export default class MdlTableClass extends Component {
       tbodyTemp = (
         <tr
           key={tableId + ' th' + i.toString()}
-          id={tableId + i.toString() + 'tr'}
-        >
+          id={tableId + i.toString() + 'tr'}>
           {tdTempOut}
         </tr>
       )

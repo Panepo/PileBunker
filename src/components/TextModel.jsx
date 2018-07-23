@@ -16,8 +16,7 @@ export default class TextModel extends Component {
         <div className="modal">
           <button
             className="close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
-            onClick={modelClose}
-          >
+            onClick={modelClose}>
             <div className="material-icons">clear</div>
           </button>
           <div className="modal-content">{textOutput}</div>

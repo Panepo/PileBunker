@@ -50,8 +50,7 @@ export default class InputBoxValue extends Component {
           classes +
           ' mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
         }
-        key={title}
-      >
+        key={title}>
         <input
           className="mdl-textfield__input"
           type="text"

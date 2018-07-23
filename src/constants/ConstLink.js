@@ -7,3 +7,11 @@ export const listLink = [
   },
   { text: 'ダメージ計算機', link: 'http://cascal.html.xdomain.jp/cascal/' }
 ]
+
+export const listDrawer = [
+  { text: '城プロRE', link: 'http://www.dmm.com/netgame_s/oshirore/' },
+  { text: 'React', link: 'https://facebook.github.io/react/' },
+  { text: 'Redux', link: 'http://redux.js.org/' },
+  { text: 'Material Design Lite', link: 'https://getmdl.io/' },
+  { text: 'LokiJS', link: 'http://lokijs.org/' }
+]
