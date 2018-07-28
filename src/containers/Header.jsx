@@ -10,9 +10,11 @@ class Header extends Component {
   generateLink() {
     const linkOut = []
     for (let i = 0; i < listLink.length; i += 1) {
+      let linkKey = 'header-link' + i.toString()
       let linkTemp = (
         <a
           className="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary"
+          key={linkKey}
           href={listLink[i].link}
         >
           {listLink[i].text}
