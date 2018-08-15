@@ -9,7 +9,7 @@
     "parserL": "lsc  ./raw/parser.ls --nodejs --harmoy",
     "parserC": "python ./raw/charDataParaser.py",
     "start": "cross-env NODE_ENV=development lsc server.ls --nodejs --harmoy",
-    "build": "npm run clean && cross-env NODE_ENV=production webpack --config webpack.config.prod.ls",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.prod.ls",
     "travis": "cross-env NODE_ENV=production webpack --config webpack.config.prod.ls",
     "dev": "npm run clean && cross-env NODE_ENV=development webpack --config webpack.config.dev.ls",
     "test": "mocha --compilers js:babel-core/register",

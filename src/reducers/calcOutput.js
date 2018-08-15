@@ -14,7 +14,7 @@ import * as parameters from '../constants/ConstParameters'
 //    計算例：Lv.110の駿府城の攻撃の値（絆ボーナス・武器・施設は無しでの値）
 //        INT(INT((1234-50)/1000*110+50)*1.10)=198
 
-export function calcAtk(input) {
+export const calcAtk = input => {
   const typeSelected = dbType.findOne({ name: input.type })
   const typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
   const comAtk = 1 + Math.floor(input.com / 10) / 100
@@ -39,16 +39,14 @@ export function calcAtk(input) {
 //		攻撃・隙 速度上昇割合＝裝備上昇割合＋特技計略上昇割合
 //		※計算結果は小數點以下四捨五入
 
-export function calcOutput(input) {
+export const calcOutput = input => {
   const weaponSelected = dbWeapon
     .chain()
     .find({ type: input.type })
     .data()
   let maxMux = 1
   let paraMux = 1
-  let totalAtk
   let totalDef
-  let output = []
   let charAtk = calcAtk(input)
 
   // ===============================================================
@@ -103,8 +101,8 @@ export function calcOutput(input) {
     if (input.type === listMelee[i]) {
       totalDef =
         input.def *
-          (1 - input.skillDefDown / 100) *
-          (1 - input.skillMelIgdef / 100) -
+        (1 - input.skillDefDown / 100) *
+        (1 - input.skillMelIgdef / 100) -
         input.skillDefDownInt
     } else {
       totalDef =
@@ -129,74 +127,77 @@ export function calcOutput(input) {
 
   // ===============================================================
   // ダメージ計算
-  for (let i = 0; i < weaponSelected.length; i += 1) {
-    let tempDef
+  weaponSelected.map(data => {
+    let totalAtk =
+      ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
+        input.skillAtkUpInt) *
+      paraMux
 
-    totalAtk =
-      (charAtk + weaponSelected[i].atk) *
-        maxMux *
-        (1 + input.skillAtkUp / 100) +
-      input.skillAtkUpInt
-    totalAtk *= paraMux
-
-    if (
-      weaponSelected[i].name === '氏康の獅盾' ||
-      weaponSelected[i].name === '真・氏康の獅盾'
-    ) {
-      tempDef = Math.round(totalDef * 0.9)
-
-      if (totalAtk - parameters.valueProDam >= tempDef) {
-        weaponSelected[i].damage = Math.floor(
-          Math.floor(totalAtk - tempDef) *
-            (1 + input.skillDamUp / 100) *
-            (1 + input.skillRecDamUp / 100)
-        )
-      } else {
-        weaponSelected[i].damage = Math.floor(
-          parameters.valueProDam *
-            (1 + input.skillDamUp / 100) *
-            (1 + input.skillRecDamUp / 100)
-        )
-      }
-    } else {
-      if (totalAtk - parameters.valueProDam >= totalDef) {
-        weaponSelected[i].damage = Math.floor(
-          Math.floor(totalAtk - totalDef) *
-            (1 + input.skillDamUp / 100) *
-            (1 + input.skillRecDamUp / 100)
-        )
-      } else {
-        weaponSelected[i].damage = Math.floor(
-          parameters.valueProDam *
-            (1 + input.skillDamUp / 100) *
-            (1 + input.skillRecDamUp / 100)
-        )
-      }
-    }
-    weaponSelected[i].frame1 = Math.round(
-      weaponSelected[i].f1 / (1 + input.skillSpdUpF / 100)
+    data.damage = calcDam(
+      totalAtk,
+      totalDef,
+      data.name,
+      input.skillDamUp,
+      input.skillRecDamUp
     )
-    if (input.skillSpdUpB > 500) {
-      weaponSelected[i].frame2 = 0
+
+    data.frame1 = Math.round(data.f1 / (1 + input.skillSpdUpF / 100))
+    if (input.skillSpdUpB >= parameters.skillSpdUpB) {
+      data.frame2 = 0
     } else {
-      weaponSelected[i].frame2 = Math.round(
-        weaponSelected[i].f2 / (1 + input.skillSpdUpB / 100)
+      data.frame2 = Math.round(data.f2 * (1 - input.skillSpdUpB / 100))
+    }
+    data.dps =
+      Math.floor(
+        data.damage *
+        data.hit *
+        parameters.valueFPS /
+        (data.frame1 + data.frame2) *
+        100
+      ) / 100
+
+    return data
+  })
+
+  dbWeapon.update(weaponSelected)
+
+  return weaponSelected
+}
+
+const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
+  let damage
+  let tempDef
+  if (name === '氏康の獅盾' || name === '真・氏康の獅盾') {
+    tempDef = Math.round(totalDef * 0.9)
+
+    if (totalAtk - parameters.valueProDam >= tempDef) {
+      damage = Math.floor(
+        Math.floor(totalAtk - tempDef) *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
+      )
+    } else {
+      damage = Math.floor(
+        parameters.valueProDam *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
       )
     }
-    weaponSelected[i].dps =
-      Math.floor(
-        weaponSelected[i].damage *
-          weaponSelected[i].hit *
-          parameters.valueFPS /
-          (weaponSelected[i].frame1 + weaponSelected[i].frame2) *
-          100
-      ) / 100
+  } else {
+    if (totalAtk - parameters.valueProDam >= totalDef) {
+      damage = Math.floor(
+        Math.floor(totalAtk - totalDef) *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
+      )
+    } else {
+      damage = Math.floor(
+        parameters.valueProDam *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
+      )
+    }
   }
-  dbWeapon.update(weaponSelected)
-  output = dbWeapon
-    .chain()
-    .find({ type: input.type })
-    .data()
 
-  return output
+  return damage
 }
