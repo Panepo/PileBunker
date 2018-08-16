@@ -142,7 +142,7 @@ export const calcOutput = input => {
     )
 
     data.frame1 = Math.round(data.f1 / (1 + input.skillSpdUpF / 100))
-    if (input.skillSpdUpB >= parameters.skillSpdUpB) {
+    if (input.skillSpdUpB >= parameters.maxskillSpdUpB) {
       data.frame2 = 0
     } else {
       data.frame2 = Math.round(data.f2 * (1 - input.skillSpdUpB / 100))
