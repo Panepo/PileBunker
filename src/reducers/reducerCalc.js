@@ -9,8 +9,6 @@ import {
   REF_SIN_CHANGE,
   CANNON_CHANGE,
   CHAR_SELECT,
-  MODEL_OPEN,
-  MODEL_CLOSE,
   PLAIN_SELECT,
   RARITY_SELECT
 } from '../constants/ConstActionTypes'
@@ -50,10 +48,9 @@ const initialState = {
   skillCanDirUp: 0,
   skillMelIgdef: 0,
   output: [],
-  outputChar: queryChar('sword', 15, 64),
-  modelStatus: '0',
+  outputChar: queryChar('sword', 15, 64 | 128),
   plainStatus: 1 | 2 | 4 | 8,
-  rarityStatus: 64
+  rarityStatus: 64 | 128
 }
 
 // ===============================================================================
@@ -68,14 +65,6 @@ export default function reducerCalc(state = initialState, action) {
   let rarityTemp
 
   switch (action.type) {
-    case MODEL_OPEN:
-      return Object.assign({}, state, {
-        modelStatus: action.modelId
-      })
-    case MODEL_CLOSE:
-      return Object.assign({}, state, {
-        modelStatus: '0'
-      })
     // ===============================================================================
     // weapon types change
     // ===============================================================================
@@ -419,8 +408,7 @@ export default function reducerCalc(state = initialState, action) {
       return Object.assign({}, state, {
         AtkParm: Math.round(parseFloat(charTemp.atF, 10) * 100),
         output: calcOutput(calcTemp),
-        atk: calcAtk(calcTemp),
-        modelStatus: '0'
+        atk: calcAtk(calcTemp)
       })
     // ===============================================================================
     // character plain select change

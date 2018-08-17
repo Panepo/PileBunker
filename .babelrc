@@ -1,8 +1,18 @@
 {
-  "presets": ["es2015", "react"],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  }
+  "presets": [
+    [
+      "env",
+      {
+        "esmodules": false,
+        "targets": {
+          "browsers": [
+            "> 3%"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "transform-runtime"
+  ]
 }

@@ -1,12 +1,3 @@
-.type-button  {
-	width: 10px;
-}
-
-.text-input {
-	width: 180px;
-	margin-right: 10px;
-}
-
 .outputTable {
 	width: 100%
 }
@@ -19,7 +10,6 @@
 	text-decoration: underline;
 }
 
-.char-plain-button,
 .refine-button {
 	margin-bottom: 10px;
 }

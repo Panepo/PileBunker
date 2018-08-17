@@ -8,9 +8,8 @@ export default class Footer extends Component {
           <div>
             <small>
               {' '}
-              『<a href="http://www.dmm.com/netgame_s/oshirore/">
-                城プロRE
-              </a>』(C) DMMゲームズ
+              『<a href="http://www.dmm.com/netgame_s/oshirore/">城プロRE</a>
+              』(C) DMMゲームズ
             </small>
           </div>
           <div>

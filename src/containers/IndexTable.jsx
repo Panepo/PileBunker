@@ -1,112 +1,82 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {
-  modelClose,
-  typeChange,
-  charSelect,
-  plainSelect,
-  raritySelect
-} from '../actions'
+
+import MenuType from './MenuType'
+
+import { modelClose, charSelect, plainSelect, raritySelect } from '../actions'
 import ToggleButton from '../components/ToggleButton'
 import MdlTableClass from '../components/MdlTableClass'
 import {
   tableCharHead,
   tableCharInd,
-  listType,
-  listTypeS,
   listPlain,
   listPlainS,
   listRarityS,
   listRarityQ
 } from '../constants/ConstList'
+import './IndexTable.css'
 
 class IndexTable extends Component {
-  generateType() {
-    const { type, typeChange } = this.props
-    let typeTemp = <label htmlFor="weaponType">武器種：</label>
-    const typeOut = []
-    typeOut.push(typeTemp)
-
-    for (let i = 0; i < listType.length; i += 1) {
-      typeTemp = (
-        <ToggleButton
-          key={'indexType' + i.toString()}
-          display={type}
-          title={listType[i]}
-          onClickFunc={modelId => {
-            typeChange(modelId)
-          }}
-          modelId={listTypeS[i]}
-          Cactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
-          }
-          Cinactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
-          }
-        />
-      )
-      typeOut.push(typeTemp)
-    }
-    return typeOut
+  componentDidUpdate = () => {
+    window.componentHandler.upgradeDom()
   }
 
-  generatePlain() {
+  renderPlain = () => {
     const { plainStatus, plainSelect } = this.props
-    let plainTemp = <label htmlFor="indexPlain">屬性：</label>
-    const plainOut = []
-    plainOut.push(plainTemp)
-
-    for (let i = 0; i < listPlain.length; i += 1) {
-      plainTemp = (
-        <ToggleButton
-          key={'indexPlain' + i.toString()}
-          display={(plainStatus & listPlainS[i]).toString()}
-          title={listPlain[i]}
-          onClickFunc={modelId => {
-            plainSelect(modelId)
-          }}
-          modelId={listPlainS[i].toString()}
-          Cactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
-          }
-          Cinactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
-          }
-        />
-      )
-      plainOut.push(plainTemp)
-    }
-    return plainOut
+    const plainTemp = <label htmlFor="indexPlain">屬性：</label>
+    return listPlain.reduce(
+      (output, data, i) => {
+        output.push(
+          <ToggleButton
+            modelKey={'indexPlain' + i.toString()}
+            modelSwitch={(plainStatus & listPlainS[i]).toString()}
+            modelTitle={data}
+            propFunc={modelId => {
+              plainSelect(modelId)
+            }}
+            modelId={listPlainS[i].toString()}
+            modelClassActive={
+              'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
+            }
+            modelClassInactive={
+              'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
+            }
+          />
+        )
+        return output
+      },
+      [plainTemp]
+    )
   }
 
-  generateRarity() {
+  renderRarity = () => {
     const { rarityStatus, raritySelect } = this.props
-    let rarityTemp = <label htmlFor="indexPlain">稀有度：</label>
-    const rarityOut = []
-    rarityOut.push(rarityTemp)
-
-    for (let i = 0; i < listRarityQ.length; i += 1) {
-      rarityTemp = (
-        <ToggleButton
-          key={'indexPlain' + i.toString()}
-          display={(rarityStatus & listRarityS[i]).toString()}
-          title={listRarityQ[i]}
-          onClickFunc={modelId => {
-            raritySelect(modelId)
-          }}
-          modelId={listRarityS[i].toString()}
-          Cactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
-          }
-          Cinactive={
-            'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
-          }
-        />
-      )
-      rarityOut.push(rarityTemp)
-    }
-    return rarityOut
+    const rarityTemp = <label htmlFor="indexPlain">稀有度：</label>
+    return listRarityQ.reduce(
+      (output, data, i) => {
+        output.push(
+          <ToggleButton
+            modelKey={'indexPlain' + i.toString()}
+            modelSwitch={(rarityStatus & listRarityS[i]).toString()}
+            modelTitle={data}
+            propFunc={modelId => {
+              raritySelect(modelId)
+            }}
+            modelId={listRarityS[i].toString()}
+            modelClassActive={
+              'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
+            }
+            modelClassInactive={
+              'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
+            }
+          />
+        )
+        return output
+      },
+      [rarityTemp]
+    )
   }
 
   render() {
@@ -116,14 +86,16 @@ class IndexTable extends Component {
       return (
         <div className="modal">
           <button
-            className="close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
+            className="modal-close mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect"
             onClick={modelClose}>
             <div className="material-icons">clear</div>
           </button>
-          <div className="index-content modal-content mdl-color--white mdl-color-text--grey-800 ">
-            <div className="char-type-button">{this.generateType()}</div>
-            <div className="char-rarity-button">{this.generateRarity()}</div>
-            <div className="char-plain-button">{this.generatePlain()}</div>
+          <div className="modal-content mdl-color--white mdl-color-text--grey-800 ">
+            <div className="char-type-button">
+              <MenuType />
+            </div>
+            <div className="char-rarity-button">{this.renderRarity()}</div>
+            <div className="char-plain-button">{this.renderPlain()}</div>
             <div>
               <MdlTableClass
                 tableId={'charTable'}
@@ -147,8 +119,6 @@ class IndexTable extends Component {
 }
 
 IndexTable.propTypes = {
-  type: PropTypes.string.isRequired,
-  typeChange: PropTypes.func.isRequired,
   charSelect: PropTypes.func.isRequired,
   outputChar: PropTypes.array.isRequired,
   modelStatus: PropTypes.string.isRequired,
@@ -159,19 +129,17 @@ IndexTable.propTypes = {
   raritySelect: PropTypes.func.isRequired
 }
 
-const mapStateToProps = function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
-    type: state.reducerCalc.type,
-    modelStatus: state.reducerCalc.modelStatus,
+    modelStatus: state.reducerLayout.modelStatus,
     outputChar: state.reducerCalc.outputChar,
     plainStatus: state.reducerCalc.plainStatus,
     rarityStatus: state.reducerCalc.rarityStatus
   }
 }
 
-const mapDispatchToProps = function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
-    typeChange: bindActionCreators(typeChange, dispatch),
     charSelect: bindActionCreators(charSelect, dispatch),
     modelClose: bindActionCreators(modelClose, dispatch),
     plainSelect: bindActionCreators(plainSelect, dispatch),
@@ -179,4 +147,7 @@ const mapDispatchToProps = function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IndexTable)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(IndexTable)

@@ -1,16 +1,15 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class TextModel extends Component {
   render() {
-    const { input, display, modelClose } = this.props
-    let textTemp
-    const textOutput = []
+    const { displayText, displaySwitch, modelClose } = this.props
 
-    if (display === true) {
-      for (let i = 0; i < input.length; i += 1) {
-        textTemp = <div>{input[i]}</div>
-        textOutput.push(textTemp)
-      }
+    if (displaySwitch === true) {
+      const textOutput = displayText.reduce((output, data) => {
+        textOutput.push(<div>{data}</div>)
+        return output
+      }, [])
 
       return (
         <div className="modal">
@@ -28,12 +27,12 @@ export default class TextModel extends Component {
 }
 
 TextModel.propTypes = {
-  input: PropTypes.array,
-  display: PropTypes.bool,
+  displayText: PropTypes.array,
+  displaySwitch: PropTypes.bool,
   modelClose: PropTypes.func
 }
 
 TextModel.defaultProps = {
-  input: [],
-  display: false
+  displayText: [],
+  displaySwitch: false
 }

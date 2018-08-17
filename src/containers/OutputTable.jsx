@@ -1,43 +1,46 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { refChange, refSinChange } from '../actions'
 import MdlTableClass from '../components/MdlTableClass'
 import ToggleButton from '../components/ToggleButton'
 import { tableHead, tableInd, listRef, listRefS } from '../constants/ConstList'
+import './OutputTable.css'
 
 class OutputTable extends Component {
-  render() {
-    const { output, refChange, refSinChange } = this.props
-
-    let butTemp
-    const butOut = []
-    for (let i = 0; i < listRef.length; i += 1) {
-      butTemp = (
+  renderButton = () => {
+    const { refChange } = this.props
+    return listRef.reduce((output, data, i) => {
+      output.push(
         <ToggleButton
-          key={'inputRef' + i.toString()}
-          display={listRefS[i]}
-          title={listRef[i]}
-          onClickFunc={modelId => {
+          modelKey={'inputRef' + i.toString()}
+          modelSwitch={listRefS[i]}
+          modelTitle={data}
+          propFunc={modelId => {
             refChange(modelId)
           }}
           modelId={listRefS[i]}
-          Cactive={
+          modelClassActive={
             'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary'
           }
-          Cinactive={
+          modelClassInactive={
             'mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
           }
         />
       )
-      butOut.push(butTemp)
-    }
+      return output
+    }, [])
+  }
+
+  render() {
+    const { output, refSinChange } = this.props
 
     return (
       <div>
         <div className="refine-button">
           精煉設定：
-          {butOut}
+          {this.renderButton()}
         </div>
         <div>
           <MdlTableClass
@@ -64,17 +67,20 @@ OutputTable.propTypes = {
   refSinChange: PropTypes.func.isRequired
 }
 
-const mapStateToProps = function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
     output: state.reducerCalc.output
   }
 }
 
-const mapDispatchToProps = function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     refChange: bindActionCreators(refChange, dispatch),
     refSinChange: bindActionCreators(refSinChange, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutputTable)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OutputTable)

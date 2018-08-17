@@ -1,66 +1,65 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import * as parameters from '../constants/ConstParameters'
 
 export default class InputBoxValue extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      text: this.props.defaultValue
+      text: this.props.modelValue
     }
+    this.handleInput = this.handleInput.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     this.setState({
-      text: nextProps.defaultValue
+      text: nextProps.modelValue
     })
   }
 
-  handleInput(event) {
+  handleInput = event => {
+    const { propFunc } = this.props
     const modelId = event.target.id
     let modelValue = parseInt(event.target.value, 10)
 
     if (isNaN(modelValue)) {
       modelValue = 0
-      this.setState({ text: modelValue })
-      this.props.inputFunc(modelId, modelValue)
-    } else if (modelId === 'skillSpdUpF') {
-      if (modelValue > parameters.maxskillSpdUpF) {
-        modelValue = parameters.maxskillSpdUpF
-      }
-      this.setState({ text: modelValue })
-      this.props.inputFunc(modelId, modelValue)
-    } else if (modelId === 'skillSpdUpB') {
-      if (modelValue > parameters.maxskillSpdUpB) {
-        modelValue = parameters.maxskillSpdUpB
-      }
-      this.setState({ text: modelValue })
-      this.props.inputFunc(modelId, modelValue)
-    } else {
-      this.setState({ text: modelValue })
-      this.props.inputFunc(modelId, modelValue)
+    } else if (
+      modelId === 'skillSpdUpF' &&
+      modelValue > parameters.maxskillSpdUpF
+    ) {
+      modelValue = parameters.maxskillSpdUpF
+    } else if (
+      modelId === 'skillSpdUpB' &&
+      modelValue > parameters.maxskillSpdUpB
+    ) {
+      modelValue = parameters.maxskillSpdUpB
     }
+
+    this.setState({ text: modelValue })
+    propFunc(modelId, modelValue)
   }
 
   render() {
-    const { title, modelId, classes } = this.props
+    const { modelTitle, modelId, modelClass } = this.props
 
     return (
       <div
         className={
-          classes +
+          modelClass +
           ' mdl-textfield mdl-js-textfield mdl-textfield--floating-label'
         }
-        key={title}>
+        key={modelId}>
         <input
           className="mdl-textfield__input"
           type="text"
           pattern="-?[0-9]*(\.[0-9]+)?"
           id={modelId}
-          onChange={this.handleInput.bind(this)}
+          onChange={this.handleInput}
           value={this.state.text}
         />
         <label className="mdl-textfield__label" htmlFor={modelId}>
-          {title}
+          {modelTitle}
         </label>
         <span className="mdl-textfield__error">数値が正しくありません</span>
       </div>
@@ -69,16 +68,16 @@ export default class InputBoxValue extends Component {
 }
 
 InputBoxValue.propTypes = {
-  classes: PropTypes.string,
-  title: PropTypes.string,
+  modelClass: PropTypes.string,
+  modelTitle: PropTypes.string,
   modelId: PropTypes.string,
-  inputFunc: PropTypes.func,
-  defaultValue: PropTypes.number
+  modelValue: PropTypes.number,
+  propFunc: PropTypes.func
 }
 
 InputBoxValue.defaultProps = {
-  classes: 'InputBoxValue',
-  title: 'InputBoxValue',
+  modelClass: 'InputBoxValue',
+  modelTitle: 'InputBoxValue',
   modelId: 'InputBoxValue',
-  defaultValue: 0
+  modelValue: 0
 }

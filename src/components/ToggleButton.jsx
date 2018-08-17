@@ -1,52 +1,50 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class ToggleButton extends Component {
+  handlePropFunc = () => {
+    const { propFunc, modelId } = this.props
+    propFunc(modelId)
+  }
+
   render() {
     const {
-      display,
-      title,
-      onClickFunc,
+      modelSwitch,
+      modelTitle,
       modelId,
-      Cactive,
-      Cinactive,
-      key
+      modelClassActive,
+      modelClassInactive,
+      modelKey
     } = this.props
-
-    let bClassName = ''
-    if (display === modelId) {
-      bClassName = Cactive
-    } else {
-      bClassName = Cinactive
-    }
+    let handlePropFunc = this.handlePropFunc.bind(this)
+    let bClassName =
+      modelSwitch === modelId ? modelClassActive : modelClassInactive
 
     return (
-      <button
-        className={bClassName}
-        onClick={onClickFunc.bind(null, modelId)}
-        key={key}>
-        {title}
+      <button className={bClassName} onClick={handlePropFunc} key={modelKey}>
+        {modelTitle}
       </button>
     )
   }
 }
 
 ToggleButton.propTypes = {
-  key: PropTypes.string,
-  display: PropTypes.string,
-  title: PropTypes.string,
-  onClickFunc: PropTypes.func,
+  modelKey: PropTypes.string,
+  modelSwitch: PropTypes.string,
+  modelTitle: PropTypes.string,
   modelId: PropTypes.string,
-  Cactive: PropTypes.string,
-  Cinactive: PropTypes.string
+  modelClassActive: PropTypes.string,
+  modelClassInactive: PropTypes.string,
+  propFunc: PropTypes.func
 }
 
 ToggleButton.defaultProps = {
-  key: 'ToggleButton',
-  display: '0',
-  title: 'ToggleButton',
+  modelKey: 'ToggleButton',
+  modelSwitch: '0',
+  modelTitle: 'ToggleButton',
   modelId: 'ToggleButton',
-  Cactive:
+  modelClassActive:
     'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--primary',
-  Cinactive:
+  modelClassInactive:
     'type-button mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--accent'
 }

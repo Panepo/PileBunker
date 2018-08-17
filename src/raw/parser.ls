@@ -21,7 +21,7 @@ for weapon, i in outWeapon
 
 outWeapon = JSON.stringify outWeapon
 console.log 'weapons.json arrange complete!'
-fs.writeFileSync './raw/weapons.json', outWeapon
+fs.writeFileSync './src/raw/weapons.json', outWeapon
 
 # ===============================================================================
 # PARSE WEAPON TYPES DATA
@@ -35,7 +35,7 @@ for type, i in weaponType.data
 
 outType = JSON.stringify outType
 console.log 'weaponTypes.json arrange complete!'
-fs.writeFileSync './raw/weaponTypes.json', outType
+fs.writeFileSync './src/raw/weaponTypes.json', outType
 
 # ===============================================================================
 # PARSE CHARACTER DATA
@@ -49,4 +49,4 @@ for char, i in chars.data
 
 outChar = JSON.stringify outChar
 console.log 'chars.json arrange complete!'
-fs.writeFileSync './raw/chars.json', outChar
+fs.writeFileSync './src/raw/chars.json', outChar

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class MdlTableArray extends Component {
   constructor(props, context) {
@@ -8,13 +9,16 @@ export default class MdlTableArray extends Component {
       sortKey: 'dps',
       sortDir: 1
     }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSort = this.handleSort.bind(this)
+    this.handlePropFunc = this.handlePropFunc.bind(this)
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom()
+  componentDidUpdate = () => {
+    window.componentHandler.upgradeDom()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     const { sortDir, sortKey } = this.state
     var tempData = nextProps.tableData
 
@@ -35,7 +39,7 @@ export default class MdlTableArray extends Component {
     })
   }
 
-  handleChange(event) {
+  handleChange = event => {
     var trId = event.target.id + 'tr'
     if (event.target.checked) {
       document.getElementById(trId).style.backgroundColor = '#f5f5f5'
@@ -44,7 +48,11 @@ export default class MdlTableArray extends Component {
     }
   }
 
-  handleSort(event) {
+  handlePropFunc = input => {
+    this.props.tableFunction(input)
+  }
+
+  handleSort = event => {
     const { sortDir, sortKey, tableBody } = this.state
     var newKey = event.target.id
     var tempData = tableBody
@@ -75,47 +83,41 @@ export default class MdlTableArray extends Component {
     })
   }
 
-  generateTableHead() {
+  renderTableHead = () => {
     const { tableHead, tableId, tableInd } = this.props
     const { sortDir, sortKey } = this.state
 
-    var theadOut
-    var theadTemp
-    var theadTempOut = []
-    var theadClass = ''
-    for (var i = 0; i < tableHead.length; i++) {
+    const theadTempOut = tableHead.reduce((output, data, i) => {
+      let theadClass = ''
       if (tableInd[i] === sortKey) {
         if (sortDir === 1) {
           theadClass = 'theadOver'
         } else {
           theadClass = 'theadUnder'
         }
-      } else {
-        theadClass = ''
       }
 
-      theadTemp = (
+      output.push(
         <th
           className={theadClass}
           id={tableInd[i]}
           key={tableId + ' th' + i.toString()}
-          onClick={this.handleSort.bind(this)}>
-          {tableHead[i]}
+          onClick={this.handleSort}>
+          {data}
         </th>
       )
-      theadTempOut.push(theadTemp)
-    }
-    theadOut = (
+      return output
+    }, [])
+
+    return (
       <thead>
         <tr>{theadTempOut}</tr>
       </thead>
     )
-
-    return theadOut
   }
 
-  generateTableBody() {
-    const { tableId, tableInd, tableFunction } = this.props
+  renderTableBody = () => {
+    const { tableId, tableInd } = this.props
     const { tableBody } = this.state
 
     var tbodyOut
@@ -135,7 +137,7 @@ export default class MdlTableArray extends Component {
                   type="checkbox"
                   id={tableId + i.toString()}
                   className="mdl-checkbox__input"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
               </label>
             </td>
@@ -145,7 +147,9 @@ export default class MdlTableArray extends Component {
           tdTemp = (
             <td
               key={tableId + ' td' + i.toString() + j.toString()}
-              onClick={tableFunction.bind(null, tableBody[i].name)}>
+              onClick={() => {
+                this.handlePropFunc(tableBody[i].name)
+              }}>
               {tableBody[i][tableInd[j]]}
             </td>
           )
@@ -171,8 +175,8 @@ export default class MdlTableArray extends Component {
 
     return (
       <table className={tableClass} id={tableId}>
-        {this.generateTableHead()}
-        {this.generateTableBody()}
+        {this.renderTableHead()}
+        {this.renderTableBody()}
       </table>
     )
   }
@@ -185,4 +189,12 @@ MdlTableArray.propTypes = {
   tableData: PropTypes.array,
   tableClass: PropTypes.string,
   tableFunction: PropTypes.func
+}
+
+MdlTableArray.defaultProps = {
+  tableId: 'mdl-table-class',
+  tableInd: [],
+  tableHead: [],
+  tableData: [],
+  tableClass: 'mdl-table-class'
 }

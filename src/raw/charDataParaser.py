@@ -1,7 +1,7 @@
 import codecs
 
-fileData = './raw/charData.txt'
-fileDataLs = './raw/chars.ls'
+fileData = './src/raw/charData.txt'
+fileDataLs = './src/raw/chars.ls'
 
 with codecs.open(fileData,'r',encoding='utf8') as f:
   data = f.read()

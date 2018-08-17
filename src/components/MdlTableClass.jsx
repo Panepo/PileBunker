@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 export default class MdlTableClass extends Component {
   constructor(props, context) {
@@ -12,9 +13,12 @@ export default class MdlTableClass extends Component {
       sortKey: 'dps',
       sortDir: 1
     }
+    this.handleSort = this.handleSort.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handlePropFunc = this.handlePropFunc.bind(this)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     const { sortDir, sortKey } = this.state
     const tempData = nextProps.tableData
 
@@ -29,11 +33,11 @@ export default class MdlTableClass extends Component {
     })
   }
 
-  componentDidUpdate() {
-    componentHandler.upgradeDom()
+  componentDidUpdate = () => {
+    window.componentHandler.upgradeDom()
   }
 
-  handleChange(event) {
+  handleChange = event => {
     const trId = event.target.id + 'tr'
     if (event.target.checked) {
       document.getElementById(trId).style.backgroundColor = '#f5f5f5'
@@ -42,7 +46,7 @@ export default class MdlTableClass extends Component {
     }
   }
 
-  handleSort(event) {
+  handleSort = event => {
     const { sortDir, sortKey, tableBody } = this.state
     const newKey = event.target.id
     const tempData = tableBody
@@ -69,46 +73,45 @@ export default class MdlTableClass extends Component {
     })
   }
 
-  generateTableHead() {
+  handlePropFunc = input => {
+    this.props.tableFunction(input)
+  }
+
+  renderTableHead = () => {
     const { tableHead, tableId, tableInd } = this.props
     const { sortDir, sortKey } = this.state
 
-    let theadTemp
-    const theadTempOut = []
-    let theadClass = ''
-    for (let i = 0; i < tableHead.length; i += 1) {
+    const theadTempOut = tableHead.reduce((output, data, i) => {
+      let theadClass = ''
       if (tableInd[i] === sortKey) {
         if (sortDir === 1) {
           theadClass = 'theadOver'
         } else {
           theadClass = 'theadUnder'
         }
-      } else {
-        theadClass = ''
       }
 
-      theadTemp = (
+      output.push(
         <th
           className={theadClass}
           id={tableInd[i]}
           key={tableId + ' th' + i.toString()}
-          onClick={this.handleSort.bind(this)}>
-          {tableHead[i]}
+          onClick={this.handleSort}>
+          {data}
         </th>
       )
-      theadTempOut.push(theadTemp)
-    }
-    const theadOut = (
+      return output
+    }, [])
+
+    return (
       <thead>
         <tr>{theadTempOut}</tr>
       </thead>
     )
-
-    return theadOut
   }
 
-  generateTableBody() {
-    const { tableId, tableInd, tableFunction } = this.props
+  renderTableBody = () => {
+    const { tableId, tableInd } = this.props
     const { tableBody } = this.state
 
     let tbodyTemp
@@ -129,7 +132,7 @@ export default class MdlTableClass extends Component {
                   type="checkbox"
                   id={tableId + i.toString()}
                   className="mdl-checkbox__input"
-                  onChange={this.handleChange.bind(this)}
+                  onChange={this.handleChange}
                 />
               </label>
             </td>
@@ -139,7 +142,9 @@ export default class MdlTableClass extends Component {
           tdTemp = (
             <td
               key={tableId + ' td' + i.toString() + j.toString()}
-              onClick={tableFunction.bind(null, tableBody[i].name)}>
+              onClick={() => {
+                this.handlePropFunc(tableBody[i].name)
+              }}>
               {tableBody[i][tableInd[j]]}
             </td>
           )
@@ -165,8 +170,8 @@ export default class MdlTableClass extends Component {
 
     return (
       <table className={tableClass} id={tableId}>
-        {this.generateTableHead()}
-        {this.generateTableBody()}
+        {this.renderTableHead()}
+        {this.renderTableBody()}
       </table>
     )
   }

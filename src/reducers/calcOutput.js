@@ -19,7 +19,7 @@ export const calcAtk = input => {
   const typeAtk = (typeSelected.atkM - typeSelected.atk) / 1000
   const comAtk = 1 + Math.floor(input.com / 10) / 100
   let charAtk = Math.floor(typeAtk * input.level + typeSelected.atk)
-  charAtk = Math.floor(charAtk * input.AtkParm / 100)
+  charAtk = Math.floor((charAtk * input.AtkParm) / 100)
   charAtk = Math.floor(charAtk * comAtk)
   return charAtk
 }
@@ -61,11 +61,8 @@ export const calcOutput = input => {
     if (input.type === 'bow') {
       paraMux *= parameters.muxFlyBow
     } else {
-      for (let i = 0; i < listMelee.length; i += 1) {
-        if (input.type === listMelee[i]) {
-          paraMux *= parameters.muxFlyMelee
-          break
-        }
+      if (listMelee.includes(input.type)) {
+        paraMux *= parameters.muxFlyMelee
       }
     }
   }
@@ -73,11 +70,8 @@ export const calcOutput = input => {
   // ===============================================================
   // 妖怪敵に対する攻撃力ボーナス
   if (input.mons === 'mons') {
-    for (let i = 0; i < listPhys.length; i += 1) {
-      if (input.type === listPhys[i]) {
-        paraMux *= parameters.muxMonsMelee
-        break
-      }
+    if (listPhys.includes(input.type)) {
+      paraMux *= parameters.muxMonsMelee
     }
   }
 
@@ -97,27 +91,17 @@ export const calcOutput = input => {
 
   // ===============================================================
   // 兜防禦力計算
-  for (let i = 0; i < listMelee.length; i += 1) {
-    if (input.type === listMelee[i]) {
-      totalDef =
-        input.def *
-        (1 - input.skillDefDown / 100) *
-        (1 - input.skillMelIgdef / 100) -
-        input.skillDefDownInt
-    } else {
-      totalDef =
-        input.def * (1 - input.skillDefDown / 100) - input.skillDefDownInt
-    }
-  }
+  totalDef =
+    input.def *
+      (1 - input.skillDefDown / 100) *
+      (1 - input.skillMelIgdef / 100) -
+    input.skillDefDownInt
 
   if (totalDef <= 0) {
     totalDef = 0
   } else {
-    for (let i = 0; i < listMagic.length; i += 1) {
-      if (input.type === listMagic[i]) {
-        totalDef = 0
-        break
-      }
+    if (listMagic.includes(input.type)) {
+      totalDef = 0
     }
   }
 
@@ -149,11 +133,9 @@ export const calcOutput = input => {
     }
     data.dps =
       Math.floor(
-        data.damage *
-        data.hit *
-        parameters.valueFPS /
-        (data.frame1 + data.frame2) *
-        100
+        ((data.damage * data.hit * parameters.valueFPS) /
+          (data.frame1 + data.frame2)) *
+          100
       ) / 100
 
     return data
@@ -173,28 +155,28 @@ const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
     if (totalAtk - parameters.valueProDam >= tempDef) {
       damage = Math.floor(
         Math.floor(totalAtk - tempDef) *
-        (1 + skillDamUp / 100) *
-        (1 + skillRecDamUp / 100)
+          (1 + skillDamUp / 100) *
+          (1 + skillRecDamUp / 100)
       )
     } else {
       damage = Math.floor(
         parameters.valueProDam *
-        (1 + skillDamUp / 100) *
-        (1 + skillRecDamUp / 100)
+          (1 + skillDamUp / 100) *
+          (1 + skillRecDamUp / 100)
       )
     }
   } else {
     if (totalAtk - parameters.valueProDam >= totalDef) {
       damage = Math.floor(
         Math.floor(totalAtk - totalDef) *
-        (1 + skillDamUp / 100) *
-        (1 + skillRecDamUp / 100)
+          (1 + skillDamUp / 100) *
+          (1 + skillRecDamUp / 100)
       )
     } else {
       damage = Math.floor(
         parameters.valueProDam *
-        (1 + skillDamUp / 100) *
-        (1 + skillRecDamUp / 100)
+          (1 + skillDamUp / 100) *
+          (1 + skillRecDamUp / 100)
       )
     }
   }
