@@ -61,7 +61,10 @@ export const calcOutput = input => {
     if (input.type === 'bow') {
       paraMux *= parameters.muxFlyBow
     } else {
-      if (listMelee.includes(input.type)) {
+      if (parameters.weaponAntiFly.includes(input.name)) {
+        paraMux *= parameters.muxFlyBow
+      }
+      else if (listMelee.includes(input.type)) {
         paraMux *= parameters.muxFlyMelee
       }
     }
@@ -149,7 +152,7 @@ export const calcOutput = input => {
 const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
   let damage
   let tempDef
-  if (name === '氏康の獅盾' || name === '真・氏康の獅盾') {
+  if (parameters.weaponIgnoreDef.includes(name)) {
     tempDef = Math.round(totalDef * 0.9)
 
     if (totalAtk - parameters.valueProDam >= tempDef) {

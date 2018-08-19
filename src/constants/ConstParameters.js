@@ -29,3 +29,6 @@ export const valueMaxRef = 10 // define the maximum refine value
 
 export const maxskillSpdUpF = 500 // define the maximum aspd skill value
 export const maxskillSpdUpB = 100 // define the maximum aspd spell value
+
+export const weaponAntiFly = ['ウォシュレ', 'ダマスキナードナイフ']
+export const weaponIgnoreDef = ['氏康の獅盾', '真・氏康の獅盾']
