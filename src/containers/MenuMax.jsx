@@ -9,11 +9,16 @@ import { listBut, listButS } from '../constants/ConstList'
 class MenuMax extends Component {
   render() {
     const { max, maxChange } = this.props
-    const maxTemp = <label htmlFor="maxType">巨大化：</label>
+    const maxTemp = (
+      <label key={'inputBut_label'} htmlFor="maxType">
+        巨大化：
+      </label>
+    )
     return listBut.reduce(
       (output, data, i) => {
         output.push(
           <ToggleButton
+            key={'inputBut' + i.toString()}
             modelKey={'inputBut' + i.toString()}
             modelSwitch={max}
             modelTitle={data}

@@ -14,6 +14,7 @@ class OutputTable extends Component {
     return listRef.reduce((output, data, i) => {
       output.push(
         <ToggleButton
+          key={'inputRef' + i.toString()}
           modelKey={'inputRef' + i.toString()}
           modelSwitch={listRefS[i]}
           modelTitle={data}

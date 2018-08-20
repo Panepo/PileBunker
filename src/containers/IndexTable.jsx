@@ -30,6 +30,7 @@ class IndexTable extends Component {
       (output, data, i) => {
         output.push(
           <ToggleButton
+            key={'indexPlain' + i.toString()}
             modelKey={'indexPlain' + i.toString()}
             modelSwitch={(plainStatus & listPlainS[i]).toString()}
             modelTitle={data}
@@ -58,6 +59,7 @@ class IndexTable extends Component {
       (output, data, i) => {
         output.push(
           <ToggleButton
+            key={'indexPlain' + i.toString()}
             modelKey={'indexPlain' + i.toString()}
             modelSwitch={(rarityStatus & listRarityS[i]).toString()}
             modelTitle={data}

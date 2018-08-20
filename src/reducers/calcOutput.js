@@ -61,10 +61,7 @@ export const calcOutput = input => {
     if (input.type === 'bow') {
       paraMux *= parameters.muxFlyBow
     } else {
-      if (parameters.weaponAntiFly.includes(input.name)) {
-        paraMux *= parameters.muxFlyBow
-      }
-      else if (listMelee.includes(input.type)) {
+      if (listMelee.includes(input.type)) {
         paraMux *= parameters.muxFlyMelee
       }
     }
@@ -115,10 +112,20 @@ export const calcOutput = input => {
   // ===============================================================
   // ダメージ計算
   weaponSelected.map(data => {
-    let totalAtk =
-      ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
-        input.skillAtkUpInt) *
-      paraMux
+    let totalAtk
+
+    if (parameters.weaponAntiFly.includes(data.name) && input.fly === 'fly') {
+      let paraMuxTemp = paraMux * 1.5
+      totalAtk =
+        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
+          input.skillAtkUpInt) *
+        paraMuxTemp
+    } else {
+      totalAtk =
+        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
+          input.skillAtkUpInt) *
+        paraMux
+    }
 
     data.damage = calcDam(
       totalAtk,
@@ -150,39 +157,25 @@ export const calcOutput = input => {
 }
 
 const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
-  let damage
-  let tempDef
   if (parameters.weaponIgnoreDef.includes(name)) {
-    tempDef = Math.round(totalDef * 0.9)
-
-    if (totalAtk - parameters.valueProDam >= tempDef) {
-      damage = Math.floor(
-        Math.floor(totalAtk - tempDef) *
-          (1 + skillDamUp / 100) *
-          (1 + skillRecDamUp / 100)
-      )
-    } else {
-      damage = Math.floor(
-        parameters.valueProDam *
-          (1 + skillDamUp / 100) *
-          (1 + skillRecDamUp / 100)
-      )
-    }
-  } else {
-    if (totalAtk - parameters.valueProDam >= totalDef) {
-      damage = Math.floor(
-        Math.floor(totalAtk - totalDef) *
-          (1 + skillDamUp / 100) *
-          (1 + skillRecDamUp / 100)
-      )
-    } else {
-      damage = Math.floor(
-        parameters.valueProDam *
-          (1 + skillDamUp / 100) *
-          (1 + skillRecDamUp / 100)
-      )
-    }
+    let tempDef = Math.round(totalDef * 0.9)
+    return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp)
   }
+  return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp)
+}
 
+const calcAtkDef = (atk, def, skillDamUp, skillRecDamUp) => {
+  let damage
+  if (atk - parameters.valueProDam >= def) {
+    damage = Math.floor(
+      Math.floor(atk - def) * (1 + skillDamUp / 100) * (1 + skillRecDamUp / 100)
+    )
+  } else {
+    damage = Math.floor(
+      parameters.valueProDam *
+        (1 + skillDamUp / 100) *
+        (1 + skillRecDamUp / 100)
+    )
+  }
   return damage
 }

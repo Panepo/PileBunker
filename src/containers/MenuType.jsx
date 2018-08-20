@@ -9,12 +9,17 @@ import { listType, listTypeS } from '../constants/ConstList'
 class MenuType extends Component {
   render() {
     const { type, typeChange } = this.props
-    const typeTemp = <label htmlFor="weaponType">武器種：</label>
+    const typeTemp = (
+      <label key={'inputPlainType_label'} htmlFor="weaponType">
+        武器種：
+      </label>
+    )
 
     return listType.reduce(
       (output, data, i) => {
         output.push(
           <ToggleButton
+            key={'inputPlainType' + i.toString()}
             modelKey={'inputType' + i.toString()}
             modelSwitch={type}
             modelTitle={data}

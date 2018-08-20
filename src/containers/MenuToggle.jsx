@@ -18,11 +18,16 @@ class MenuToggle extends Component {
       cannonChange,
       type
     } = this.props
-    let toggleTemp = <label htmlFor="plainType">地形適性：</label>
+    let toggleTemp = (
+      <label key={'inputType_toggle_label'} htmlFor="plainType">
+        地形適性：
+      </label>
+    )
     const toggleOut = []
     toggleOut.push(toggleTemp)
     toggleTemp = (
       <ToggleButton
+        key={'inputType plain'}
         modelKey={'inputType plain'}
         modelSwitch={plain}
         modelTitle={'地形適性あり'}
@@ -40,10 +45,15 @@ class MenuToggle extends Component {
     )
     toggleOut.push(toggleTemp)
 
-    toggleTemp = <label htmlFor="flyType">飛行兜：</label>
+    toggleTemp = (
+      <label key={'inputFly_toggle_label'} htmlFor="flyType">
+        飛行兜：
+      </label>
+    )
     toggleOut.push(toggleTemp)
     toggleTemp = (
       <ToggleButton
+        key={'inputType fly'}
         modelKey={'inputType fly'}
         modelSwitch={fly}
         modelTitle={'飛行兜あり'}
@@ -61,10 +71,15 @@ class MenuToggle extends Component {
     )
     toggleOut.push(toggleTemp)
 
-    toggleTemp = <label htmlFor="flyType">妖怪：</label>
+    toggleTemp = (
+      <label key={'inputMons_toggle_label'} htmlFor="flyType">
+        妖怪：
+      </label>
+    )
     toggleOut.push(toggleTemp)
     toggleTemp = (
       <ToggleButton
+        key={'inputType mons'}
         modelKey={'inputType mons'}
         modelSwitch={mons}
         modelTitle={'妖怪あり'}
@@ -83,10 +98,15 @@ class MenuToggle extends Component {
     toggleOut.push(toggleTemp)
 
     if (type === 'cannon') {
-      toggleTemp = <label htmlFor="cannonType">大砲直擊：</label>
+      toggleTemp = (
+        <label key={'inputCannon_toggle_label'} htmlFor="cannonType">
+          大砲直擊：
+        </label>
+      )
       toggleOut.push(toggleTemp)
       toggleTemp = (
         <ToggleButton
+          key={'inputType cannon'}
           modelKey={'inputType cannon'}
           modelSwitch={cannon}
           modelTitle={'大砲直擊あり'}
