@@ -114,16 +114,10 @@ export default class MdlTableClass extends Component {
     const { tableId, tableInd } = this.props
     const { tableBody } = this.state
 
-    let tbodyTemp
-    const tbodyTempOut = []
-    let tdTemp
-    let tdTempOut = []
-
-    for (let i = 0; i < tableBody.length; i += 1) {
-      tdTempOut = []
-      for (let j = 0; j < tableInd.length; j += 1) {
+    const tbodyTempOut = tableBody.reduce((output, data, i) => {
+      const tdTempOut = tableInd.reduce((output2, data2, j) => {
         if (j === 0) {
-          tdTemp = (
+          output2.push(
             <td key={tableId + ' td' + i.toString() + j.toString()}>
               <label
                 className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect"
@@ -137,32 +131,30 @@ export default class MdlTableClass extends Component {
               </label>
             </td>
           )
-          tdTempOut.push(tdTemp)
         } else {
-          tdTemp = (
+          output2.push(
             <td
               key={tableId + ' td' + i.toString() + j.toString()}
               onClick={() => {
-                this.handlePropFunc(tableBody[i].name)
+                this.handlePropFunc(data.name)
               }}>
-              {tableBody[i][tableInd[j]]}
+              {data[data2]}
             </td>
           )
-          tdTempOut.push(tdTemp)
         }
-      }
-      tbodyTemp = (
+        return output2
+      }, [])
+      output.push(
         <tr
           key={tableId + ' th' + i.toString()}
           id={tableId + i.toString() + 'tr'}>
           {tdTempOut}
         </tr>
       )
-      tbodyTempOut.push(tbodyTemp)
-    }
-    const tbodyOut = <tbody>{tbodyTempOut}</tbody>
+      return output
+    }, [])
 
-    return tbodyOut
+    return <tbody>{tbodyTempOut}</tbody>
   }
 
   render() {
