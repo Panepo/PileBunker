@@ -25,7 +25,11 @@ class IndexTable extends Component {
 
   renderPlain = () => {
     const { plainStatus, plainSelect } = this.props
-    const plainTemp = <label htmlFor="indexPlain">屬性：</label>
+    const plainTemp = (
+      <label key={'indexButton_plain'} htmlFor="indexPlain">
+        屬性：
+      </label>
+    )
     return listPlain.reduce(
       (output, data, i) => {
         output.push(
@@ -54,7 +58,11 @@ class IndexTable extends Component {
 
   renderRarity = () => {
     const { rarityStatus, raritySelect } = this.props
-    const rarityTemp = <label htmlFor="indexPlain">稀有度：</label>
+    const rarityTemp = (
+      <label key={'indexButton_rarity'} htmlFor="indexPlain">
+        稀有度：
+      </label>
+    )
     return listRarityQ.reduce(
       (output, data, i) => {
         output.push(
