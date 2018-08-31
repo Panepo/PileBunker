@@ -158,11 +158,11 @@ export default function reducerCalc(state = initialState, action) {
       switch (action.modelId) {
         case 'ref0':
           weaponSelected = dbWeapon.chain().data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].ref = 0
-            weaponSelected[i].refText = '+0'
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.ref = 0
+            data.refText = '+0'
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {
@@ -170,12 +170,12 @@ export default function reducerCalc(state = initialState, action) {
           })
         case 'refAll':
           weaponSelected = dbWeapon.chain().data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].atk += parameters.valueMaxRef
-            weaponSelected[i].ref = parameters.valueMaxRef
-            weaponSelected[i].refText = '+' + parameters.valueMaxRef.toString()
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.atk += parameters.valueMaxRef
+            data.ref = parameters.valueMaxRef
+            data.refText = '+' + parameters.valueMaxRef.toString()
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {
@@ -186,12 +186,12 @@ export default function reducerCalc(state = initialState, action) {
             .chain()
             .find({ rare: 4 })
             .data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].atk += parameters.valueMaxRef
-            weaponSelected[i].ref = parameters.valueMaxRef
-            weaponSelected[i].refText = '+' + parameters.valueMaxRef.toString()
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.atk += parameters.valueMaxRef
+            data.ref = parameters.valueMaxRef
+            data.refText = '+' + parameters.valueMaxRef.toString()
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {
@@ -202,12 +202,12 @@ export default function reducerCalc(state = initialState, action) {
             .chain()
             .find({ rare: 3 })
             .data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].atk += parameters.valueMaxRef
-            weaponSelected[i].ref = parameters.valueMaxRef
-            weaponSelected[i].refText = '+' + parameters.valueMaxRef.toString()
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.atk += parameters.valueMaxRef
+            data.ref = parameters.valueMaxRef
+            data.refText = '+' + parameters.valueMaxRef.toString()
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {
@@ -218,12 +218,12 @@ export default function reducerCalc(state = initialState, action) {
             .chain()
             .find({ rare: 2 })
             .data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].atk += parameters.valueMaxRef
-            weaponSelected[i].ref = parameters.valueMaxRef
-            weaponSelected[i].refText = '+' + parameters.valueMaxRef.toString()
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.atk += parameters.valueMaxRef
+            data.ref = parameters.valueMaxRef
+            data.refText = '+' + parameters.valueMaxRef.toString()
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {
@@ -234,12 +234,12 @@ export default function reducerCalc(state = initialState, action) {
             .chain()
             .find({ rare: 1 })
             .data()
-          for (let i = 0; i < weaponSelected.length; i += 1) {
-            weaponSelected[i].atk -= weaponSelected[i].ref
-            weaponSelected[i].atk += parameters.valueMaxRef
-            weaponSelected[i].ref = parameters.valueMaxRef
-            weaponSelected[i].refText = '+' + parameters.valueMaxRef.toString()
-          }
+          weaponSelected.map(data => {
+            data.atk -= data.ref
+            data.atk += parameters.valueMaxRef
+            data.ref = parameters.valueMaxRef
+            data.refText = '+' + parameters.valueMaxRef.toString()
+          })
           dbWeapon.update(weaponSelected)
           calcTemp = state
           return Object.assign({}, state, {

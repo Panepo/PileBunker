@@ -8,14 +8,14 @@ export const dbWeapon = db.addCollection('dbWeapon')
 export const dbType = db.addCollection('dbType')
 export const dbChar = db.addCollection('dbChar')
 
-for (let i = 0; i < weaponData.length; i += 1) {
-  dbWeapon.insert(weaponData[i])
-}
+weaponData.forEach(element => {
+  dbWeapon.insert(element)
+})
 
-for (let i = 0; i < typeData.length; i += 1) {
-  dbType.insert(typeData[i])
-}
+typeData.forEach(element => {
+  dbType.insert(element)
+})
 
-for (let i = 0; i < charData.length; i += 1) {
-  dbChar.insert(charData[i])
-}
+charData.forEach(element => {
+  dbChar.insert(element)
+})

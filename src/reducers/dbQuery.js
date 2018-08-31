@@ -1,14 +1,19 @@
 import { dbChar } from './database'
-import { listType, listTypeS, listPlainQ } from '../constants/ConstList'
+import {
+  listType,
+  listTypeS,
+  listPlainQ,
+  listRarity
+} from '../constants/ConstList'
 
-export function queryChar(type, plain, rarity) {
+export const queryChar = (type, plain, rarity) => {
   let charTemp = []
   let charTemp2 = []
 
   if (listTypeS.includes(type)) {
     let idx = listTypeS.indexOf(type)
-    for (let i = 1; i <= 8; i += 1) {
-      if (rarity & Math.pow(2, i - 1)) {
+    listRarity.forEach(data => {
+      if (rarity & Math.pow(2, data - 1)) {
         charTemp2 = dbChar
           .chain()
           .find({
@@ -17,19 +22,18 @@ export function queryChar(type, plain, rarity) {
               {
                 $and: [
                   { plain: { $in: listPlainQ[plain - 1] } },
-                  { rarity: i.toString() }
+                  { rarity: data.toString() }
                 ]
               }
             ]
           })
           .data()
 
-        charTemp2.forEach(data => {
-          charTemp.push(data)
+        charTemp2.forEach(char => {
+          charTemp.push(char)
         })
       }
-    }
+    })
   }
-
   return charTemp
 }
