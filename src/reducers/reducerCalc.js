@@ -57,7 +57,7 @@ const initialState = {
 // reducer main function
 // ===============================================================================
 
-export default function reducerCalc(state = initialState, action) {
+const reducerCalc = (state = initialState, action) => {
   let calcTemp = {}
   let weaponSelected = []
   let charTemp = []
@@ -162,6 +162,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk -= data.ref
             data.ref = 0
             data.refText = '+0'
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -175,6 +176,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk += parameters.valueMaxRef
             data.ref = parameters.valueMaxRef
             data.refText = '+' + parameters.valueMaxRef.toString()
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -191,6 +193,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk += parameters.valueMaxRef
             data.ref = parameters.valueMaxRef
             data.refText = '+' + parameters.valueMaxRef.toString()
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -207,6 +210,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk += parameters.valueMaxRef
             data.ref = parameters.valueMaxRef
             data.refText = '+' + parameters.valueMaxRef.toString()
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -223,6 +227,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk += parameters.valueMaxRef
             data.ref = parameters.valueMaxRef
             data.refText = '+' + parameters.valueMaxRef.toString()
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -239,6 +244,7 @@ export default function reducerCalc(state = initialState, action) {
             data.atk += parameters.valueMaxRef
             data.ref = parameters.valueMaxRef
             data.refText = '+' + parameters.valueMaxRef.toString()
+            return data
           })
           dbWeapon.update(weaponSelected)
           calcTemp = state
@@ -451,3 +457,5 @@ export default function reducerCalc(state = initialState, action) {
       })
   }
 }
+
+export default reducerCalc

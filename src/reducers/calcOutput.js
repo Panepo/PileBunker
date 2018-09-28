@@ -24,6 +24,26 @@ export const calcAtk = input => {
   return charAtk
 }
 
+export const calcDef = input => {
+  const typeSelected = dbType.findOne({ name: input.type })
+  const typeDef = (typeSelected.defM - typeSelected.def) / 1000
+  const comDef = 1 + Math.floor(input.com / 10) / 100
+  let charDef = Math.floor(typeDef * input.level + typeSelected.def)
+  charDef = Math.floor((charDef * input.DefParm) / 100)
+  charDef = Math.floor(charDef * comDef)
+  return charDef
+}
+
+export const calcHp = input => {
+  const typeSelected = dbType.findOne({ name: input.type })
+  const typeHp = (typeSelected.hpM - typeSelected.hp) / 1000
+  const comHp = 1 + Math.floor(input.com / 10) / 100
+  let charHp = Math.floor(typeHp * input.level + typeSelected.hp)
+  charHp = Math.floor((charHp * input.HpParm) / 100)
+  charHp = Math.floor(charHp * comHp)
+  return charHp
+}
+
 // ===============================================================================
 // calculate dps for each weapon
 // ===============================================================================

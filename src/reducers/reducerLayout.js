@@ -8,7 +8,7 @@ const initialState = {
   modelStatus: '0'
 }
 
-export default function reducerLayout(state = initialState, action) {
+const reducerLayout = (state = initialState, action) => {
   switch (action.type) {
     case MODEL_OPEN:
       return Object.assign({}, state, {
@@ -23,3 +23,5 @@ export default function reducerLayout(state = initialState, action) {
       return state
   }
 }
+
+export default reducerLayout
