@@ -6,15 +6,17 @@ Shiropro RE weapon damage calculator PileBunker
 
 城プロRE 武器傷害機算機 パイルバンカー
 
-『[城プロRE](http://www.dmm.com/netgame_s/oshirore/)』(C) DMMゲームズ
+* 『[城プロRE](http://www.dmm.com/netgame_s/oshirore/)』(C) DMMゲームズ
+* 「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。
 
-「城プロRE」から転載された全てのコンテンツの著作権につきましては、権利者様へ帰属します。
+## Data
+
+Data are collected from:
+
+* [御城プロジェクトRE 城プロRE 攻略 Wiki](http://scre.swiki.jp/)
+* [くろもじ屋](http://www116.sakura.ne.jp/~kuromoji/castle_enemy.htm)
 
 ## Algorithm
-
-Data are collected from 御城プロジェクトRE 城プロRE 攻略 Wiki
-
-http://scre.swiki.jp/
 
 The calcuation algorithm for is
 
@@ -53,6 +55,14 @@ Lv.Xでの城娘の能力値Y算出（※2017/08/08メンテ後）
       INT(INT((1234-50)/1000*110+50)*1.10)=198
 ```
 
+## Library used
+
+* [React](https://facebook.github.io/react/)
+* [Redux](http://redux.js.org/)
+* [Create React App ](https://github.com/facebook/create-react-app)
+* [Material Design Lite](https://getmdl.io/)
+* [LokiJS](http://lokijs.org/)
+
 ## Develop
 
 ### Development Requirements
@@ -78,19 +88,30 @@ $ yarn start
 ### Scripts
 
 |`yarn <script>`       |Description|
-|-------------------|-----------|
-|`start`            |Serves your app at `localhost:3000`|
-|`parser`           |Parses raw data in ./src/raw to generate .json file|
-|`test`             |`Working`|
-|`lint`             |Lint code in ./src|
-|`prettier`         |Prettier code in ./src|
-|`build`            |Builds the production application to ./build|
-|`deploy`           |Deploy the production application to github pages|
+|---------------------|-----------|
+|`start`              |Serves your app at `localhost:3000`|
+|`parser`             |Parses raw data in ./src/raw to generate .json file|
+|`test`               |Run test code in ./src|
+|`lint`               |Lint code in ./src|
+|`prettier`           |Prettier code in ./src|
+|`build`              |Builds the production application to ./build|
+|`deploy`             |Deploy the production application to github pages|
 
-### Testing
+### Test
 
-Working
+Jest is used for test runner. Jest will look for test files with any of the following naming conventions:
+
+* Files with `.js` suffix in `__tests__` folders.
+* Files with `.test.js` suffix.
+* Files with `.spec.js` suffix.
+
+Jest has an integrated coverage reporter that works well with ES6 and requires no configuration.
+Run `npm test -- --coverage` (note extra `--` in the middle) to include a coverage report.
 
 ### Production
 
 Build code before deployment by running `yarn build`.
+
+## Author
+
+[Panepo](https://github.com/Panepo)
