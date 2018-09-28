@@ -7,14 +7,11 @@ import {
 } from '../constants/ConstList'
 
 export const queryChar = (type, plain, rarity) => {
-  let charTemp = []
-  let charTemp2 = []
-
   if (listTypeS.includes(type)) {
     let idx = listTypeS.indexOf(type)
-    listRarity.forEach(data => {
+    return listRarity.reduce((output, data) => {
       if (rarity & Math.pow(2, data - 1)) {
-        charTemp2 = dbChar
+        let charTemp = dbChar
           .chain()
           .find({
             $and: [
@@ -29,11 +26,12 @@ export const queryChar = (type, plain, rarity) => {
           })
           .data()
 
-        charTemp2.forEach(char => {
-          charTemp.push(char)
+        charTemp.forEach(char => {
+          output.push(char)
         })
       }
-    })
+      return output
+    }, [])
   }
-  return charTemp
+  return []
 }
