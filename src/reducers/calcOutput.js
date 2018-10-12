@@ -97,7 +97,7 @@ export const calcOutput = input => {
 
   // ===============================================================
   // 砲弾が敵に直撃した場合、攻撃力が50%アップ。
-  if (input.type === 'cannon' && input.cannon === 'cannon') {
+  if (input.cannon === 'cannon' && input.type === 'cannon') {
     if (input.skillCanDirUp === 0) {
       paraMux *= 1 + parameters.muxCanDirect
     } else {
@@ -140,6 +140,16 @@ export const calcOutput = input => {
         ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
           input.skillAtkUpInt) *
         paraMuxTemp
+    } else if (
+      input.cannon === 'cannon' &&
+      input.type === 'hammer' &&
+      parameters.weaponAtkUp.includes(data.name)
+    ) {
+      let paraMuxTemp = paraMux * (1 + parameters.weaponAtkUpValue / 100)
+      totalAtk =
+        ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
+          input.skillAtkUpInt) *
+        paraMuxTemp
     } else {
       totalAtk =
         ((charAtk + data.atk) * maxMux * (1 + input.skillAtkUp / 100) +
@@ -178,7 +188,7 @@ export const calcOutput = input => {
 
 const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
   if (parameters.weaponIgnoreDef.includes(name)) {
-    let tempDef = Math.round(totalDef * 0.9)
+    let tempDef = Math.round(totalDef * parameters.weaponIgnoreDefValue)
     return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp)
   }
   return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp)

@@ -97,10 +97,10 @@ class MenuToggle extends Component {
     )
     toggleOut.push(toggleTemp)
 
-    if (type === 'cannon') {
+    if (type === 'cannon' || type === 'hammer') {
       toggleTemp = (
         <label key={'inputCannon_toggle_label'} htmlFor="cannonType">
-          大砲直擊：
+          直擊：
         </label>
       )
       toggleOut.push(toggleTemp)
@@ -109,7 +109,7 @@ class MenuToggle extends Component {
           key={'inputType cannon'}
           modelKey={'inputType cannon'}
           modelSwitch={cannon}
-          modelTitle={'大砲直擊あり'}
+          modelTitle={'直擊あり'}
           propFunc={modelId => {
             cannonChange(modelId)
           }}

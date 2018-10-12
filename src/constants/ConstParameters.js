@@ -37,3 +37,7 @@ export const weaponAntiFly = [
   'ダマスキナードナイフ'
 ]
 export const weaponIgnoreDef = ['氏康の獅盾', '真・氏康の獅盾']
+export const weaponIgnoreDefValue = 0.9
+
+export const weaponAtkUp = ['義重の重槌', '真・義重の重槌']
+export const weaponAtkUpValue = 50
