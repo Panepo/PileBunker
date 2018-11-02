@@ -34,7 +34,8 @@ export const weaponAntiFly = [
   'スローイングナイフ',
   'ブーメランダガー',
   'ウォシュレ',
-  'ダマスキナードナイフ'
+  'ダマスキナードナイフ',
+  '月光の短剣'
 ]
 export const weaponIgnoreDef = ['氏康の獅盾', '真・氏康の獅盾']
 export const weaponIgnoreDefValue = 0.9
