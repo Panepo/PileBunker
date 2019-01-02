@@ -1,0 +1,15 @@
+[ignore]
+.*/archieve/.*
+.*/build/.*
+.*/coverage/.*
+.*/node_modules/.*
+.*/public/.*
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

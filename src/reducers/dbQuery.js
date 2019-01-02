@@ -1,3 +1,4 @@
+// @flow
 import { dbChar } from './database'
 import {
   listType,
@@ -6,7 +7,7 @@ import {
   listRarity
 } from '../constants/ConstList'
 
-export const queryChar = (type, plain, rarity) => {
+export const queryChar = (type: string, plain: number, rarity: number) => {
   if (listTypeS.includes(type)) {
     let idx = listTypeS.indexOf(type)
     return listRarity.reduce((output, data) => {

@@ -9,10 +9,12 @@
             "> 3%"
           ]
         }
-      }
+      },
+      "flow"
     ]
   ],
   "plugins": [
     "transform-runtime"
-  ]
+  ],
+  "retainLines": true
 }
