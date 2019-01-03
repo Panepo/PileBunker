@@ -30,13 +30,11 @@
     ]
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "flow-bin": "^0.89.0",
+    "@babel/polyfill": "^7.2.5",
     "lokijs": "^1.5.5",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-flip-move": "^3.0.2",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
     "redux": "^4.0.0",
@@ -44,9 +42,10 @@
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2017": "^6.24.1",
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
     "eslint": "^5.2.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
@@ -59,6 +58,7 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.10.0",
     "eslint-plugin-standard": "^3.1.0",
+    "flow-bin": "^0.89.0",
     "gh-pages": "^1.2.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.2.0",
