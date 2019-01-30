@@ -193,6 +193,9 @@ const calcDam = (totalAtk, totalDef, name, skillDamUp, skillRecDamUp) => {
   } else if (parameters.weaponIgnoreDef2.includes(name)) {
     let tempDef = Math.round(totalDef * parameters.weaponIgnoreDef2Value)
     return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp)
+  } else if (parameters.weaponIgnoreDef3.includes(name)) {
+    let tempDef = Math.round(totalDef * parameters.weaponIgnoreDef3Value)
+    return calcAtkDef(totalAtk, tempDef, skillDamUp, skillRecDamUp)
   }
   return calcAtkDef(totalAtk, totalDef, skillDamUp, skillRecDamUp)
 }

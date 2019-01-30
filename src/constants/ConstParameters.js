@@ -43,5 +43,8 @@ export const weaponIgnoreDefValue = 0.9
 export const weaponIgnoreDef2 = ['ヴァリス']
 export const weaponIgnoreDef2Value = 0.92
 
+export const weaponIgnoreDef3 = ['聖剣エクスカリバー']
+export const weaponIgnoreDef3Value = 0.95
+
 export const weaponAtkUp = ['義重の重槌', '真・義重の重槌']
 export const weaponAtkUpValue = 50
