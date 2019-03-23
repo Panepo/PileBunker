@@ -12,7 +12,8 @@ export const listType = [
   '法術',
   '杖',
   '歌舞',
-  '鈴'
+  '鈴',
+  '祓串'
 ]
 export const listTypeS = [
   'sword',
@@ -28,7 +29,8 @@ export const listTypeS = [
   'spell',
   'staff',
   'dance',
-  'bell'
+  'bell',
+  'onusa'
 ]
 
 export const listBut = [
@@ -100,7 +102,7 @@ export const tableCharInd = [
 ]
 
 export const listMelee = ['sword', 'lance', 'hammer', 'fist', 'shield']
-export const listMagic = ['spell', 'staff', 'dance', 'bell']
+export const listMagic = ['spell', 'staff', 'dance', 'bell', 'onusa']
 export const listPhys = [
   'sword',
   'lance',
