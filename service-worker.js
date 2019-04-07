@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/PileBunker/precache-manifest.89ff0c78f1fe90d98bddbfac5383320a.js"
+  "/PileBunker/precache-manifest.b6007f1135395877f8db4e5c74b2ce98.js"
 );
 
 workbox.clientsClaim();
