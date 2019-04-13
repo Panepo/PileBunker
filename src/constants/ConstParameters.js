@@ -6,7 +6,7 @@ export const defaultCompanion = 100 // define the default Companion parameter
 
 export const defaultDef = 100 // define the default defense value
 
-export const muxPlain = 1.2 // define the multiplier when attacker have plain
+export const muxPlain = 1.3 // define the multiplier when attacker have plain
 export const muxFlyBow = 1.5 // define the multiplier when bow attack a flying enemy
 export const muxFlyMelee = 0.5 // define the multiplier when melee attack a flying enemy
 export const muxMonsMelee = 0.5 // define the multiplier when physical attack a monster
@@ -40,7 +40,7 @@ export const weaponAntiFly = [
 export const weaponIgnoreDef = ['氏康の獅盾', '真・氏康の獅盾', 'ヴァリス改']
 export const weaponIgnoreDefValue = 0.9
 
-export const weaponIgnoreDef2 = ['ヴァリス']
+export const weaponIgnoreDef2 = ['ヴァリス', '幽閉の紅弓']
 export const weaponIgnoreDef2Value = 0.92
 
 export const weaponIgnoreDef3 = ['聖剣エクスカリバー']
