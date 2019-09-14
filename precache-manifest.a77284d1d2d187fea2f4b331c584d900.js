@@ -4,19 +4,19 @@ self.__precacheManifest = [
     "url": "/PileBunker/static/js/runtime~main.555c720a.js"
   },
   {
-    "revision": "9362065811e4c4dabe36",
-    "url": "/PileBunker/static/js/main.93620658.chunk.js"
+    "revision": "35c18948c80ca90e2d98",
+    "url": "/PileBunker/static/js/main.35c18948.chunk.js"
   },
   {
     "revision": "94a7f29f35a007ee4af2",
     "url": "/PileBunker/static/js/2.94a7f29f.chunk.js"
   },
   {
-    "revision": "9362065811e4c4dabe36",
+    "revision": "35c18948c80ca90e2d98",
     "url": "/PileBunker/static/css/main.baabff0e.chunk.css"
   },
   {
-    "revision": "7d52417d1d046742f0d85cae5036419e",
+    "revision": "23436833d741fbd5ab5535e96507cfcb",
     "url": "/PileBunker/index.html"
   }
 ];
